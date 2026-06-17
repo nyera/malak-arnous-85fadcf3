@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { CTAButton } from "./CTAButton";
-import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
+import { STAN_URL } from "@/data/content";
+import { useI18n } from "@/i18n/I18nProvider";
 
-interface Program {
+export interface Program {
   slug: string;
   name: string;
   duration: string;
@@ -16,6 +17,7 @@ interface Program {
 }
 
 export function ProgramCard({ program, index = 0 }: { program: Program; index?: number }) {
+  const { t } = useI18n();
   const featured = program.badge != null;
   return (
     <motion.div
@@ -35,7 +37,7 @@ export function ProgramCard({ program, index = 0 }: { program: Program; index?: 
           </span>
         </div>
       )}
-      <div className="flex items-baseline justify-between mb-6">
+      <div className="flex items-baseline justify-between mb-6 gap-3">
         <h3 className="display-md">{program.name}</h3>
         <span className="text-xs uppercase tracking-widest text-muted-foreground">{program.duration}</span>
       </div>
@@ -43,9 +45,9 @@ export function ProgramCard({ program, index = 0 }: { program: Program; index?: 
       <p className="text-muted-foreground mb-8 leading-relaxed">{program.description}</p>
 
       <div className="mb-8">
-        <div className="flex items-baseline gap-2">
+        <div className="flex items-baseline gap-2 flex-wrap">
           <span className="display-md ember-text">{program.price}</span>
-          <span className="text-xs text-muted-foreground uppercase tracking-widest">one-time</span>
+          <span className="text-xs text-muted-foreground uppercase tracking-widest">{t.programs.oneTime}</span>
         </div>
       </div>
 
@@ -58,11 +60,15 @@ export function ProgramCard({ program, index = 0 }: { program: Program; index?: 
         ))}
       </ul>
 
-      <Link to="/contact">
-        <CTAButton variant={featured ? "primary" : "outline"} className="w-full">
-          Apply for {program.name}
-        </CTAButton>
-      </Link>
+      <CTAButton
+        href={STAN_URL}
+        external
+        variant={featured ? "primary" : "outline"}
+        className="w-full"
+        icon={<ArrowRight className="w-4 h-4" />}
+      >
+        {t.cta.joinNow} — {program.name}
+      </CTAButton>
     </motion.div>
   );
 }
