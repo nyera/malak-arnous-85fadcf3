@@ -22,9 +22,9 @@ import { MarqueeBar, FadeIn } from "@/components/site/Misc";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Atlas Coaching — Transform Your Body, Reclaim Your Power" },
+      { title: "Malak Arnous — Transform Your Body, Reclaim Your Power" },
       { name: "description", content: "Premium 1:1 online weight-loss coaching for women. 1,240+ transformed. Apply today." },
-      { property: "og:title", content: "Atlas Coaching" },
+      { property: "og:title", content: "Malak Arnous" },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],

@@ -3,12 +3,12 @@
 export const STAN_URL = "https://stan.store/atlas-coaching";
 
 export const brand = {
-  name: "ATLAS",
-  full: "Atlas Coaching",
-  email: "hello@atlascoaching.co",
+  name: "Malak Arnous",
+  full: "Malak Arnous",
+  email: "hello@malakarnous.com",
   phone: "+1 (555) 014-8821",
-  instagram: "https://instagram.com/atlas.coaching",
-  instagramHandle: "@atlas.coaching",
+  instagram: "https://instagram.com/malakarnous369",
+  instagramHandle: "@malakarnous369",
   telegram: "https://t.me/atlascommunity",
   telegramHandle: "Atlas Inner Circle",
   whatsapp: "https://wa.me/15550148821",
