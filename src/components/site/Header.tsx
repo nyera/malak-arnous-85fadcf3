@@ -42,7 +42,7 @@ export function Header() {
           <span className="font-display text-xl tracking-widest">{brand.name}</span>
         </Link>
 
-        <nav className="hidden xl:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {nav.map((item) => {
             const active = pathname === item.to;
             return (
