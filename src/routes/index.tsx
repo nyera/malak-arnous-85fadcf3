@@ -22,8 +22,8 @@ import { MarqueeBar, FadeIn } from "@/components/site/Misc";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Malak Arnous — Transform Your Body, Reclaim Your Power" },
-      { name: "description", content: "Premium 1:1 online weight-loss coaching for women. 1,240+ transformed. Apply today." },
+      { title: "Malak Arnous —Customized health, Fitness training" },
+      { name: "description", content: "Specializing in helping women break free from emotional eating and lose weight from the root.. not just the surface. Apply today." },
       { property: "og:title", content: "Malak Arnous" },
       { property: "og:url", content: "/" },
     ],
