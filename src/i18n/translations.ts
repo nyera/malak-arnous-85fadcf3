@@ -180,7 +180,7 @@ const en = {
     eyebrow: "My Story",
     title1: "Built by a woman.",
     title2: "Built for women.",
-    p1: "I'm Dani — strength coach, lifelong lifter, and the person behind every program at Atlas. After eight years in the trenches with over 1,200 clients, I built Atlas because I was tired of women being sold quick fixes that don't last and workouts that leave them weaker than they started.",
+    p1: "I'm Malak — strength coach, lifelong lifter, and the person behind every program at Atlas. After eight years in the trenches with over 1,200 clients, I built Atlas because I was tired of women being sold quick fixes that don't last and workouts that leave them weaker than they started.",
     p2: "We coach one thing here: the slow, stubborn, undeniable work of becoming strong. Inside and out.",
     coachName: "Dani Reyes",
     coachCreds: "NASM-CPT · PN-L2 · Founder",
