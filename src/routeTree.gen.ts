@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TransformationsRouteImport } from './routes/transformations'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TransformationsRoute = TransformationsRouteImport.update({
   id: '/transformations',
   path: '/transformations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgramsRoute = ProgramsRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/programs': typeof ProgramsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transformations': typeof TransformationsRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/programs': typeof ProgramsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transformations': typeof TransformationsRoute
 }
 export interface FileRoutesById {
@@ -61,19 +69,33 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/programs': typeof ProgramsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/transformations': typeof TransformationsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/programs' | '/transformations'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/programs'
+    | '/sitemap.xml'
+    | '/transformations'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/programs' | '/transformations'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/programs'
+    | '/sitemap.xml'
+    | '/transformations'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/contact'
     | '/programs'
+    | '/sitemap.xml'
     | '/transformations'
   fileRoutesById: FileRoutesById
 }
@@ -82,6 +104,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   ProgramsRoute: typeof ProgramsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TransformationsRoute: typeof TransformationsRoute
 }
 
@@ -92,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/transformations'
       fullPath: '/transformations'
       preLoaderRoute: typeof TransformationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programs': {
@@ -130,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   ProgramsRoute: ProgramsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TransformationsRoute: TransformationsRoute,
 }
 export const routeTree = rootRouteImport
