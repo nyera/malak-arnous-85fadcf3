@@ -13,9 +13,9 @@ import { FadeIn } from "@/components/site/Misc";
 export const Route = createFileRoute("/transformations")({
   head: () => ({
     meta: [
-      { title: "Results & Testimonials — Atlas Coaching" },
+      { title: "Testimonials — Atlas Coaching" },
       { name: "description", content: "Real women, real results. Browse transformations, video stories, Instagram reviews and written testimonials." },
-      { property: "og:title", content: "Results & Testimonials" },
+      { property: "og:title", content: "Testimonials" },
       { property: "og:url", content: "/transformations" },
       { property: "og:image", content: transformationImages[0].after },
     ],
