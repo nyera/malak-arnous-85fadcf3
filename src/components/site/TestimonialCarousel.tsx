@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { testimonials } from "@/data/content";
+import { useI18n } from "@/i18n/I18nProvider";
+import { testimonialMeta } from "@/data/content";
 
 export function TestimonialCarousel() {
+  const { t } = useI18n();
+  const items = t.testimonials.items.map((it, i) => ({ ...it, avatar: testimonialMeta[i].avatar }));
   const [i, setI] = useState(0);
-  const t = testimonials[i];
+  const tt = items[i];
 
   useEffect(() => {
-    const id = setInterval(() => setI((p) => (p + 1) % testimonials.length), 6000);
+    const id = setInterval(() => setI((p) => (p + 1) % items.length), 6000);
     return () => clearInterval(id);
-  }, []);
+  }, [items.length]);
 
   return (
     <div className="relative max-w-4xl mx-auto">
-      <div className="relative min-h-[320px] md:min-h-[260px]">
+      <div className="relative min-h-[340px] md:min-h-[280px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={i}
@@ -25,13 +28,13 @@ export function TestimonialCarousel() {
             className="text-center px-6"
           >
             <p className="font-serif text-2xl md:text-4xl leading-snug text-foreground italic mb-8">
-              "{t.quote}"
+              "{tt.quote}"
             </p>
             <div className="flex items-center justify-center gap-4">
-              <img src={t.avatar} alt={t.name} loading="lazy" className="w-14 h-14 rounded-full ring-2 ring-ember/40 object-cover" />
-              <div className="text-left">
-                <div className="font-semibold">{t.name}</div>
-                <div className="text-sm text-ember uppercase tracking-widest">{t.result}</div>
+              <img src={tt.avatar} alt={tt.name} loading="lazy" className="w-14 h-14 rounded-full ring-2 ring-ember/40 object-cover" />
+              <div className="text-start">
+                <div className="font-semibold">{tt.name}</div>
+                <div className="text-sm text-ember uppercase tracking-widest">{tt.result}</div>
               </div>
             </div>
           </motion.div>
@@ -40,28 +43,28 @@ export function TestimonialCarousel() {
 
       <div className="flex items-center justify-center gap-6 mt-10">
         <button
-          onClick={() => setI((p) => (p - 1 + testimonials.length) % testimonials.length)}
+          onClick={() => setI((p) => (p - 1 + items.length) % items.length)}
           className="w-11 h-11 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"
-          aria-label="Previous testimonial"
+          aria-label="Previous"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-5 h-5 rtl:-scale-x-100" />
         </button>
         <div className="flex gap-2">
-          {testimonials.map((_, idx) => (
+          {items.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setI(idx)}
               className={`h-1 transition-all rounded-full ${idx === i ? "w-8 bg-ember" : "w-2 bg-border"}`}
-              aria-label={`Go to testimonial ${idx + 1}`}
+              aria-label={`Go to ${idx + 1}`}
             />
           ))}
         </div>
         <button
-          onClick={() => setI((p) => (p + 1) % testimonials.length)}
+          onClick={() => setI((p) => (p + 1) % items.length)}
           className="w-11 h-11 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"
-          aria-label="Next testimonial"
+          aria-label="Next"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-5 h-5 rtl:-scale-x-100" />
         </button>
       </div>
     </div>

@@ -1,23 +1,26 @@
 import { useState, useEffect } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Send, Menu, X } from "lucide-react";
+import { Instagram, Send, Menu, X, Globe } from "lucide-react";
 import { brand } from "@/data/content";
-import { CTAButton } from "./CTAButton";
+import { JoinNowButton } from "./CTAButton";
 import { cn } from "@/lib/utils";
-
-const nav = [
-  { to: "/", label: "Home" },
-  { to: "/programs", label: "Programs" },
-  { to: "/transformations", label: "Transformations" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-] as const;
+import { useI18n } from "@/i18n/I18nProvider";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { t, lang, toggleLang } = useI18n();
+
+  const nav = [
+    { to: "/", label: t.nav.home },
+    { to: "/programs", label: t.nav.programs },
+    { to: "/transformations", label: t.nav.results },
+    { to: "/about", label: t.nav.story },
+    { to: "/survey", label: t.nav.survey },
+    { to: "/contact", label: t.nav.contact },
+  ] as const;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -34,12 +37,12 @@ export function Header() {
       scrolled ? "bg-background/85 backdrop-blur-xl border-b border-border" : "bg-transparent",
     )}>
       <div className="container-x flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link to="/" className="flex items-center gap-2 group shrink-0">
           <div className="w-9 h-9 rounded-sm ember-gradient grid place-items-center font-display text-background text-xl">A</div>
           <span className="font-display text-xl tracking-widest">{brand.name}</span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden xl:flex items-center gap-1">
           {nav.map((item) => {
             const active = pathname === item.to;
             return (
@@ -47,34 +50,43 @@ export function Header() {
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  "relative px-4 py-2 text-xs uppercase tracking-[0.2em] font-semibold transition-colors",
+                  "relative px-3 py-2 text-[11px] uppercase tracking-[0.2em] font-semibold transition-colors",
                   active ? "text-ember" : "text-foreground/70 hover:text-foreground",
                 )}
               >
                 {item.label}
-                {active && (
-                  <motion.span layoutId="nav-underline" className="absolute left-4 right-4 -bottom-0.5 h-px bg-ember" />
-                )}
+                {active && <motion.span layoutId="nav-underline" className="absolute start-3 end-3 -bottom-0.5 h-px bg-ember" />}
               </Link>
             );
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2">
+          <button
+            onClick={toggleLang}
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-[11px] uppercase tracking-widest font-semibold text-foreground/70 hover:text-ember transition-colors"
+            aria-label="Toggle language"
+          >
+            <Globe className="w-3.5 h-3.5" />
+            {lang === "en" ? "ع" : "EN"}
+          </button>
           <a href={brand.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="p-2 text-foreground/70 hover:text-ember transition-colors">
             <Instagram className="w-4 h-4" />
           </a>
           <a href={brand.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" className="p-2 text-foreground/70 hover:text-ember transition-colors">
-            <Send className="w-4 h-4" />
+            <Send className="w-4 h-4 rtl:-scale-x-100" />
           </a>
-          <Link to="/contact">
-            <CTAButton size="sm">Join Now</CTAButton>
-          </Link>
+          <JoinNowButton size="sm" />
         </div>
 
-        <button onClick={() => setOpen((v) => !v)} className="lg:hidden p-2 text-foreground" aria-label="Toggle menu">
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex lg:hidden items-center gap-1">
+          <button onClick={toggleLang} className="px-2 py-2 text-[11px] uppercase tracking-widest font-semibold text-foreground/70" aria-label="Toggle language">
+            {lang === "en" ? "ع" : "EN"}
+          </button>
+          <button onClick={() => setOpen((v) => !v)} className="p-2 text-foreground" aria-label="Toggle menu">
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -93,8 +105,8 @@ export function Header() {
               ))}
               <div className="flex items-center gap-3 pt-5">
                 <a href={brand.instagram} target="_blank" rel="noreferrer" className="p-3 rounded-sm border border-border"><Instagram className="w-4 h-4" /></a>
-                <a href={brand.telegram} target="_blank" rel="noreferrer" className="p-3 rounded-sm border border-border"><Send className="w-4 h-4" /></a>
-                <Link to="/contact" className="flex-1"><CTAButton size="sm" className="w-full">Join Now</CTAButton></Link>
+                <a href={brand.telegram} target="_blank" rel="noreferrer" className="p-3 rounded-sm border border-border"><Send className="w-4 h-4 rtl:-scale-x-100" /></a>
+                <div className="flex-1"><JoinNowButton size="sm" className="w-full" /></div>
               </div>
             </div>
           </motion.div>

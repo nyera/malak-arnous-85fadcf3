@@ -23,17 +23,12 @@ export function FAQ({ items }: Props) {
           >
             <button
               onClick={() => setOpen(isOpen ? null : i)}
-              className="w-full flex items-center justify-between gap-6 py-7 text-left group"
+              className="w-full flex items-center justify-between gap-6 py-7 text-start group"
             >
               <span className="font-display text-2xl md:text-3xl uppercase tracking-tight group-hover:text-ember transition-colors">
                 {item.q}
               </span>
-              <Plus
-                className={cn(
-                  "w-6 h-6 shrink-0 text-ember transition-transform duration-500",
-                  isOpen && "rotate-45",
-                )}
-              />
+              <Plus className={cn("w-6 h-6 shrink-0 text-ember transition-transform duration-500", isOpen && "rotate-45")} />
             </button>
             <AnimatePresence initial={false}>
               {isOpen && (
@@ -44,9 +39,7 @@ export function FAQ({ items }: Props) {
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="pb-7 pr-12 text-muted-foreground text-lg leading-relaxed max-w-3xl">
-                    {item.a}
-                  </p>
+                  <p className="pb-7 pe-12 text-muted-foreground text-lg leading-relaxed max-w-3xl">{item.a}</p>
                 </motion.div>
               )}
             </AnimatePresence>

@@ -1,61 +1,52 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import coachImg from "@/assets/coach.jpg";
-import { stats, brand } from "@/data/content";
+import { brand, statValues } from "@/data/content";
+import { useI18n } from "@/i18n/I18nProvider";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { Counter } from "@/components/site/Counter";
-import { CTAButton } from "@/components/site/CTAButton";
+import { CTAButton, JoinNowButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
+import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
 import { FadeIn } from "@/components/site/Misc";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Atlas Coaching" },
-      { name: "description", content: "Meet the coach behind 1,240+ women's transformations. 8 years coaching, evidence-based method, results-obsessed." },
-      { property: "og:title", content: "About — Atlas Coaching" },
-      { property: "og:description", content: "The coach, the method, the standard." },
+      { title: "My Story — Atlas Coaching" },
+      { name: "description", content: "Meet the coach behind 1,240+ women's transformations. The journey, the mission, the method." },
+      { property: "og:title", content: "My Story — Atlas Coaching" },
+      { property: "og:url", content: "/about" },
     ],
+    links: [{ rel: "canonical", href: "/about" }],
   }),
   component: AboutPage,
 });
 
-const pillars = [
-  { n: "01", t: "Strength First", d: "Lean comes from muscle. Every plan is built around progressive resistance training — not punishment cardio." },
-  { n: "02", t: "Food Freedom", d: "No meal plans, no good/bad foods. A flexible macro framework you can actually live with for life." },
-  { n: "03", t: "Behavioural Coaching", d: "Plans don't change you. Behaviours do. Weekly check-ins focus on the habits that drive 90% of results." },
-  { n: "04", t: "Radical Accountability", d: "You don't pay for a PDF. You pay for a coach who notices when you skip a week and asks the right question." },
-];
-
 function AboutPage() {
+  const { t } = useI18n();
+  const labels = [t.stats.coached, t.stats.retention, t.stats.transformation, t.stats.experience];
   return (
     <>
       <section className="section-y relative overflow-hidden">
         <div className="container-x grid lg:grid-cols-[1.1fr_1fr] gap-14 items-center">
           <div className="space-y-7">
-            <span className="eyebrow flex items-center gap-3"><span className="h-px w-8 bg-ember" />The Coach</span>
-            <h1 className="display-xl">
-              Built by a woman.<br />
-              <span className="text-serif-italic ember-text normal-case">Built for women.</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              I'm Dani — strength coach, lifelong lifter, and the person behind every program at Atlas. After eight years in the trenches with over 1,200 clients,
-              I built Atlas because I was tired of women being sold quick fixes that don't last and workouts that leave them weaker than they started.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              We coach one thing here: the slow, stubborn, undeniable work of becoming strong. Inside and out.
-            </p>
+            <span className="eyebrow flex items-center gap-3"><span className="h-px w-8 bg-ember" />{t.story.eyebrow}</span>
+            <h1 className="display-xl">{t.story.title1}<br /><span className="text-serif-italic ember-text normal-case">{t.story.title2}</span></h1>
+            <p className="text-lg text-muted-foreground leading-relaxed">{t.story.p1}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed">{t.story.p2}</p>
             <div className="flex flex-wrap gap-4 pt-2">
-              <Link to="/contact"><CTAButton icon={<ArrowRight className="w-4 h-4" />}>Apply for Coaching</CTAButton></Link>
-              <a href={brand.instagram} target="_blank" rel="noreferrer"><CTAButton variant="outline">@atlas.coaching</CTAButton></a>
+              <JoinNowButton size="lg" />
+              <Link to="/survey"><CTAButton variant="outline" icon={<ArrowRight className="w-4 h-4" />}>{t.cta.takeSurvey}</CTAButton></Link>
+              <a href={brand.instagram} target="_blank" rel="noreferrer"><CTAButton variant="ghost">{brand.instagramHandle}</CTAButton></a>
             </div>
           </div>
           <FadeIn>
             <div className="relative aspect-[4/5] rounded-sm overflow-hidden">
-              <img src={coachImg} alt="Coach Dani" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="font-display text-3xl uppercase">Dani Reyes</div>
-                <div className="text-xs uppercase tracking-widest text-ember mt-1">NASM-CPT · PN-L2 · Founder</div>
+              <img src={coachImg} alt={t.story.coachName} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute bottom-6 inset-x-6">
+                <div className="font-display text-3xl uppercase">{t.story.coachName}</div>
+                <div className="text-xs uppercase tracking-widest text-ember mt-1">{t.story.coachCreds}</div>
               </div>
             </div>
           </FadeIn>
@@ -64,11 +55,11 @@ function AboutPage() {
 
       <section className="section-y bg-surface border-y border-border">
         <div className="container-x grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-8">
-          {stats.map((s, i) => (
-            <FadeIn key={s.label} delay={i * 0.08}>
-              <div className="text-center lg:text-left">
+          {statValues.map((s, i) => (
+            <FadeIn key={i} delay={i * 0.08}>
+              <div className="text-center lg:text-start">
                 <div className="display-lg ember-text mb-2"><Counter value={s.value} suffix={s.suffix} /></div>
-                <div className="eyebrow text-muted-foreground">{s.label}</div>
+                <div className="eyebrow text-muted-foreground">{labels[i]}</div>
               </div>
             </FadeIn>
           ))}
@@ -77,18 +68,25 @@ function AboutPage() {
 
       <section className="section-y">
         <div className="container-x">
-          <SectionHeader eyebrow="The Method" title="Four pillars." highlight="One standard." description="Everything we do at Atlas comes back to these four non-negotiables." />
+          <SectionHeader eyebrow={t.story.methodEyebrow} title={t.story.methodTitle} highlight={t.story.methodHighlight} description={t.story.methodDesc} />
           <div className="mt-16 grid md:grid-cols-2 gap-6">
-            {pillars.map((p, i) => (
-              <FadeIn key={p.n} delay={i * 0.08}>
+            {t.story.pillars.map((p, i) => (
+              <FadeIn key={i} delay={i * 0.08}>
                 <div className="p-8 lg:p-10 rounded-sm bg-surface border border-border hover-lift h-full">
-                  <div className="font-display text-5xl ember-text mb-5">{p.n}</div>
+                  <div className="font-display text-5xl ember-text mb-5">0{i + 1}</div>
                   <h3 className="display-md mb-3">{p.t}</h3>
                   <p className="text-muted-foreground leading-relaxed">{p.d}</p>
                 </div>
               </FadeIn>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section-y bg-surface border-y border-border">
+        <div className="container-x">
+          <SectionHeader eyebrow={t.testimonials.carouselEyebrow} title={t.testimonials.carouselTitle} highlight={t.testimonials.carouselHighlight} align="center" />
+          <div className="mt-16"><TestimonialCarousel /></div>
         </div>
       </section>
 

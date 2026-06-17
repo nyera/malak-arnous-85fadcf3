@@ -1,18 +1,20 @@
 import { motion } from "framer-motion";
 import { Instagram, ExternalLink } from "lucide-react";
 import { brand, instagramPosts } from "@/data/content";
+import { useI18n } from "@/i18n/I18nProvider";
 
 export function InstagramGrid() {
+  const { t } = useI18n();
   return (
     <div>
       <div className="flex items-end justify-between mb-8 flex-wrap gap-4">
-        <div className="flex items-center gap-4">
-          <div className="grid place-items-center w-12 h-12 rounded-sm ember-gradient">
+        <div className="flex items-center gap-4 min-w-0">
+          <div className="grid place-items-center w-12 h-12 rounded-sm ember-gradient shrink-0">
             <Instagram className="w-6 h-6 text-background" />
           </div>
           <div className="min-w-0">
-            <div className="font-semibold">{brand.instagramHandle}</div>
-            <div className="text-sm text-muted-foreground">Daily training · nutrition · mindset</div>
+            <div className="font-semibold truncate">{brand.instagramHandle}</div>
+            <div className="text-sm text-muted-foreground">{t.ig.handleTagline}</div>
           </div>
         </div>
         <a
@@ -21,7 +23,7 @@ export function InstagramGrid() {
           rel="noreferrer"
           className="inline-flex items-center gap-2 text-sm uppercase tracking-widest font-semibold text-ember hover:gap-3 transition-all"
         >
-          Follow on Instagram <ExternalLink className="w-4 h-4" />
+          {t.ig.follow} <ExternalLink className="w-4 h-4" />
         </a>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">

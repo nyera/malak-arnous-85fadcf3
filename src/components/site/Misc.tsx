@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
-import { trustBadges } from "@/data/content";
+import { useI18n } from "@/i18n/I18nProvider";
 
 export function MarqueeBar() {
-  const items = [...trustBadges, ...trustBadges, ...trustBadges];
+  const { t } = useI18n();
+  const items = [...t.trustBadges, ...t.trustBadges, ...t.trustBadges];
   return (
     <div className="border-y border-border bg-surface overflow-hidden py-5">
       <div className="flex marquee whitespace-nowrap gap-12">
-        {items.map((t, i) => (
-          <span key={i} className="eyebrow text-muted-foreground flex items-center gap-12">
-            {t} <span className="w-1.5 h-1.5 rounded-full bg-ember/60" />
+        {items.map((b, i) => (
+          <span key={i} className="eyebrow text-muted-foreground flex items-center gap-12 shrink-0">
+            {b} <span className="w-1.5 h-1.5 rounded-full bg-ember/60" />
           </span>
         ))}
       </div>
