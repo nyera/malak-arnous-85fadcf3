@@ -22,9 +22,9 @@ import { MarqueeBar, FadeIn } from "@/components/site/Misc";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Malak Arnous —Customized health, Fitness training" },
-      { name: "description", content: "Specializing in helping women break free from emotional eating and lose weight from the root.. not just the surface. Apply today." },
-      { property: "og:title", content: "Malak Arnous" },
+      { title: "ملاك أرنوس — مدربة حياة للنساء" },
+      { name: "description", content: "ملاك أرنوس — مدربة حياة للنساء. رحلة شفاء داخلي، تنظيم الجهاز العصبي، والتحرر من الأكل العاطفي." },
+      { property: "og:title", content: "ملاك أرنوس — مدربة حياة للنساء" },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],

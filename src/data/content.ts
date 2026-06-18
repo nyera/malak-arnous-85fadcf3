@@ -3,14 +3,14 @@
 export const STAN_URL = "https://stan.store/malakarnous";
 
 export const brand = {
-  name: "Malak Arnous",
-  full: "Malak Arnous",
+  name: "ملاك أرنوس",
+  full: "ملاك أرنوس",
   email: "hello@malakarnous.com",
   phone: "+1 (555) 014-8821",
   instagram: "https://instagram.com/malakarnous369",
   instagramHandle: "@malakarnous369",
   telegram: "https://t.me/+LzSx7ITqfc41N2Qx",
-  telegramHandle: "Malak's Inner Circle",
+  telegramHandle: "الدائرة الداخلية",
   whatsapp: "https://wa.me/15550148821",
   youtube: "https://youtube.com/@malakarnous",
   tiktok: "https://tiktok.com/@malakarnous",
@@ -19,8 +19,8 @@ export const brand = {
 export const statValues = [
   { value: 1240, suffix: "+" },
   { value: 98, suffix: "%" },
-  { value: 12, suffix: "w" },
-  { value: 8, suffix: "yr" },
+  { value: 12, suffix: "" },
+  { value: 8, suffix: "" },
 ];
 
 export const testimonialMeta = [
@@ -34,19 +34,20 @@ export const testimonialMeta = [
   { avatar: "https://i.pravatar.cc/200?img=16" },
 ];
 
+// Soft feminine lifestyle imagery — no fitness/sports
 export const transformationImages = [
-  { before: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=1000&fit=crop", after: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=1000&fit=crop" },
-  { before: "https://images.unsplash.com/photo-1594381898411-846e7d193883?w=800&h=1000&fit=crop", after: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800&h=1000&fit=crop" },
-  { before: "https://images.unsplash.com/photo-1550345332-09e3ac987658?w=800&h=1000&fit=crop", after: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=800&h=1000&fit=crop" },
+  { before: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=1000&fit=crop", after: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=1000&fit=crop" },
+  { before: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&h=1000&fit=crop", after: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&h=1000&fit=crop" },
+  { before: "https://images.unsplash.com/photo-1542596594-649edbc13630?w=800&h=1000&fit=crop", after: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&h=1000&fit=crop" },
 ];
 
 export const instagramPosts = [
-  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&h=600&fit=crop",
-  "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=600&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=600&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=600&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=600&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1493836512294-502baa1986e2?w=600&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1502209524164-acea936639a2?w=600&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1528319725582-ddc096101511?w=600&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=600&fit=crop",
+  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=600&fit=crop",
 ];

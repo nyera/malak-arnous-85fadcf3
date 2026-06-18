@@ -11,9 +11,9 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  --font-display: "Cormorant Garamond", "Instrument Serif", serif;
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-serif: "Instrument Serif", "Times New Roman", serif;
+  --font-display: "Noto Kufi Arabic", "Cormorant Garamond", serif;
+  --font-sans: "IBM Plex Sans Arabic", "Noto Kufi Arabic", system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -123,9 +123,9 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 400;
-    letter-spacing: -0.015em;
-    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.25;
     text-transform: none;
   }
 }
