@@ -37,9 +37,9 @@ export function Header() {
       scrolled ? "bg-background/85 backdrop-blur-xl border-b border-border" : "bg-transparent",
     )}>
       <div className="container-x flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-2 group shrink-0">
-          <div className="w-9 h-9 rounded-sm ember-gradient grid place-items-center font-display text-background text-xl">A</div>
-          <span className="font-display text-xl tracking-widest">{brand.name}</span>
+        <Link to="/" className="flex items-center gap-2.5 group shrink-0">
+          <div className="w-9 h-9 rounded-full ember-gradient grid place-items-center font-display text-background text-lg italic">M</div>
+          <span className="font-display text-2xl tracking-tight">{brand.name}</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">

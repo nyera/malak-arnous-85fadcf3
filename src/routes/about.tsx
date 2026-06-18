@@ -45,8 +45,8 @@ function AboutPage() {
             <div className="relative aspect-[4/5] rounded-sm overflow-hidden">
               <img src={coachImg} alt={t.story.coachName} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute bottom-6 inset-x-6">
-                <div className="font-display text-3xl uppercase">{t.story.coachName}</div>
-                <div className="text-xs uppercase tracking-widest text-ember mt-1">{t.story.coachCreds}</div>
+                <div className="font-display text-3xl">{t.story.coachName}</div>
+                <div className="text-xs uppercase tracking-widest text-ember mt-1">{t.story.methodEyebrow}</div>
               </div>
             </div>
           </FadeIn>
