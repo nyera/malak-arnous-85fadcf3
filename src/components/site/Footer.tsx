@@ -10,9 +10,9 @@ export function Footer() {
       <div className="container-x py-20">
         <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
           <div className="space-y-5 max-w-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-sm ember-gradient grid place-items-center font-display text-background text-xl">A</div>
-              <span className="font-display text-xl tracking-widest">{brand.name}</span>
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-full ember-gradient grid place-items-center font-display text-background text-lg italic">M</div>
+              <span className="font-display text-2xl tracking-tight">{brand.name}</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">{t.hero.description}</p>
             <div className="flex items-center gap-3 pt-2">

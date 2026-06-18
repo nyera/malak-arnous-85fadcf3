@@ -13,20 +13,20 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const base =
-  "group relative inline-flex items-center justify-center gap-2 font-semibold uppercase tracking-[0.15em] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-background whitespace-nowrap";
+  "group relative inline-flex items-center justify-center gap-2 font-medium uppercase tracking-[0.18em] rounded-full transition-all duration-500 ease-out disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background whitespace-nowrap";
 
 const sizes: Record<Size, string> = {
-  sm: "px-4 py-2 text-[11px]",
-  md: "px-6 py-3.5 text-xs",
-  lg: "px-8 py-5 text-sm",
+  sm: "px-5 py-2.5 text-[10.5px]",
+  md: "px-7 py-3.5 text-[11px]",
+  lg: "px-10 py-5 text-[12px]",
 };
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-ember text-background hover:bg-ember-glow shadow-[0_10px_40px_-10px_oklch(0.68_0.19_38_/_0.6)] hover:shadow-[0_20px_50px_-10px_oklch(0.78_0.18_55_/_0.7)] hover:-translate-y-0.5",
-  secondary: "bg-foreground text-background hover:bg-foreground/90",
-  ghost: "bg-transparent text-foreground hover:bg-surface-elevated",
-  outline: "border border-foreground/20 text-foreground hover:border-ember hover:text-ember",
+    "bg-foreground text-background hover:bg-ember shadow-[0_8px_30px_-12px_oklch(0.24_0.015_30_/_0.35)] hover:shadow-[0_14px_40px_-12px_oklch(0.66_0.115_28_/_0.45)] hover:-translate-y-0.5",
+  secondary: "bg-ember text-background hover:bg-ember-glow hover:-translate-y-0.5 shadow-[0_8px_28px_-12px_oklch(0.66_0.115_28_/_0.4)]",
+  ghost: "bg-transparent text-foreground hover:text-ember",
+  outline: "border border-foreground/25 text-foreground hover:border-foreground hover:bg-foreground hover:text-background",
 };
 
 export const CTAButton = forwardRef<HTMLButtonElement, Props>(

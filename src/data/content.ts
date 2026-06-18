@@ -1,6 +1,6 @@
 // Non-translatable data: links, image URLs. Translatable copy lives in src/i18n/translations.ts.
 
-export const STAN_URL = "https://stan.store/atlas-coaching";
+export const STAN_URL = "https://stan.store/malakarnous";
 
 export const brand = {
   name: "Malak Arnous",
@@ -9,11 +9,11 @@ export const brand = {
   phone: "+1 (555) 014-8821",
   instagram: "https://instagram.com/malakarnous369",
   instagramHandle: "@malakarnous369",
-  telegram: "https://t.me/atlascommunity",
-  telegramHandle: "Atlas Inner Circle",
+  telegram: "https://t.me/+LzSx7ITqfc41N2Qx",
+  telegramHandle: "Malak's Inner Circle",
   whatsapp: "https://wa.me/15550148821",
-  youtube: "https://youtube.com/@atlascoaching",
-  tiktok: "https://tiktok.com/@atlas.coaching",
+  youtube: "https://youtube.com/@malakarnous",
+  tiktok: "https://tiktok.com/@malakarnous",
 };
 
 export const statValues = [
