@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Send, Menu, X, Globe } from "lucide-react";
+import { Instagram, Send, Menu, X } from "lucide-react";
 import { brand } from "@/data/content";
 import { JoinNowButton } from "./CTAButton";
 import { cn } from "@/lib/utils";
@@ -11,7 +11,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { t, lang, toggleLang } = useI18n();
+  const { t } = useI18n();
 
   const nav = [
     { to: "/", label: t.nav.home },
@@ -62,14 +62,6 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-2">
-          <button
-            onClick={toggleLang}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-[11px] uppercase tracking-widest font-semibold text-foreground/70 hover:text-ember transition-colors"
-            aria-label="Toggle language"
-          >
-            <Globe className="w-3.5 h-3.5" />
-            {lang === "en" ? "ع" : "EN"}
-          </button>
           <a href={brand.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="p-2 text-foreground/70 hover:text-ember transition-colors">
             <Instagram className="w-4 h-4" />
           </a>
@@ -80,9 +72,6 @@ export function Header() {
         </div>
 
         <div className="flex lg:hidden items-center gap-1">
-          <button onClick={toggleLang} className="px-2 py-2 text-[11px] uppercase tracking-widest font-semibold text-foreground/70" aria-label="Toggle language">
-            {lang === "en" ? "ع" : "EN"}
-          </button>
           <button onClick={() => setOpen((v) => !v)} className="p-2 text-foreground" aria-label="Toggle menu">
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

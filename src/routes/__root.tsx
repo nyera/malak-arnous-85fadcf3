@@ -44,22 +44,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Malak Arnous" },
-      { name: "description", content: "online weight-loss coaching for women — bilingual EN/AR. Custom training, nutrition and accountability." },
-      { property: "og:title", content: "Malak Arnous" },
-      { property: "og:description", content: "online weight-loss coaching for women — bilingual EN/AR. Custom training, nutrition and accountability." },
+      { title: "ملاك أرنوس — مدربة حياة للنساء" },
+      { name: "description", content: "ملاك أرنوس — مدربة حياة وتطوير ذاتي للنساء. رحلة شفاء داخلي، تنظيم الجهاز العصبي، والتحرر من الأكل العاطفي." },
+      { property: "og:title", content: "ملاك أرنوس — مدربة حياة للنساء" },
+      { property: "og:description", content: "رحلة شفاء داخلي وتطوير ذاتي للنساء مع ملاك أرنوس." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Malak Arnous" },
-      { name: "twitter:description", content: "online weight-loss coaching for women — bilingual EN/AR. Custom training, nutrition and accountability." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/52770dfc-a16d-46af-a1be-61f5d3d1aa40/id-preview-1d7a8e8e--2d8667bd-9071-4c3f-beb7-9fe4c8d279e3.lovable.app-1781675035548.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/52770dfc-a16d-46af-a1be-61f5d3d1aa40/id-preview-1d7a8e8e--2d8667bd-9071-4c3f-beb7-9fe4c8d279e3.lovable.app-1781675035548.png" },
+      { name: "twitter:title", content: "ملاك أرنوس" },
+      { name: "twitter:description", content: "رحلة شفاء داخلي وتطوير ذاتي للنساء." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Cairo:wght@300;400;500;600;700&family=Amiri:ital@0;1&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -70,7 +68,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <head><HeadContent /></head>
       <body>{children}<Scripts /></body>
     </html>
