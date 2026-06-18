@@ -22,9 +22,9 @@ import { MarqueeBar, FadeIn } from "@/components/site/Misc";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ملاك أرنوس — مدربة حياة للنساء" },
-      { name: "description", content: "ملاك أرنوس — مدربة حياة للنساء. رحلة شفاء داخلي، تنظيم الجهاز العصبي، والتحرر من الأكل العاطفي." },
-      { property: "og:title", content: "ملاك أرنوس — مدربة حياة للنساء" },
+      { title: "ملاك عرنوس — مدربة حياة للنساء" },
+      { name: "description", content: "ملاك عرنوس — مدربة حياة للنساء. رحلة شفاء داخلي، تنظيم الجهاز العصبي، والتحرر من الأكل العاطفي." },
+      { property: "og:title", content: "ملاك عرنوس — مدربة حياة للنساء" },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],

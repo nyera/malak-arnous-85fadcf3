@@ -11,8 +11,8 @@ import { FadeIn } from "@/components/site/Misc";
 export const Route = createFileRoute("/programs")({
   head: () => ({
     meta: [
-      { title: "Programs — Atlas Coaching" },
-      { name: "description", content: "Three coaching programs: Ignite (8wk on-ramp), Transform (16wk signature), Elite (12mo athlete-level partnership)." },
+      { title: "البرامج — ملاك عرنوس" },
+      { name: "description", content: "Three coaching programs: The Shift (8wk on-ramp), Heal & Recieve (16wk signature), Coming Soon.. (12mo athlete-level partnership)." },
       { property: "og:title", content: "Programs — Atlas Coaching" },
       { property: "og:url", content: "/programs" },
     ],

@@ -10,9 +10,9 @@ import { FadeIn } from "@/components/site/Misc";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Atlas Coaching" },
+      { title: "Contact — MAlak Coaching" },
       { name: "description", content: "Talk to a coach. 24-hour response on every message — or jump into the free survey to get matched." },
-      { property: "og:title", content: "Contact — Atlas Coaching" },
+      { property: "og:title", content: "Contact — MAlak Coaching" },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],

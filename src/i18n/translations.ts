@@ -41,8 +41,7 @@ const ar = {
     rights: "جميع الحقوق محفوظة.",
     response24: "خلال 24 ساعة",
     onlineWorldwide: "أونلاين · حول العالم",
-    guarantee: "ضمان 30 يومًا",
-    guaranteeBody: "اتبعي البرنامج وسترَين التحوّل بنفسكِ — أو نرافقكِ مجانًا حتى ترَيه.",
+    guaranteeBody: "بدون دايت❌بدون حرمان❌بدون أدوية❌بدون تفكير بالموضوع❌.",
   },
   hero: {
     title1: "رحلتكِ نحو",
@@ -74,7 +73,7 @@ const ar = {
     pageDescription: "لا مستويات جهد. لا نسخ مخفّفة. كل برنامج يحصل على نفس المرافقة، نفس الحضور، نفس الالتزام بكِ.",
     items: [
       {
-        slug: "shift",
+        slug: "The shift",
         name: "البداية",
         duration: "8 أسابيع",
         price: "—",
@@ -84,7 +83,7 @@ const ar = {
         badge: null,
       },
       {
-        slug: "healing",
+        slug: "Heal & Receive",
         name: "الشفاء",
         duration: "16 أسبوع",
         price: "—",
@@ -94,7 +93,7 @@ const ar = {
         badge: "الأكثر طلباً",
       },
       {
-        slug: "elite",
+        slug: "coming soon...",
         name: "التحوّل",
         duration: "12 شهرًا",
         price: "—",
