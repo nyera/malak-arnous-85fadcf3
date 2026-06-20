@@ -9,22 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TransformationsRouteImport } from './routes/transformations'
+import { Route as TheShiftRouteImport } from './routes/the-shift'
 import { Route as SurveyRouteImport } from './routes/survey'
+import { Route as StoryRouteImport } from './routes/story'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProgramsRouteImport } from './routes/programs'
-import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
-const TransformationsRoute = TransformationsRouteImport.update({
-  id: '/transformations',
-  path: '/transformations',
+const TheShiftRoute = TheShiftRouteImport.update({
+  id: '/the-shift',
+  path: '/the-shift',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SurveyRoute = SurveyRouteImport.update({
   id: '/survey',
   path: '/survey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoryRoute = StoryRouteImport.update({
+  id: '/story',
+  path: '/story',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -35,11 +40,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ProgramsRoute = ProgramsRouteImport.update({
   id: '/programs',
   path: '/programs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -56,78 +56,78 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
   '/programs': typeof ProgramsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
-  '/transformations': typeof TransformationsRoute
+  '/the-shift': typeof TheShiftRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
   '/programs': typeof ProgramsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
-  '/transformations': typeof TransformationsRoute
+  '/the-shift': typeof TheShiftRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/contact': typeof ContactRoute
   '/programs': typeof ProgramsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
-  '/transformations': typeof TransformationsRoute
+  '/the-shift': typeof TheShiftRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/contact'
     | '/programs'
     | '/sitemap.xml'
+    | '/story'
     | '/survey'
-    | '/transformations'
+    | '/the-shift'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/contact'
     | '/programs'
     | '/sitemap.xml'
+    | '/story'
     | '/survey'
-    | '/transformations'
+    | '/the-shift'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/contact'
     | '/programs'
     | '/sitemap.xml'
+    | '/story'
     | '/survey'
-    | '/transformations'
+    | '/the-shift'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  ContactRoute: typeof ContactRoute
   ProgramsRoute: typeof ProgramsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StoryRoute: typeof StoryRoute
   SurveyRoute: typeof SurveyRoute
-  TransformationsRoute: typeof TransformationsRoute
+  TheShiftRoute: typeof TheShiftRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/transformations': {
-      id: '/transformations'
-      path: '/transformations'
-      fullPath: '/transformations'
-      preLoaderRoute: typeof TransformationsRouteImport
+    '/the-shift': {
+      id: '/the-shift'
+      path: '/the-shift'
+      fullPath: '/the-shift'
+      preLoaderRoute: typeof TheShiftRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/survey': {
@@ -135,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/survey'
       fullPath: '/survey'
       preLoaderRoute: typeof SurveyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/story': {
+      id: '/story'
+      path: '/story'
+      fullPath: '/story'
+      preLoaderRoute: typeof StoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -149,13 +156,6 @@ declare module '@tanstack/react-router' {
       path: '/programs'
       fullPath: '/programs'
       preLoaderRoute: typeof ProgramsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -178,22 +178,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  ContactRoute: ContactRoute,
   ProgramsRoute: ProgramsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StoryRoute: StoryRoute,
   SurveyRoute: SurveyRoute,
-  TransformationsRoute: TransformationsRoute,
+  TheShiftRoute: TheShiftRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

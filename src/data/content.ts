@@ -3,24 +3,24 @@
 export const STAN_URL = "https://stan.store/malakarnous";
 
 export const brand = {
-  name: "ملاك أرنوس",
-  full: "ملاك أرنوس",
-  email: "hello@malakarnous.com",
-  phone: "+1 (555) 014-8821",
+  name: "ملاك عرنوس",
+  full: "ملاك عرنوس",
+  email: "hello@malakarnous369.com",
+  phone: "",
   instagram: "https://instagram.com/malakarnous369",
   instagramHandle: "@malakarnous369",
   telegram: "https://t.me/+LzSx7ITqfc41N2Qx",
   telegramHandle: "الدائرة الداخلية",
-  whatsapp: "https://wa.me/15550148821",
-  youtube: "https://youtube.com/@malakarnous",
-  tiktok: "https://tiktok.com/@malakarnous",
+  whatsapp: "",
+  youtube: "",
+  tiktok: "",
 };
 
 export const statValues = [
   { value: 1240, suffix: "+" },
   { value: 98, suffix: "%" },
-  { value: 12, suffix: "" },
   { value: 8, suffix: "" },
+  { value: 8, suffix: "+" },
 ];
 
 export const testimonialMeta = [
@@ -34,7 +34,6 @@ export const testimonialMeta = [
   { avatar: "https://i.pravatar.cc/200?img=16" },
 ];
 
-// Soft feminine lifestyle imagery — no fitness/sports
 export const transformationImages = [
   { before: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=1000&fit=crop", after: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=1000&fit=crop" },
   { before: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=800&h=1000&fit=crop", after: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&h=1000&fit=crop" },

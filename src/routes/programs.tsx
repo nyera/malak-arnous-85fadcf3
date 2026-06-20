@@ -1,59 +1,53 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { useI18n } from "@/i18n/I18nProvider";
-import { ProgramCard } from "@/components/site/ProgramCard";
 import { SectionHeader } from "@/components/site/SectionHeader";
-import { FAQ } from "@/components/site/FAQ";
-import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
+import { CTAButton, JoinNowButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
-import { JoinNowButton } from "@/components/site/CTAButton";
 import { FadeIn } from "@/components/site/Misc";
 
 export const Route = createFileRoute("/programs")({
   head: () => ({
     meta: [
-      { title: "البرامج — ملاك عرنوس" },
-      { name: "description", content: "Three coaching programs: The Shift (8wk on-ramp), Heal & Recieve (16wk signature), Coming Soon.. (12mo athlete-level partnership)." },
-      { property: "og:title", content: "Programs — Atlas Coaching" },
-      { property: "og:url", content: "/programs" },
+      { title: "الخدمات — ملاك عرنوس" },
+      { name: "description", content: "خدمات ملاك عرنوس: The Shift, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
     ],
     links: [{ rel: "canonical", href: "/programs" }],
   }),
-  component: ProgramsPage,
+  component: ServicesPage,
 });
 
-function ProgramsPage() {
+function ServicesPage() {
   const { t } = useI18n();
   return (
     <>
       <section className="section-y">
         <div className="container-x">
-          <SectionHeader eyebrow={t.programs.eyebrow} title={t.programs.headingPage} highlight={t.programs.headingHighlight} description={t.programs.pageDescription} align="center" />
+          <SectionHeader eyebrow={t.services.eyebrow} title={t.services.title} highlight="" description={t.services.description} align="center" />
         </div>
       </section>
 
       <section className="pb-24">
-        <div className="container-x grid lg:grid-cols-3 gap-6 items-stretch">
-          {t.programs.items.map((p, i) => <ProgramCard key={p.slug} program={p} index={i} />)}
-        </div>
-        <div className="container-x mt-12 text-center"><JoinNowButton size="lg" /></div>
-      </section>
-
-      <section className="section-y bg-surface border-y border-border">
-        <div className="container-x">
-          <SectionHeader eyebrow={t.testimonials.carouselEyebrow} title={t.testimonials.carouselTitle} highlight={t.testimonials.carouselHighlight} align="center" />
-          <div className="mt-16"><TestimonialCarousel /></div>
+        <div className="container-x grid md:grid-cols-2 gap-6 items-stretch">
+          {t.services.items.map((s, i) => (
+            <FadeIn key={s.slug} delay={i * 0.08}>
+              <div className="p-8 lg:p-10 rounded-sm border border-border bg-surface hover-lift h-full flex flex-col">
+                <h3 className="display-md mb-3">{s.name}</h3>
+                <p className="text-serif-italic text-ember text-xl mb-4 leading-snug">{s.tagline}</p>
+                <p className="text-muted-foreground leading-relaxed flex-1">{s.description}</p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {s.link ? (
+                    <Link to={s.link}><CTAButton variant="outline" icon={<ArrowRight className="w-4 h-4" />}>{t.cta.readMore}</CTAButton></Link>
+                  ) : null}
+                  <JoinNowButton size="sm" />
+                </div>
+              </div>
+            </FadeIn>
+          ))}
         </div>
       </section>
 
       <TelegramCTA />
-
-      <section className="section-y border-t border-border">
-        <div className="container-x">
-          <SectionHeader eyebrow={t.faq.eyebrow} title={t.faq.title} highlight={t.faq.highlight} align="center" />
-          <div className="mt-12 max-w-3xl mx-auto"><FAQ items={t.faq.items} /></div>
-          <FadeIn><div className="mt-12 text-center"><JoinNowButton size="lg" /></div></FadeIn>
-        </div>
-      </section>
     </>
   );
 }
