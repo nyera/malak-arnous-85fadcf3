@@ -35,7 +35,6 @@ export function Footer() {
           <FooterCol title={t.footer.about}>
             <Link to="/about" className="footer-link">{t.nav.about}</Link>
             <Link to="/story" className="footer-link">{t.nav.story}</Link>
-            <Link to="/contact" className="footer-link">{t.nav.contact}</Link>
           </FooterCol>
 
           <FooterCol title={t.footer.contact}>
