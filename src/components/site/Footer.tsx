@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Send, Youtube, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Instagram, Send, Mail, MapPin } from "lucide-react";
 import { brand } from "@/data/content";
 import { useI18n } from "@/i18n/I18nProvider";
+import logoAsset from "@/assets/logo.png.asset.json";
 
 export function Footer() {
   const { t } = useI18n();
@@ -11,30 +12,30 @@ export function Footer() {
         <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
           <div className="space-y-5 max-w-sm">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full ember-gradient grid place-items-center font-display text-background text-lg italic">M</div>
+              <div className="w-11 h-11 rounded-full bg-ember/10 grid place-items-center overflow-hidden">
+                <img src={logoAsset.url} alt={brand.name} className="w-9 h-9 object-contain" style={{ filter: "invert(35%) sepia(45%) saturate(900%) hue-rotate(330deg)" }} />
+              </div>
               <span className="font-display text-2xl tracking-tight">{brand.name}</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">{t.hero.description}</p>
             <div className="flex items-center gap-3 pt-2">
               <a href={brand.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Instagram className="w-4 h-4" /></a>
               <a href={brand.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Send className="w-4 h-4 rtl:-scale-x-100" /></a>
-              <a href={brand.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><MessageCircle className="w-4 h-4" /></a>
-              <a href={brand.youtube} target="_blank" rel="noreferrer" aria-label="YouTube" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Youtube className="w-4 h-4" /></a>
+              <a href={`mailto:${brand.email}`} aria-label="Email" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Mail className="w-4 h-4" /></a>
             </div>
           </div>
 
           <FooterCol title={t.footer.coaching}>
-            <Link to="/programs" className="footer-link">{t.footer.allPrograms}</Link>
+            <Link to="/programs" className="footer-link">{t.nav.services}</Link>
+            <Link to="/the-shift" className="footer-link">{t.nav.theShift}</Link>
             <Link to="/survey" className="footer-link">{t.nav.survey}</Link>
-            <Link to="/transformations" className="footer-link">{t.nav.results}</Link>
             <a href={brand.telegram} target="_blank" rel="noreferrer" className="footer-link">{t.footer.free}</a>
           </FooterCol>
 
           <FooterCol title={t.footer.about}>
-            <Link to="/about" className="footer-link">{t.nav.story}</Link>
-            <Link to="/about" className="footer-link">{t.footer.method}</Link>
-            <Link to="/transformations" className="footer-link">{t.nav.results}</Link>
-            <Link to="/contact" className="footer-link">{t.footer.apply}</Link>
+            <Link to="/about" className="footer-link">{t.nav.about}</Link>
+            <Link to="/story" className="footer-link">{t.nav.story}</Link>
+            <Link to="/contact" className="footer-link">{t.nav.contact}</Link>
           </FooterCol>
 
           <FooterCol title={t.footer.contact}>
