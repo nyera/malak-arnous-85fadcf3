@@ -1,51 +1,64 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { motion, AnimatePresence } from "framer-motion";
-import { Check, Loader2, ArrowRight, ArrowLeft, ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
+import { Check, Loader2 } from "lucide-react";
 import { CTAButton } from "./CTAButton";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
-import { STAN_URL } from "@/data/content";
+import { brand } from "@/data/content";
 
 export function AssessmentForm() {
   const { t } = useI18n();
-  const e = t.survey.errors;
-  const schema = z.object({
-    name: z.string().trim().min(2, e.name).max(80),
-    email: z.string().trim().email(e.email).max(200),
-    age: z.string().min(1, e.age),
-    goal: z.string().min(1, e.goal),
-    weightToLose: z.string().min(1, e.weight),
-    trainingFrequency: z.string().min(1, e.freq),
-    experience: z.string().min(1, e.exp),
-    obstacles: z.string().trim().min(10, e.obstacles).max(1000),
-    commitment: z.string().min(1, e.commit),
-  });
-  type FormData = z.infer<typeof schema>;
-
-  const steps: { fields: (keyof FormData)[] }[] = [
-    { fields: ["goal", "weightToLose"] },
-    { fields: ["age", "experience", "trainingFrequency"] },
-    { fields: ["obstacles", "commitment"] },
-    { fields: ["name", "email"] },
-  ];
-
-  const { register, handleSubmit, trigger, formState: { errors }, reset, watch, setValue } = useForm<FormData>({ resolver: zodResolver(schema), mode: "onChange" });
-  const [step, setStep] = useState(0);
+  const sections = t.survey.sections;
+  const [values, setValues] = useState<Record<string, string | string[]>>({});
   const [state, setState] = useState<"idle" | "loading" | "success">("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const next = async () => {
-    const valid = await trigger(steps[step].fields);
-    if (valid) setStep((s) => Math.min(s + 1, steps.length - 1));
+  const setVal = (id: string, v: string | string[]) => setValues((s) => ({ ...s, [id]: v }));
+  const toggleCheckbox = (id: string, opt: string) => {
+    const cur = (values[id] as string[]) || [];
+    setVal(id, cur.includes(opt) ? cur.filter((x) => x !== opt) : [...cur, opt]);
   };
 
-  const onSubmit = async (_data: FormData) => {
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const errs: Record<string, string> = {};
+    sections.forEach((sec) =>
+      sec.fields.forEach((f) => {
+        if (f.required) {
+          const v = values[f.id];
+          if (!v || (Array.isArray(v) && v.length === 0) || (typeof v === "string" && !v.trim())) {
+            errs[f.id] = "هذا الحقل مطلوب";
+          }
+        }
+      })
+    );
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) {
+      const first = document.getElementById(`field-${Object.keys(errs)[0]}`);
+      first?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
     setState("loading");
-    await new Promise((r) => setTimeout(r, 1500));
-    setState("success");
-    reset();
+
+    // Build email body
+    const lines: string[] = ["استبيان الأكل العاطفي، التدمير الذاتي، والتحول في الحياة", ""];
+    sections.forEach((sec) => {
+      lines.push(`━━━ ${sec.title} ━━━`);
+      sec.fields.forEach((f) => {
+        const v = values[f.id];
+        const ans = Array.isArray(v) ? (v.length ? v.join("، ") : "—") : (v && String(v).trim() ? String(v) : "—");
+        lines.push(`• ${f.label}`);
+        lines.push(`  ${ans}`);
+        lines.push("");
+      });
+    });
+    const body = lines.join("\n");
+    const subject = "استبيان جديد من الموقع";
+    const mailto = `mailto:${brand.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Open default mail client
+    window.location.href = mailto;
+    setTimeout(() => setState("success"), 600);
   };
 
   if (state === "success") {
@@ -55,125 +68,100 @@ export function AssessmentForm() {
           <Check className="w-8 h-8 text-background" />
         </div>
         <h3 className="display-md mb-3">{t.survey.successTitle}</h3>
-        <p className="text-muted-foreground max-w-md mx-auto mb-8">{t.survey.successBody}</p>
-        <CTAButton href={STAN_URL} external size="lg" icon={<ExternalLink className="w-4 h-4" />}>
-          {t.cta.joinNow}
-        </CTAButton>
+        <p className="text-muted-foreground max-w-md mx-auto mb-8 leading-relaxed">{t.survey.successBody}</p>
+        <p className="text-sm text-muted-foreground">
+          {brand.email}
+        </p>
       </motion.div>
     );
   }
 
-  const progress = ((step + 1) / steps.length) * 100;
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-      <div>
-        <div className="flex items-center justify-between mb-3 text-xs uppercase tracking-widest">
-          <span className="text-muted-foreground">{t.survey.step} {step + 1} {t.survey.of} {steps.length}</span>
-          <span className="text-ember font-semibold">{t.survey.stepTitles[step]}</span>
-        </div>
-        <div className="h-1 bg-border rounded-full overflow-hidden">
-          <motion.div initial={false} animate={{ width: `${progress}%` }} transition={{ duration: 0.5 }} className="h-full ember-gradient" />
-        </div>
-      </div>
+    <form onSubmit={onSubmit} className="space-y-10">
+      {sections.map((sec) => (
+        <fieldset key={sec.title} className="space-y-6 pb-8 border-b border-border last:border-0">
+          <legend className="display-md ember-text mb-2">{sec.title}</legend>
+          {sec.fields.map((f) => (
+            <div key={f.id} id={`field-${f.id}`}>
+              <label className="block eyebrow text-foreground mb-3 leading-relaxed">
+                {f.label}{f.required && <span className="text-ember mr-1">*</span>}
+              </label>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={step}
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -40 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6 min-h-[320px]"
-        >
-          {step === 0 && (
-            <>
-              <Radio label={t.survey.goalLabel} value={watch("goal")} setValue={(v) => setValue("goal", v, { shouldValidate: true })} error={errors.goal?.message} options={t.survey.goalOptions} />
-              <Radio label={t.survey.weightLabel} value={watch("weightToLose")} setValue={(v) => setValue("weightToLose", v, { shouldValidate: true })} error={errors.weightToLose?.message} options={t.survey.weightOptions} />
-            </>
-          )}
-          {step === 1 && (
-            <>
-              <Radio label={t.survey.ageLabel} value={watch("age")} setValue={(v) => setValue("age", v, { shouldValidate: true })} error={errors.age?.message} options={t.survey.ageOptions} />
-              <Radio label={t.survey.expLabel} value={watch("experience")} setValue={(v) => setValue("experience", v, { shouldValidate: true })} error={errors.experience?.message} options={t.survey.expOptions} />
-              <Radio label={t.survey.freqLabel} value={watch("trainingFrequency")} setValue={(v) => setValue("trainingFrequency", v, { shouldValidate: true })} error={errors.trainingFrequency?.message} options={t.survey.freqOptions} />
-            </>
-          )}
-          {step === 2 && (
-            <>
-              <Field label={t.survey.obstaclesLabel} error={errors.obstacles?.message}>
-                <textarea {...register("obstacles")} rows={5} className={input} placeholder={t.survey.obstaclesPlaceholder} />
-              </Field>
-              <Radio label={t.survey.commitmentLabel} value={watch("commitment")} setValue={(v) => setValue("commitment", v, { shouldValidate: true })} error={errors.commitment?.message} options={t.survey.commitmentOptions} />
-            </>
-          )}
-          {step === 3 && (
-            <>
-              <Field label={t.survey.nameLabel} error={errors.name?.message}>
-                <input type="text" {...register("name")} className={input} placeholder={t.survey.namePlaceholder} />
-              </Field>
-              <Field label={t.survey.emailLabel} error={errors.email?.message}>
-                <input type="email" {...register("email")} className={input} placeholder={t.survey.emailPlaceholder} />
-              </Field>
-              <p className="text-xs text-muted-foreground">{t.survey.privacy}</p>
-            </>
-          )}
-        </motion.div>
-      </AnimatePresence>
+              {f.type === "text" || f.type === "email" ? (
+                <input
+                  type={f.type}
+                  value={(values[f.id] as string) || ""}
+                  onChange={(e) => setVal(f.id, e.target.value)}
+                  className={input}
+                />
+              ) : f.type === "textarea" ? (
+                <textarea
+                  rows={4}
+                  value={(values[f.id] as string) || ""}
+                  onChange={(e) => setVal(f.id, e.target.value)}
+                  className={input}
+                />
+              ) : f.type === "checkbox" ? (
+                <div className="grid sm:grid-cols-2 gap-2">
+                  {f.options?.map((opt) => {
+                    const checked = ((values[f.id] as string[]) || []).includes(opt);
+                    return (
+                      <button
+                        type="button"
+                        key={opt}
+                        onClick={() => toggleCheckbox(f.id, opt)}
+                        className={cn(
+                          "text-start px-4 py-3 rounded-sm border text-sm transition-all flex items-start gap-2",
+                          checked ? "border-ember bg-ember/10 text-foreground" : "border-border bg-background hover:border-ember/50"
+                        )}
+                      >
+                        <span className={cn("w-4 h-4 rounded-sm border shrink-0 mt-0.5 grid place-items-center", checked ? "border-ember bg-ember" : "border-border")}>
+                          {checked && <Check className="w-3 h-3 text-background" />}
+                        </span>
+                        <span className="leading-relaxed">{opt}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : f.type === "radio" ? (
+                <div className={cn("grid gap-2", f.options && f.options.length > 4 ? "grid-cols-5 sm:grid-cols-10" : "sm:grid-cols-2")}>
+                  {f.options?.map((opt) => {
+                    const selected = values[f.id] === opt;
+                    return (
+                      <button
+                        type="button"
+                        key={opt}
+                        onClick={() => setVal(f.id, opt)}
+                        className={cn(
+                          "text-center px-4 py-3 rounded-sm border text-sm transition-all",
+                          selected ? "border-ember bg-ember/10 text-foreground" : "border-border bg-background hover:border-ember/50"
+                        )}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : null}
 
-      <div className="flex items-center justify-between gap-4 pt-4 border-t border-border">
-        {step > 0 ? (
-          <CTAButton type="button" variant="ghost" onClick={() => setStep((s) => s - 1)}>
-            <ArrowLeft className="w-4 h-4 rtl:-scale-x-100 inline mr-2" />
-            {t.cta.back}
-          </CTAButton>
-        ) : <div />}
-        {step < steps.length - 1 ? (
-          <CTAButton type="button" onClick={next} icon={<ArrowRight className="w-4 h-4" />}>{t.cta.next}</CTAButton>
-        ) : (
-          <CTAButton type="submit" disabled={state === "loading"}>
-            {state === "loading" ? <span className="flex items-center gap-2"><Loader2 className="w-4 h-4 animate-spin" /> {t.cta.submitting}</span> : t.cta.submit}
-          </CTAButton>
-        )}
+              {errors[f.id] && <p className="text-xs text-destructive mt-2">{errors[f.id]}</p>}
+            </div>
+          ))}
+        </fieldset>
+      ))}
+
+      <div className="pt-4">
+        <CTAButton type="submit" size="lg" disabled={state === "loading"} className="w-full sm:w-auto">
+          {state === "loading" ? (
+            <span className="flex items-center gap-2"><Loader2 className="w-4 h-4 animate-spin" /> {t.survey.sending}</span>
+          ) : t.survey.submit}
+        </CTAButton>
+        <p className="text-xs text-muted-foreground mt-4">
+          سيتم إرسال إجاباتك إلى {brand.email}
+        </p>
       </div>
     </form>
   );
 }
 
-const input = "w-full px-4 py-3.5 bg-surface border border-border rounded-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-ember focus:ring-1 focus:ring-ember transition-colors";
-
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
-  return (
-    <label className="block">
-      <span className="eyebrow text-foreground mb-2 block">{label}</span>
-      {children}
-      {error && <span className="text-xs text-destructive mt-1.5 block">{error}</span>}
-    </label>
-  );
-}
-
-function Radio({ label, options, value, setValue, error }: { label: string; options: string[]; value: string; setValue: (v: string) => void; error?: string }) {
-  return (
-    <div>
-      <span className="eyebrow text-foreground mb-3 block">{label}</span>
-      <div className="grid sm:grid-cols-2 gap-2">
-        {options.map((opt) => (
-          <button
-            type="button"
-            key={opt}
-            onClick={() => setValue(opt)}
-            className={cn(
-              "text-start px-4 py-3 rounded-sm border text-sm transition-all",
-              value === opt
-                ? "border-ember bg-ember/10 text-foreground"
-                : "border-border bg-surface hover:border-ember/50",
-            )}
-          >
-            {opt}
-          </button>
-        ))}
-      </div>
-      {error && <span className="text-xs text-destructive mt-1.5 block">{error}</span>}
-    </div>
-  );
-}
+const input = "w-full px-4 py-3 bg-background border border-border rounded-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-ember focus:ring-1 focus:ring-ember transition-colors";
