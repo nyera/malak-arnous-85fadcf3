@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheShiftRouteImport } from './routes/the-shift'
+import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as SurveyRouteImport } from './routes/survey'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -20,6 +21,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TheShiftRoute = TheShiftRouteImport.update({
   id: '/the-shift',
   path: '/the-shift',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestimonialsRoute = TestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SurveyRoute = SurveyRouteImport.update({
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
+  '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
+  '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
 }
 export interface FileRoutesById {
@@ -79,6 +87,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
+  '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
 }
 export interface FileRouteTypes {
@@ -90,6 +99,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/survey'
+    | '/testimonials'
     | '/the-shift'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -99,6 +109,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/survey'
+    | '/testimonials'
     | '/the-shift'
   id:
     | '__root__'
@@ -108,6 +119,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/survey'
+    | '/testimonials'
     | '/the-shift'
   fileRoutesById: FileRoutesById
 }
@@ -118,6 +130,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoryRoute: typeof StoryRoute
   SurveyRoute: typeof SurveyRoute
+  TestimonialsRoute: typeof TestimonialsRoute
   TheShiftRoute: typeof TheShiftRoute
 }
 
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/the-shift'
       fullPath: '/the-shift'
       preLoaderRoute: typeof TheShiftRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/testimonials': {
+      id: '/testimonials'
+      path: '/testimonials'
+      fullPath: '/testimonials'
+      preLoaderRoute: typeof TestimonialsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/survey': {
@@ -182,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoryRoute: StoryRoute,
   SurveyRoute: SurveyRoute,
+  TestimonialsRoute: TestimonialsRoute,
   TheShiftRoute: TheShiftRoute,
 }
 export const routeTree = rootRouteImport
