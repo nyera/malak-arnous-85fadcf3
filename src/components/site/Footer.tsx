@@ -28,6 +28,7 @@ export function Footer() {
           <FooterCol title={t.footer.coaching}>
             <Link to="/programs" className="footer-link">{t.nav.services}</Link>
             <Link to="/the-shift" className="footer-link">{t.nav.theShift}</Link>
+            <Link to="/testimonials" className="footer-link">آراء العملاء</Link>
             <Link to="/survey" className="footer-link">{t.nav.survey}</Link>
             <a href={brand.telegram} target="_blank" rel="noreferrer" className="footer-link">{t.footer.free}</a>
           </FooterCol>
