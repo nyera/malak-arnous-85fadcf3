@@ -45,7 +45,20 @@ export function Footer() {
           </FooterCol>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-border flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
+        <div className="mt-14 pt-8 border-t border-border flex flex-col items-center gap-4 text-center">
+          <p className="text-sm text-muted-foreground">تابعونا على إنستجرام لمزيد من الآراء والتحديثات</p>
+          <a
+            href={brand.instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-ember/30 bg-ember/5 hover:bg-ember hover:text-background hover:border-ember transition-all duration-500 text-xs font-medium tracking-wide"
+          >
+            <Instagram className="w-3.5 h-3.5" />
+            {brand.instagramHandle}
+          </a>
+        </div>
+
+        <div className="mt-10 pt-6 border-t border-border flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} {brand.full}. {t.common.rights}</p>
           <p className="uppercase tracking-widest">{t.common.builtForStrong}</p>
         </div>
