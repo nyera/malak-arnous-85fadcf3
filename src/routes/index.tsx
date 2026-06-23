@@ -9,6 +9,7 @@ import { CTAButton, JoinNowButton } from "@/components/site/CTAButton";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
 import { FadeIn } from "@/components/site/Misc";
+import { Testimonials } from "@/components/site/Testimonials";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +28,7 @@ function HomePage() {
       <Hero />
       <AboutPreview />
       <ServicesPreview />
+      <Testimonials />
       <TelegramCTA />
       <FinalCTA />
     </>
