@@ -5,6 +5,7 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { CTAButton, JoinNowButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
+import { TestimonialsPreview } from "@/components/site/TestimonialsPreview";
 import { FadeIn } from "@/components/site/Misc";
 
 export const Route = createFileRoute("/about")({
@@ -70,6 +71,7 @@ function AboutPage() {
         </div>
       </section>
 
+      <TestimonialsPreview />
       <TelegramCTA />
     </>
   );

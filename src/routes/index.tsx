@@ -8,6 +8,7 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { CTAButton, JoinNowButton } from "@/components/site/CTAButton";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
+import { TestimonialsPreview } from "@/components/site/TestimonialsPreview";
 import { FadeIn } from "@/components/site/Misc";
 
 export const Route = createFileRoute("/")({
@@ -27,6 +28,7 @@ function HomePage() {
       <Hero />
       <AboutPreview />
       <ServicesPreview />
+      <TestimonialsPreview />
       <TelegramCTA />
       <FinalCTA />
     </>

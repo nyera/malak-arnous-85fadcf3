@@ -36,13 +36,26 @@ export function Footer() {
           <FooterCol title={t.footer.about}>
             <Link to="/about" className="footer-link">{t.nav.about}</Link>
             <Link to="/story" className="footer-link">{t.nav.story}</Link>
+            <Link to="/message" className="footer-link">رسالة إليكِ</Link>
           </FooterCol>
 
           <FooterCol title={t.footer.contact}>
-            <a href={`mailto:${brand.email}`} className="footer-link flex items-center gap-2"><Mail className="w-3.5 h-3.5" />{brand.email}</a>
-            <span className="footer-link flex items-center gap-2"><MapPin className="w-3.5 h-3.5" />{t.common.onlineWorldwide}</span>
-            <a href={brand.instagram} target="_blank" rel="noreferrer" className="footer-link flex items-center gap-2"><Instagram className="w-3.5 h-3.5" />{brand.instagramHandle}</a>
-            <a href={brand.telegram} target="_blank" rel="noreferrer" className="footer-link flex items-center gap-2"><Send className="w-3.5 h-3.5 rtl:-scale-x-100" />{brand.telegramHandle}</a>
+            <a href={`mailto:${brand.email}`} className="footer-link inline-flex items-center gap-2.5 leading-relaxed">
+              <Mail className="w-4 h-4 shrink-0 text-ember" aria-hidden />
+              <span>{brand.email}</span>
+            </a>
+            <span className="footer-link inline-flex items-center gap-2.5 leading-relaxed">
+              <MapPin className="w-4 h-4 shrink-0 text-ember" aria-hidden />
+              <span>{t.common.onlineWorldwide}</span>
+            </span>
+            <a href={brand.instagram} target="_blank" rel="noreferrer" className="footer-link inline-flex items-center gap-2.5 leading-relaxed">
+              <Instagram className="w-4 h-4 shrink-0 text-ember" aria-hidden />
+              <span>{brand.instagramHandle}</span>
+            </a>
+            <a href={brand.telegram} target="_blank" rel="noreferrer" className="footer-link inline-flex items-center gap-2.5 leading-relaxed">
+              <Send className="w-4 h-4 shrink-0 text-ember rtl:-scale-x-100" aria-hidden />
+              <span>{brand.telegramHandle}</span>
+            </a>
           </FooterCol>
         </div>
 
