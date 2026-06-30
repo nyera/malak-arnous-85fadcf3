@@ -11,8 +11,8 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
 
-  --font-display: "Cairo", "Tajawal", "IBM Plex Sans Arabic", system-ui, sans-serif;
-  --font-sans: "Tajawal", "IBM Plex Sans Arabic", "Cairo", system-ui, sans-serif;
+  --font-display: "Alexandria", "IBM Plex Sans Arabic", "Cairo", system-ui, sans-serif;
+  --font-sans: "Alexandria", "IBM Plex Sans Arabic", "Tajawal", "Cairo", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", "Times New Roman", serif;
 
   --color-background: var(--background);
