@@ -40,15 +40,15 @@ export function Footer() {
           </FooterCol>
 
           <FooterCol title={t.footer.contact}>
-            <a href={`mailto:${brand.email}`} className="footer-link inline-flex items-center gap-2.5 leading-relaxed">
+            <a href={`mailto:${brand.email}`} className="footer-link flex items-center gap-2.5 leading-relaxed">
               <Mail className="w-4 h-4 shrink-0 text-ember" aria-hidden />
-              <span>{brand.email}</span>
+              <span className="leading-none">{brand.email}</span>
             </a>
-            <span className="footer-link inline-flex items-center gap-2.5 leading-relaxed">
+            <div className="footer-link flex items-center gap-2.5 leading-relaxed">
               <MapPin className="w-4 h-4 shrink-0 text-ember" aria-hidden />
-              <span>{t.common.onlineWorldwide}</span>
-            </span>
-            <div className="flex items-center gap-3 pt-2">
+              <span className="leading-none">{t.common.onlineWorldwide}</span>
+            </div>
+            <div className="flex items-center gap-3 pt-3">
               <a href={brand.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember hover:-translate-y-0.5 transition-all duration-300"><Instagram className="w-4 h-4" /></a>
               <a href={brand.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember hover:-translate-y-0.5 transition-all duration-300"><Send className="w-4 h-4 rtl:-scale-x-100" /></a>
               <a href={`mailto:${brand.email}`} aria-label="Email" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember hover:-translate-y-0.5 transition-all duration-300"><Mail className="w-4 h-4" /></a>
