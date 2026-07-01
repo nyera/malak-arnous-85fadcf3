@@ -112,8 +112,9 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    line-height: 1.75;
-    font-size: 15.5px;
+    line-height: 1.9;
+    font-size: 16px;
+    font-weight: 400;
   }
 
   ::selection {
@@ -124,10 +125,13 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: 0;
-    line-height: 1.35;
+    letter-spacing: -0.005em;
+    line-height: 1.4;
     text-transform: none;
+    margin-block: 0.35em;
   }
+
+  p { line-height: 1.95; }
 }
 
 @utility display-xl {
