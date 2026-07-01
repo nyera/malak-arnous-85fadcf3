@@ -47,18 +47,18 @@ function Hero() {
         <div className="space-y-7 max-w-2xl">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-ember/30 bg-ember/5 backdrop-blur">
             <Sparkles className="w-3.5 h-3.5 text-ember" />
-            <span className="eyebrow text-foreground/90">{t.hero.eyebrow}</span>
+            <span className="eyebrow text-foreground/90">{t.home.heroEyebrow}</span>
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} className="display-xl">
-            {t.hero.title1}{" "}
-            <span className="text-serif-italic ember-text normal-case">{t.hero.title2}</span>
+            {t.home.heroTitle1}{" "}
+            <span className="text-serif-italic ember-text normal-case">{t.home.heroTitle2}</span>
             <br />
-            {t.hero.title3}
+            {t.home.heroTitle3}
           </motion.h1>
 
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-            {t.hero.description}
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} className="text-lg md:text-xl text-muted-foreground leading-loose">
+            {t.home.heroDescription}
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }} className="flex flex-wrap items-center gap-4">
@@ -68,8 +68,8 @@ function Hero() {
         </div>
 
         <motion.div style={{ y }} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} className="relative">
-          <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
-            <img src={portraitAsset.url} alt="ملاك عرنوس" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="relative aspect-[3/4] rounded-sm overflow-hidden group">
+            <img src={portraitAsset.url} alt="ملاك عرنوس" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
           </div>
           <div className="absolute -bottom-4 -start-4 rtl:-end-4 rtl:start-auto bg-background border border-ember/30 px-5 py-3 rounded-sm shadow-lg">
@@ -88,12 +88,12 @@ function AboutPreview() {
     <section className="section-y bg-surface border-y border-border">
       <div className="container-x grid lg:grid-cols-[1fr_1.2fr] gap-12 items-center">
         <FadeIn>
-          <SectionHeader eyebrow={t.about.eyebrow} title={t.about.title} highlight={t.about.subtitle} />
+          <SectionHeader eyebrow={t.home.aboutEyebrow} title={t.home.aboutTitle} highlight={t.home.aboutSubtitle} />
         </FadeIn>
         <FadeIn delay={0.1}>
           <div className="space-y-5">
-            <p className="text-lg text-foreground leading-relaxed">{t.about.intro}</p>
-            <p className="text-muted-foreground leading-relaxed">{t.about.p1}</p>
+            <p className="text-lg text-foreground leading-loose">{t.home.aboutIntro}</p>
+            <p className="text-muted-foreground leading-loose">{t.home.aboutBody}</p>
             <Link to="/about"><CTAButton variant="outline" icon={<ArrowRight className="w-4 h-4" />}>{t.cta.readMore}</CTAButton></Link>
           </div>
         </FadeIn>
@@ -107,14 +107,14 @@ function ServicesPreview() {
   return (
     <section className="section-y">
       <div className="container-x">
-        <SectionHeader eyebrow={t.services.eyebrow} title={t.services.title} highlight="" description={t.services.description} align="center" />
+        <SectionHeader eyebrow={t.home.servicesEyebrow} title={t.home.servicesTitle} highlight="" description={t.home.servicesDescription} align="center" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {t.services.items.map((s, i) => (
             <FadeIn key={s.slug} delay={i * 0.08}>
               <div className="p-7 rounded-sm border border-border bg-surface hover-lift h-full flex flex-col">
                 <h3 className="font-display text-2xl mb-2">{s.name}</h3>
                 <p className="text-serif-italic text-ember text-base mb-3 leading-snug">{s.tagline}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">{s.description}</p>
+                <p className="text-sm text-muted-foreground leading-loose flex-1">{s.description}</p>
                 {s.link && (
                   <Link to={s.link} className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-ember hover:gap-3 transition-all">
                     {t.cta.readMore} <ArrowRight className="w-3.5 h-3.5 rtl:-scale-x-100" />
@@ -140,9 +140,9 @@ function FinalCTA() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full ember-gradient opacity-15 blur-3xl animate-ember-pulse" />
       <div className="container-x relative text-center max-w-3xl">
         <FadeIn>
-          <span className="eyebrow">{t.common.yourMove}</span>
-          <h2 className="display-xl mt-5 mb-7">{t.cta.joinNow}</h2>
-          <p className="text-xl text-muted-foreground mb-10 leading-relaxed">{t.about.p4}</p>
+          <span className="eyebrow">{t.home.ctaEyebrow}</span>
+          <h2 className="display-xl mt-5 mb-7">{t.home.ctaTitle}</h2>
+          <p className="text-xl text-muted-foreground mb-10 leading-loose">{t.home.ctaBody}</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <JoinNowButton size="lg" />
             <Link to="/survey"><CTAButton size="lg" variant="outline">{t.cta.takeSurvey}</CTAButton></Link>
