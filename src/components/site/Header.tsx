@@ -18,7 +18,7 @@ export function Header() {
     { to: "/", label: t.nav.home },
     { to: "/about", label: t.nav.about },
     { to: "/story", label: t.nav.story },
-    { to: "/message", label: "رسالة إليكِ" },
+    
     { to: "/programs", label: t.nav.services },
     { to: "/the-shift", label: t.nav.theShift },
     { to: "/testimonials", label: "آراء العملاء" },
