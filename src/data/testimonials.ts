@@ -76,4 +76,9 @@ export const testimonials: Testimonial[] = [
   { image: t30.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
   { image: t31.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
   { image: t32.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t33.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t34.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t35.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t36.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t37.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
 ];
