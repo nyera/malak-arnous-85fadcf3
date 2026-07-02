@@ -28,6 +28,11 @@ import t29 from "@/assets/testimonials/t29.jpeg.asset.json";
 import t30 from "@/assets/testimonials/t30.jpeg.asset.json";
 import t31 from "@/assets/testimonials/t31.jpeg.asset.json";
 import t32 from "@/assets/testimonials/t32.jpeg.asset.json";
+import t33 from "@/assets/testimonials/t33.jpeg.asset.json";
+import t34 from "@/assets/testimonials/t34.jpeg.asset.json";
+import t35 from "@/assets/testimonials/t35.jpeg.asset.json";
+import t36 from "@/assets/testimonials/t36.jpeg.asset.json";
+import t37 from "@/assets/testimonials/t37.jpeg.asset.json";
 import { brand } from "@/data/content";
 
 export type Testimonial = {
@@ -71,4 +76,9 @@ export const testimonials: Testimonial[] = [
   { image: t30.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
   { image: t31.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
   { image: t32.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t33.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t34.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t35.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t36.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t37.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
 ];
