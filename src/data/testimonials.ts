@@ -33,6 +33,16 @@ import t34 from "@/assets/testimonials/t34.jpeg.asset.json";
 import t35 from "@/assets/testimonials/t35.jpeg.asset.json";
 import t36 from "@/assets/testimonials/t36.jpeg.asset.json";
 import t37 from "@/assets/testimonials/t37.jpeg.asset.json";
+import t38 from "@/assets/testimonials/t38.jpeg.asset.json";
+import t39 from "@/assets/testimonials/t39.jpeg.asset.json";
+import t40 from "@/assets/testimonials/t40.jpeg.asset.json";
+import t41 from "@/assets/testimonials/t41.jpeg.asset.json";
+import t42 from "@/assets/testimonials/t42.jpeg.asset.json";
+import t43 from "@/assets/testimonials/t43.jpeg.asset.json";
+import t44 from "@/assets/testimonials/t44.jpeg.asset.json";
+import t45 from "@/assets/testimonials/t45.jpeg.asset.json";
+import t46 from "@/assets/testimonials/t46.jpeg.asset.json";
+import t47 from "@/assets/testimonials/t47.jpeg.asset.json";
 import { brand } from "@/data/content";
 
 export type Testimonial = {
