@@ -8,6 +8,16 @@ import t9 from "@/assets/testimonials/t9.jpeg.asset.json";
 import t10 from "@/assets/testimonials/t10.jpeg.asset.json";
 import t11 from "@/assets/testimonials/t11.jpeg.asset.json";
 import t12 from "@/assets/testimonials/t12.jpeg.asset.json";
+import t13 from "@/assets/testimonials/t13.jpeg.asset.json";
+import t14 from "@/assets/testimonials/t14.jpeg.asset.json";
+import t15 from "@/assets/testimonials/t15.jpeg.asset.json";
+import t16 from "@/assets/testimonials/t16.jpeg.asset.json";
+import t17 from "@/assets/testimonials/t17.jpeg.asset.json";
+import t18 from "@/assets/testimonials/t18.jpeg.asset.json";
+import t19 from "@/assets/testimonials/t19.jpeg.asset.json";
+import t20 from "@/assets/testimonials/t20.jpeg.asset.json";
+import t21 from "@/assets/testimonials/t21.jpeg.asset.json";
+import t22 from "@/assets/testimonials/t22.jpeg.asset.json";
 import { brand } from "@/data/content";
 
 export type Testimonial = {
@@ -31,4 +41,14 @@ export const testimonials: Testimonial[] = [
   { image: t4.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
   { image: t11.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
   { image: t12.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t13.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t14.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t15.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t16.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t17.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t18.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t19.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t20.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t21.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
+  { image: t22.url, instagramUrl: brand.instagram, alt: "شهادة عميلة من إنستجرام" },
 ];
