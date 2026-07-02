@@ -43,6 +43,7 @@ import t44 from "@/assets/testimonials/t44.jpeg.asset.json";
 import t45 from "@/assets/testimonials/t45.jpeg.asset.json";
 import t46 from "@/assets/testimonials/t46.jpeg.asset.json";
 import t47 from "@/assets/testimonials/t47.jpeg.asset.json";
+import t48 from "@/assets/testimonials/t48.jpeg.asset.json";
 import { brand } from "@/data/content";
 
 export type Testimonial = {
