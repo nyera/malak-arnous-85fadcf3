@@ -25,6 +25,8 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as ApiPublicStanPurchaseRouteImport } from './routes/api/public/stan-purchase'
+import { Route as AuthenticatedDashboardProgramSlugIndexRouteImport } from './routes/_authenticated/dashboard.$programSlug.index'
+import { Route as AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport } from './routes/_authenticated/dashboard.$programSlug.lesson.$lessonSlug'
 
 const TheShiftRoute = TheShiftRouteImport.update({
   id: '/the-shift',
@@ -106,6 +108,18 @@ const ApiPublicStanPurchaseRoute = ApiPublicStanPurchaseRouteImport.update({
   path: '/api/public/stan-purchase',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardProgramSlugIndexRoute =
+  AuthenticatedDashboardProgramSlugIndexRouteImport.update({
+    id: '/dashboard/$programSlug/',
+    path: '/dashboard/$programSlug/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardProgramSlugLessonLessonSlugRoute =
+  AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport.update({
+    id: '/dashboard/$programSlug/lesson/$lessonSlug',
+    path: '/dashboard/$programSlug/lesson/$lessonSlug',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -123,6 +137,8 @@ export interface FileRoutesByFullPath {
   '/the-shift': typeof TheShiftRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
+  '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -140,6 +156,8 @@ export interface FileRoutesByTo {
   '/the-shift': typeof TheShiftRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/$programSlug': typeof AuthenticatedDashboardProgramSlugIndexRoute
+  '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -159,6 +177,8 @@ export interface FileRoutesById {
   '/the-shift': typeof TheShiftRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
+  '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -178,6 +198,8 @@ export interface FileRouteTypes {
     | '/the-shift'
     | '/api/public/stan-purchase'
     | '/dashboard/'
+    | '/dashboard/$programSlug/'
+    | '/dashboard/$programSlug/lesson/$lessonSlug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -195,6 +217,8 @@ export interface FileRouteTypes {
     | '/the-shift'
     | '/api/public/stan-purchase'
     | '/dashboard'
+    | '/dashboard/$programSlug'
+    | '/dashboard/$programSlug/lesson/$lessonSlug'
   id:
     | '__root__'
     | '/'
@@ -213,6 +237,8 @@ export interface FileRouteTypes {
     | '/the-shift'
     | '/api/public/stan-purchase'
     | '/_authenticated/dashboard/'
+    | '/_authenticated/dashboard/$programSlug/'
+    | '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -347,15 +373,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicStanPurchaseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard/$programSlug/': {
+      id: '/_authenticated/dashboard/$programSlug/'
+      path: '/dashboard/$programSlug'
+      fullPath: '/dashboard/$programSlug/'
+      preLoaderRoute: typeof AuthenticatedDashboardProgramSlugIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': {
+      id: '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
+      path: '/dashboard/$programSlug/lesson/$lessonSlug'
+      fullPath: '/dashboard/$programSlug/lesson/$lessonSlug'
+      preLoaderRoute: typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+  AuthenticatedDashboardProgramSlugIndexRoute: typeof AuthenticatedDashboardProgramSlugIndexRoute
+  AuthenticatedDashboardProgramSlugLessonLessonSlugRoute: typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+  AuthenticatedDashboardProgramSlugIndexRoute:
+    AuthenticatedDashboardProgramSlugIndexRoute,
+  AuthenticatedDashboardProgramSlugLessonLessonSlugRoute:
+    AuthenticatedDashboardProgramSlugLessonLessonSlugRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
