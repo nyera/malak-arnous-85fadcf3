@@ -73,6 +73,7 @@ export function Header() {
           <a href={brand.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" className="p-2 text-foreground/70 hover:text-ember transition-colors">
             <Send className="w-4 h-4 rtl:-scale-x-100" />
           </a>
+          <Link to="/login" className="px-3 py-2 text-[11px] uppercase tracking-[0.2em] font-semibold text-foreground/70 hover:text-ember">دخول العضوات</Link>
           <JoinNowButton size="sm" />
         </div>
 

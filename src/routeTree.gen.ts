@@ -23,6 +23,7 @@ import { Route as ClaimAccessRouteImport } from './routes/claim-access'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as ApiPublicStanPurchaseRouteImport } from './routes/api/public/stan-purchase'
 import { Route as AuthenticatedDashboardProgramSlugIndexRouteImport } from './routes/_authenticated/dashboard.$programSlug.index'
@@ -97,6 +98,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
     id: '/dashboard/',
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/$programSlug': typeof AuthenticatedDashboardProgramSlugIndexRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
     | '/survey'
     | '/testimonials'
     | '/the-shift'
+    | '/admin'
     | '/api/public/stan-purchase'
     | '/dashboard/'
     | '/dashboard/$programSlug/'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/survey'
     | '/testimonials'
     | '/the-shift'
+    | '/admin'
     | '/api/public/stan-purchase'
     | '/dashboard'
     | '/dashboard/$programSlug'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
     | '/survey'
     | '/testimonials'
     | '/the-shift'
+    | '/_authenticated/admin'
     | '/api/public/stan-purchase'
     | '/_authenticated/dashboard/'
     | '/_authenticated/dashboard/$programSlug/'
@@ -359,6 +371,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard/': {
       id: '/_authenticated/dashboard/'
       path: '/dashboard'
@@ -391,12 +410,14 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
   AuthenticatedDashboardProgramSlugIndexRoute: typeof AuthenticatedDashboardProgramSlugIndexRoute
   AuthenticatedDashboardProgramSlugLessonLessonSlugRoute: typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
   AuthenticatedDashboardProgramSlugIndexRoute:
     AuthenticatedDashboardProgramSlugIndexRoute,
