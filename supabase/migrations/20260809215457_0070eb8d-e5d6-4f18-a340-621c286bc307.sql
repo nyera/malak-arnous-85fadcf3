@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION public.has_program_access(UUID, UUID) TO authenticated;
