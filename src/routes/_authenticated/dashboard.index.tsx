@@ -20,6 +20,19 @@ export const Route = createFileRoute("/_authenticated/dashboard/")({
   component: DashboardPage,
 });
 
+type ProgramCard = {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string | null;
+  checkout_url: string | null;
+  sales_page_path: string | null;
+  hasAccess: boolean;
+  totalLessons: number;
+  completedLessons: number;
+  percent: number;
+};
+
 function DashboardPage() {
   const data = Route.useLoaderData();
   const navigate = useNavigate();
@@ -32,8 +45,9 @@ function DashboardPage() {
     navigate({ to: "/login", replace: true });
   }
 
-  const active = data.programs.filter((p) => p.hasAccess);
-  const locked = data.programs.filter((p) => !p.hasAccess);
+  const programs = data.programs as ProgramCard[];
+  const active = programs.filter((p) => p.hasAccess);
+  const locked = programs.filter((p) => !p.hasAccess);
 
   return (
     <section className="section-y">
@@ -82,7 +96,7 @@ function DashboardPage() {
 
         {active.length > 0 && (
           <div className="grid gap-5 sm:grid-cols-2 mb-14">
-            {active.map((p, i) => (
+            {active.map((p: ProgramCard, i: number) => (
               <FadeIn key={p.id} delay={i * 0.05}>
                 <Link
                   to="/dashboard/$programSlug"
@@ -113,7 +127,7 @@ function DashboardPage() {
               <h2 className="display-sm mb-5">برامج أخرى</h2>
             </FadeIn>
             <div className="grid gap-5 sm:grid-cols-2">
-              {locked.map((p, i) => (
+              {locked.map((p: ProgramCard, i: number) => (
                 <FadeIn key={p.id} delay={i * 0.05}>
                   <div className="h-full rounded-sm border border-border bg-background p-6">
                     <p className="eyebrow text-muted-foreground mb-3 inline-flex items-center gap-2">

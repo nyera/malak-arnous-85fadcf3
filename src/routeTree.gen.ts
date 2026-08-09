@@ -19,8 +19,11 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as ClaimAccessRouteImport } from './routes/claim-access'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as ApiPublicStanPurchaseRouteImport } from './routes/api/public/stan-purchase'
 
 const TheShiftRoute = TheShiftRouteImport.update({
@@ -73,9 +76,18 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClaimAccessRoute = ClaimAccessRouteImport.update({
+  id: '/claim-access',
+  path: '/claim-access',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +95,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ApiPublicStanPurchaseRoute = ApiPublicStanPurchaseRouteImport.update({
   id: '/api/public/stan-purchase',
   path: '/api/public/stan-purchase',
@@ -92,6 +110,7 @@ const ApiPublicStanPurchaseRoute = ApiPublicStanPurchaseRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/claim-access': typeof ClaimAccessRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/programs': typeof ProgramsRoute
@@ -103,10 +122,12 @@ export interface FileRoutesByFullPath {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/claim-access': typeof ClaimAccessRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/programs': typeof ProgramsRoute
@@ -118,11 +139,14 @@ export interface FileRoutesByTo {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/claim-access': typeof ClaimAccessRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
   '/programs': typeof ProgramsRoute
@@ -134,12 +158,14 @@ export interface FileRoutesById {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/claim-access'
     | '/forgot-password'
     | '/login'
     | '/programs'
@@ -151,10 +177,12 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/api/public/stan-purchase'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/claim-access'
     | '/forgot-password'
     | '/login'
     | '/programs'
@@ -166,10 +194,13 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/api/public/stan-purchase'
+    | '/dashboard'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/claim-access'
     | '/forgot-password'
     | '/login'
     | '/programs'
@@ -181,11 +212,14 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/api/public/stan-purchase'
+    | '/_authenticated/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  ClaimAccessRoute: typeof ClaimAccessRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
   ProgramsRoute: typeof ProgramsRoute
@@ -271,11 +305,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/claim-access': {
+      id: '/claim-access'
+      path: '/claim-access'
+      fullPath: '/claim-access'
+      preLoaderRoute: typeof ClaimAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -284,6 +332,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/api/public/stan-purchase': {
       id: '/api/public/stan-purchase'
@@ -295,9 +350,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  ClaimAccessRoute: ClaimAccessRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
   ProgramsRoute: ProgramsRoute,
