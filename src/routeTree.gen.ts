@@ -14,9 +14,20 @@ import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as SurveyRouteImport } from './routes/survey'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as ProgramsRouteImport } from './routes/programs'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as ClaimAccessRouteImport } from './routes/claim-access'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as ApiPublicStanPurchaseRouteImport } from './routes/api/public/stan-purchase'
+import { Route as AuthenticatedDashboardProgramSlugIndexRouteImport } from './routes/_authenticated/dashboard.$programSlug.index'
+import { Route as AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport } from './routes/_authenticated/dashboard.$programSlug.lesson.$lessonSlug'
 
 const TheShiftRoute = TheShiftRouteImport.update({
   id: '/the-shift',
@@ -43,9 +54,34 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgramsRoute = ProgramsRouteImport.update({
   id: '/programs',
   path: '/programs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClaimAccessRoute = ClaimAccessRouteImport.update({
+  id: '/claim-access',
+  path: '/claim-access',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -53,85 +89,186 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const ApiPublicStanPurchaseRoute = ApiPublicStanPurchaseRouteImport.update({
+  id: '/api/public/stan-purchase',
+  path: '/api/public/stan-purchase',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedDashboardProgramSlugIndexRoute =
+  AuthenticatedDashboardProgramSlugIndexRouteImport.update({
+    id: '/dashboard/$programSlug/',
+    path: '/dashboard/$programSlug/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardProgramSlugLessonLessonSlugRoute =
+  AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport.update({
+    id: '/dashboard/$programSlug/lesson/$lessonSlug',
+    path: '/dashboard/$programSlug/lesson/$lessonSlug',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/claim-access': typeof ClaimAccessRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
   '/programs': typeof ProgramsRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
+  '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/claim-access': typeof ClaimAccessRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
   '/programs': typeof ProgramsRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/$programSlug': typeof AuthenticatedDashboardProgramSlugIndexRoute
+  '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/claim-access': typeof ClaimAccessRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/login': typeof LoginRoute
   '/programs': typeof ProgramsRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
+  '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/claim-access'
+    | '/forgot-password'
+    | '/login'
     | '/programs'
+    | '/reset-password'
+    | '/signup'
     | '/sitemap.xml'
     | '/story'
     | '/survey'
     | '/testimonials'
     | '/the-shift'
+    | '/admin'
+    | '/api/public/stan-purchase'
+    | '/dashboard/'
+    | '/dashboard/$programSlug/'
+    | '/dashboard/$programSlug/lesson/$lessonSlug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/claim-access'
+    | '/forgot-password'
+    | '/login'
     | '/programs'
+    | '/reset-password'
+    | '/signup'
     | '/sitemap.xml'
     | '/story'
     | '/survey'
     | '/testimonials'
     | '/the-shift'
+    | '/admin'
+    | '/api/public/stan-purchase'
+    | '/dashboard'
+    | '/dashboard/$programSlug'
+    | '/dashboard/$programSlug/lesson/$lessonSlug'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/claim-access'
+    | '/forgot-password'
+    | '/login'
     | '/programs'
+    | '/reset-password'
+    | '/signup'
     | '/sitemap.xml'
     | '/story'
     | '/survey'
     | '/testimonials'
     | '/the-shift'
+    | '/_authenticated/admin'
+    | '/api/public/stan-purchase'
+    | '/_authenticated/dashboard/'
+    | '/_authenticated/dashboard/$programSlug/'
+    | '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  ClaimAccessRoute: typeof ClaimAccessRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  LoginRoute: typeof LoginRoute
   ProgramsRoute: typeof ProgramsRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoryRoute: typeof StoryRoute
   SurveyRoute: typeof SurveyRoute
   TestimonialsRoute: typeof TestimonialsRoute
   TheShiftRoute: typeof TheShiftRoute
+  ApiPublicStanPurchaseRoute: typeof ApiPublicStanPurchaseRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -171,11 +308,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/programs': {
       id: '/programs'
       path: '/programs'
       fullPath: '/programs'
       preLoaderRoute: typeof ProgramsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/claim-access': {
+      id: '/claim-access'
+      path: '/claim-access'
+      fullPath: '/claim-access'
+      preLoaderRoute: typeof ClaimAccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -185,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -192,29 +371,80 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/public/stan-purchase': {
+      id: '/api/public/stan-purchase'
+      path: '/api/public/stan-purchase'
+      fullPath: '/api/public/stan-purchase'
+      preLoaderRoute: typeof ApiPublicStanPurchaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/dashboard/$programSlug/': {
+      id: '/_authenticated/dashboard/$programSlug/'
+      path: '/dashboard/$programSlug'
+      fullPath: '/dashboard/$programSlug/'
+      preLoaderRoute: typeof AuthenticatedDashboardProgramSlugIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': {
+      id: '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
+      path: '/dashboard/$programSlug/lesson/$lessonSlug'
+      fullPath: '/dashboard/$programSlug/lesson/$lessonSlug'
+      preLoaderRoute: typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+  AuthenticatedDashboardProgramSlugIndexRoute: typeof AuthenticatedDashboardProgramSlugIndexRoute
+  AuthenticatedDashboardProgramSlugLessonLessonSlugRoute: typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+  AuthenticatedDashboardProgramSlugIndexRoute:
+    AuthenticatedDashboardProgramSlugIndexRoute,
+  AuthenticatedDashboardProgramSlugLessonLessonSlugRoute:
+    AuthenticatedDashboardProgramSlugLessonLessonSlugRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  ClaimAccessRoute: ClaimAccessRoute,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  LoginRoute: LoginRoute,
   ProgramsRoute: ProgramsRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoryRoute: StoryRoute,
   SurveyRoute: SurveyRoute,
   TestimonialsRoute: TestimonialsRoute,
   TheShiftRoute: TheShiftRoute,
+  ApiPublicStanPurchaseRoute: ApiPublicStanPurchaseRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

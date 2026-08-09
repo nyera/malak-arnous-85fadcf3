@@ -1,8 +1,9 @@
-# The Shift Member Platform — Audit + Build Plan
+# The Shift Member Platform — Audit + Build Plan ( for all the pages , keep everything in Arabic )
 
 ## Phase 1 — Audit (done, no changes made)
 
 **Current architecture**
+
 - TanStack Start (React 19, Vite, Tailwind v4, shadcn/ui, Framer Motion), file routes in `src/routes/`.
 - Public routes: `/`, `/about`, `/programs`, `/story`, `/survey`, `/testimonials`, `/the-shift`, `/sitemap.xml`.
 - Arabic-only, RTL locked in `src/i18n/I18nProvider.tsx`; `<html lang="ar" dir="rtl">` in `src/routes/__root.tsx`.
@@ -10,13 +11,16 @@
 - Reusable components in `src/components/site/`: `CTAButton` (incl. `JoinNowButton`), `SectionHeader`, `TelegramCTA`, `Testimonials`, `Misc` (`FadeIn`), `Header`, `Footer`, `AssessmentForm`.
 - Copy lives in `src/i18n/translations.ts`; links/config in `src/data/content.ts` (`STAN_URL = https://stan.store/malakarnous`, Telegram invite).
 
-**Existing `/the-shift`**
+**Existing `/the-shift**`
+
 - `src/routes/the-shift.tsx` — long marketing page built from `translations.ts` `theShift` block plus a local `Block` helper, ending in `JoinNowButton` + `TelegramCTA`. It stays exactly as-is (only a small secondary login link added).
 
 **Backend**
+
 - No Lovable Cloud / database / auth / storage / server functions exist. Nothing to reuse; everything backend is new.
 
 **Risks**
+
 - Enabling Cloud adds generated integration files and an `_authenticated` route gate — public routes are unaffected.
 - `/dashboard/the-shift` vs public `/the-shift` must stay separate route files (no route collisions).
 - Zoom URLs must never be sent to the browser unless entitlement is verified server-side.
