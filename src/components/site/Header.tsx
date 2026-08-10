@@ -98,7 +98,9 @@ export function Header() {
                   {item.label}
                 </Link>
               ))}
+              <Link to="/login" className="py-3 text-sm font-semibold tracking-wide text-foreground/70">دخول العضوات</Link>
               <div className="flex items-center gap-3 pt-5">
+
                 <a href={brand.instagram} target="_blank" rel="noreferrer" className="p-3 rounded-sm border border-border"><Instagram className="w-4 h-4" /></a>
                 <a href={brand.telegram} target="_blank" rel="noreferrer" className="p-3 rounded-sm border border-border"><Send className="w-4 h-4 rtl:-scale-x-100" /></a>
                 <div className="flex-1"><JoinNowButton size="sm" className="w-full" /></div>

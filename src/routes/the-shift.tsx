@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/i18n/I18nProvider";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { JoinNowButton } from "@/components/site/CTAButton";
@@ -145,6 +145,10 @@ function TheShiftPage() {
             <h2 className="display-xl mb-6">{s.bookTitle}</h2>
             <p className="text-xl text-muted-foreground mb-10 leading-relaxed">{s.bookBody}</p>
             <JoinNowButton size="lg" />
+            <p className="mt-6 text-sm text-muted-foreground">
+              مشتركة بالفعل؟{" "}
+              <Link to="/login" className="text-ember underline underline-offset-4">سجّلي الدخول</Link>
+            </p>
           </FadeIn>
         </div>
       </section>
