@@ -13,9 +13,9 @@ export const Route = createFileRoute("/login")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  validateSearch: (search: Record<string, unknown>) => ({
-    next: typeof search.next === "string" && search.next.startsWith("/") ? search.next : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { next?: string } =>
+    typeof search.next === "string" && search.next.startsWith("/") ? { next: search.next } : {},
+
   component: LoginPage,
 });
 
