@@ -32,6 +32,7 @@ import { Route as AuthenticatedAdminProgramsIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedAdminProgramsSlugIndexRouteImport } from './routes/_authenticated/admin/programs/$slug/index'
 import { Route as AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport } from './routes/_authenticated/dashboard.$programSlug.lesson.$lessonSlug'
 import { Route as AuthenticatedAdminProgramsSlugLessonsNewRouteImport } from './routes/_authenticated/admin/programs/$slug/lessons/new'
+import { Route as AuthenticatedAdminProgramsSlugLessonsLessonIdEditRouteImport } from './routes/_authenticated/admin/programs/$slug/lessons/$lessonId/edit'
 
 const TheShiftRoute = TheShiftRouteImport.update({
   id: '/the-shift',
@@ -153,6 +154,12 @@ const AuthenticatedAdminProgramsSlugLessonsNewRoute =
     path: '/programs/$slug/lessons/new',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute =
+  AuthenticatedAdminProgramsSlugLessonsLessonIdEditRouteImport.update({
+    id: '/programs/$slug/lessons/$lessonId/edit',
+    path: '/programs/$slug/lessons/$lessonId/edit',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -177,6 +184,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
   '/admin/programs/$slug/': typeof AuthenticatedAdminProgramsSlugIndexRoute
   '/admin/programs/$slug/lessons/new': typeof AuthenticatedAdminProgramsSlugLessonsNewRoute
+  '/admin/programs/$slug/lessons/$lessonId/edit': typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -200,6 +208,7 @@ export interface FileRoutesByTo {
   '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
   '/admin/programs/$slug': typeof AuthenticatedAdminProgramsSlugIndexRoute
   '/admin/programs/$slug/lessons/new': typeof AuthenticatedAdminProgramsSlugLessonsNewRoute
+  '/admin/programs/$slug/lessons/$lessonId/edit': typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -226,6 +235,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
   '/_authenticated/admin/programs/$slug/': typeof AuthenticatedAdminProgramsSlugIndexRoute
   '/_authenticated/admin/programs/$slug/lessons/new': typeof AuthenticatedAdminProgramsSlugLessonsNewRoute
+  '/_authenticated/admin/programs/$slug/lessons/$lessonId/edit': typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -252,6 +262,7 @@ export interface FileRouteTypes {
     | '/dashboard/$programSlug/lesson/$lessonSlug'
     | '/admin/programs/$slug/'
     | '/admin/programs/$slug/lessons/new'
+    | '/admin/programs/$slug/lessons/$lessonId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -275,6 +286,7 @@ export interface FileRouteTypes {
     | '/dashboard/$programSlug/lesson/$lessonSlug'
     | '/admin/programs/$slug'
     | '/admin/programs/$slug/lessons/new'
+    | '/admin/programs/$slug/lessons/$lessonId/edit'
   id:
     | '__root__'
     | '/'
@@ -300,6 +312,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
     | '/_authenticated/admin/programs/$slug/'
     | '/_authenticated/admin/programs/$slug/lessons/new'
+    | '/_authenticated/admin/programs/$slug/lessons/$lessonId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -483,6 +496,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminProgramsSlugLessonsNewRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/programs/$slug/lessons/$lessonId/edit': {
+      id: '/_authenticated/admin/programs/$slug/lessons/$lessonId/edit'
+      path: '/programs/$slug/lessons/$lessonId/edit'
+      fullPath: '/admin/programs/$slug/lessons/$lessonId/edit'
+      preLoaderRoute: typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
@@ -491,6 +511,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminProgramsIndexRoute: typeof AuthenticatedAdminProgramsIndexRoute
   AuthenticatedAdminProgramsSlugIndexRoute: typeof AuthenticatedAdminProgramsSlugIndexRoute
   AuthenticatedAdminProgramsSlugLessonsNewRoute: typeof AuthenticatedAdminProgramsSlugLessonsNewRoute
+  AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute: typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
@@ -501,6 +522,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminProgramsSlugIndexRoute,
     AuthenticatedAdminProgramsSlugLessonsNewRoute:
       AuthenticatedAdminProgramsSlugLessonsNewRoute,
+    AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute:
+      AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute,
   }
 
 const AuthenticatedAdminRouteRouteWithChildren =
