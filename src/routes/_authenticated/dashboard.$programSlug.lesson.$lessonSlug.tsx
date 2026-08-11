@@ -29,8 +29,16 @@ export const Route = createFileRoute("/_authenticated/dashboard/$programSlug/les
 });
 
 type Res = { label: string; url: string };
+type FileRes = {
+  id: string;
+  title: string;
+  file_name: string | null;
+  file_type: string | null;
+  file_size: number | null;
+};
 type LessonData = {
   program: { slug: string; title: string };
+  moduleTitle: string | null;
   lesson: {
     id: string;
     title: string;
@@ -41,10 +49,12 @@ type LessonData = {
     resources: Res[];
     subtitles: Res[];
   };
+  files: FileRes[];
   completed: boolean;
   prev: { slug: string; title: string } | null;
   next: { slug: string; title: string } | null;
 };
+
 
 function LessonPage() {
   const data = Route.useLoaderData() as LessonData;
