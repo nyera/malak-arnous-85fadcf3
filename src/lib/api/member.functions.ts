@@ -283,3 +283,33 @@ export const requireAdmin = createServerFn({ method: "GET" })
     await assertAdmin(context.supabase, context.userId);
     return { ok: true };
   });
+
+export const getMyResourceUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(z.object({ slug: z.string().min(1), resourceId: z.string().uuid() }))
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+    const program = await requireProgramBySlug(supabase, data.slug);
+    await assertAccess(supabase, userId, program.id);
+
+    const { data: resource } = await supabase
+      .from("lesson_resources")
+      .select("file_path, lesson_id")
+      .eq("id", data.resourceId)
+      .maybeSingle();
+    if (!resource) throw new Error("NOT_FOUND");
+
+    const { data: lesson } = await supabase
+      .from("lessons")
+      .select("id, program_id, is_published")
+      .eq("id", resource.lesson_id)
+      .maybeSingle();
+    if (!lesson || !lesson.is_published || lesson.program_id !== program.id) throw new Error("NOT_FOUND");
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: signed, error } = await supabaseAdmin.storage
+      .from("course-resources")
+      .createSignedUrl(resource.file_path, 60 * 10);
+    if (error) throw new Error(error.message);
+    return { url: signed.signedUrl };
+  });
