@@ -29,6 +29,7 @@ import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authentic
 import { Route as ApiPublicStanPurchaseRouteImport } from './routes/api/public/stan-purchase'
 import { Route as AuthenticatedDashboardProgramSlugIndexRouteImport } from './routes/_authenticated/dashboard.$programSlug.index'
 import { Route as AuthenticatedAdminProgramsIndexRouteImport } from './routes/_authenticated/admin/programs/index'
+import { Route as AuthenticatedAdminProgramsSlugIndexRouteImport } from './routes/_authenticated/admin/programs/$slug/index'
 import { Route as AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport } from './routes/_authenticated/dashboard.$programSlug.lesson.$lessonSlug'
 
 const TheShiftRoute = TheShiftRouteImport.update({
@@ -133,6 +134,12 @@ const AuthenticatedAdminProgramsIndexRoute =
     path: '/programs/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminProgramsSlugIndexRoute =
+  AuthenticatedAdminProgramsSlugIndexRouteImport.update({
+    id: '/programs/$slug/',
+    path: '/programs/$slug/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedDashboardProgramSlugLessonLessonSlugRoute =
   AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport.update({
     id: '/dashboard/$programSlug/lesson/$lessonSlug',
@@ -161,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/admin/programs/': typeof AuthenticatedAdminProgramsIndexRoute
   '/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
   '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
+  '/admin/programs/$slug/': typeof AuthenticatedAdminProgramsSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -182,6 +190,7 @@ export interface FileRoutesByTo {
   '/admin/programs': typeof AuthenticatedAdminProgramsIndexRoute
   '/dashboard/$programSlug': typeof AuthenticatedDashboardProgramSlugIndexRoute
   '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
+  '/admin/programs/$slug': typeof AuthenticatedAdminProgramsSlugIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -206,6 +215,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/programs/': typeof AuthenticatedAdminProgramsIndexRoute
   '/_authenticated/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
   '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
+  '/_authenticated/admin/programs/$slug/': typeof AuthenticatedAdminProgramsSlugIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/admin/programs/'
     | '/dashboard/$programSlug/'
     | '/dashboard/$programSlug/lesson/$lessonSlug'
+    | '/admin/programs/$slug/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -251,6 +262,7 @@ export interface FileRouteTypes {
     | '/admin/programs'
     | '/dashboard/$programSlug'
     | '/dashboard/$programSlug/lesson/$lessonSlug'
+    | '/admin/programs/$slug'
   id:
     | '__root__'
     | '/'
@@ -274,6 +286,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/programs/'
     | '/_authenticated/dashboard/$programSlug/'
     | '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
+    | '/_authenticated/admin/programs/$slug/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -436,6 +449,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminProgramsIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/programs/$slug/': {
+      id: '/_authenticated/admin/programs/$slug/'
+      path: '/programs/$slug'
+      fullPath: '/admin/programs/$slug/'
+      preLoaderRoute: typeof AuthenticatedAdminProgramsSlugIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': {
       id: '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
       path: '/dashboard/$programSlug/lesson/$lessonSlug'
@@ -449,12 +469,15 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedAdminProgramsIndexRoute: typeof AuthenticatedAdminProgramsIndexRoute
+  AuthenticatedAdminProgramsSlugIndexRoute: typeof AuthenticatedAdminProgramsSlugIndexRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
     AuthenticatedAdminProgramsIndexRoute: AuthenticatedAdminProgramsIndexRoute,
+    AuthenticatedAdminProgramsSlugIndexRoute:
+      AuthenticatedAdminProgramsSlugIndexRoute,
   }
 
 const AuthenticatedAdminRouteRouteWithChildren =
