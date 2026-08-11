@@ -27,6 +27,7 @@ import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authentic
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as ApiPublicStanPurchaseRouteImport } from './routes/api/public/stan-purchase'
+import { Route as AuthenticatedAdminStudentsRouteImport } from './routes/_authenticated/admin/students'
 import { Route as AuthenticatedDashboardProgramSlugIndexRouteImport } from './routes/_authenticated/dashboard.$programSlug.index'
 import { Route as AuthenticatedAdminProgramsIndexRouteImport } from './routes/_authenticated/admin/programs/index'
 import { Route as AuthenticatedAdminProgramsSlugIndexRouteImport } from './routes/_authenticated/admin/programs/$slug/index'
@@ -124,6 +125,12 @@ const ApiPublicStanPurchaseRoute = ApiPublicStanPurchaseRouteImport.update({
   path: '/api/public/stan-purchase',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminStudentsRoute =
+  AuthenticatedAdminStudentsRouteImport.update({
+    id: '/students',
+    path: '/students',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedDashboardProgramSlugIndexRoute =
   AuthenticatedDashboardProgramSlugIndexRouteImport.update({
     id: '/dashboard/$programSlug/',
@@ -176,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
@@ -200,6 +208,7 @@ export interface FileRoutesByTo {
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
@@ -227,6 +236,7 @@ export interface FileRoutesById {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/_authenticated/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
@@ -254,6 +264,7 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/admin'
+    | '/admin/students'
     | '/api/public/stan-purchase'
     | '/admin/'
     | '/dashboard/'
@@ -278,6 +289,7 @@ export interface FileRouteTypes {
     | '/survey'
     | '/testimonials'
     | '/the-shift'
+    | '/admin/students'
     | '/api/public/stan-purchase'
     | '/admin'
     | '/dashboard'
@@ -304,6 +316,7 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/_authenticated/admin'
+    | '/_authenticated/admin/students'
     | '/api/public/stan-purchase'
     | '/_authenticated/admin/'
     | '/_authenticated/dashboard/'
@@ -461,6 +474,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicStanPurchaseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/students': {
+      id: '/_authenticated/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AuthenticatedAdminStudentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/dashboard/$programSlug/': {
       id: '/_authenticated/dashboard/$programSlug/'
       path: '/dashboard/$programSlug'
@@ -507,6 +527,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminStudentsRoute: typeof AuthenticatedAdminStudentsRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedAdminProgramsIndexRoute: typeof AuthenticatedAdminProgramsIndexRoute
   AuthenticatedAdminProgramsSlugIndexRoute: typeof AuthenticatedAdminProgramsSlugIndexRoute
@@ -516,6 +537,7 @@ interface AuthenticatedAdminRouteRouteChildren {
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
+    AuthenticatedAdminStudentsRoute: AuthenticatedAdminStudentsRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
     AuthenticatedAdminProgramsIndexRoute: AuthenticatedAdminProgramsIndexRoute,
     AuthenticatedAdminProgramsSlugIndexRoute:
