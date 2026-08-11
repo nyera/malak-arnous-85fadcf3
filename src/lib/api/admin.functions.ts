@@ -245,9 +245,10 @@ export const adminTogglePublish = createServerFn({ method: "POST" })
   .inputValidator(z.object({ table: z.enum(["modules", "lessons", "programs"]), id: z.string().uuid(), value: z.boolean() }))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
+    const db = context.supabase as any;
     const patch =
       data.table === "modules" ? { status: data.value ? "published" : "draft" } : { is_published: data.value };
-    const { error } = await context.supabase.from(data.table).update(patch).eq("id", data.id);
+    const { error } = await db.from(data.table).update(patch).eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true };
   });
@@ -262,13 +263,13 @@ export const adminReorder = createServerFn({ method: "POST" })
     }),
   )
   .handler(async ({ data, context }) => {
-    const { supabase } = context;
-    await assertAdmin(supabase, context.userId);
+    await assertAdmin(context.supabase, context.userId);
+    const db = context.supabase as any;
 
     const scopeColumn =
       data.table === "modules" ? "program_id" : data.table === "lessons" ? "module_id" : "lesson_id";
 
-    const { data: current, error: e1 } = await supabase
+    const { data: current, error: e1 } = await db
       .from(data.table)
       .select(`id, sort_order, ${scopeColumn}`)
       .eq("id", data.id)
@@ -277,13 +278,13 @@ export const adminReorder = createServerFn({ method: "POST" })
     if (!current) throw new Error("NOT_FOUND");
 
     const scopeValue = (current as Record<string, any>)[scopeColumn];
-    const { data: siblings } = await supabase
+    const { data: siblings } = await db
       .from(data.table)
       .select("id, sort_order")
       .eq(scopeColumn, scopeValue)
       .order("sort_order", { ascending: true });
 
-    const list = siblings ?? [];
+    const list = (siblings ?? []) as { id: string; sort_order: number }[];
     const index = list.findIndex((r) => r.id === data.id);
     const target = data.direction === "up" ? index - 1 : index + 1;
     if (index === -1 || target < 0 || target >= list.length) return { ok: true };
@@ -293,7 +294,7 @@ export const adminReorder = createServerFn({ method: "POST" })
     reordered.splice(target, 0, moved!);
 
     for (let i = 0; i < reordered.length; i++) {
-      const { error } = await supabase
+      const { error } = await db
         .from(data.table)
         .update({ sort_order: i + 1 })
         .eq("id", reordered[i]!.id);
@@ -301,6 +302,7 @@ export const adminReorder = createServerFn({ method: "POST" })
     }
     return { ok: true };
   });
+
 
 export const adminSetAccess = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
