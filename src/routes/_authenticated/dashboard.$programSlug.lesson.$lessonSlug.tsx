@@ -2,7 +2,7 @@ import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, ExternalLink, ArrowLeft, ArrowRight, KeyRound } from "lucide-react";
-import { getLesson, setLessonProgress } from "@/lib/api/member.functions";
+import { getLesson, setLessonProgress, getMyResourceUrl } from "@/lib/api/member.functions";
 import { FadeIn } from "@/components/site/Misc";
 
 export const Route = createFileRoute("/_authenticated/dashboard/$programSlug/lesson/$lessonSlug")({
