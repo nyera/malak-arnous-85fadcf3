@@ -53,6 +53,53 @@ export type Database = {
           },
         ]
       }
+      lesson_resources: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_path: string
+          file_size: number | null
+          file_type: string | null
+          id: string
+          lesson_id: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_path: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          lesson_id: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_path?: string
+          file_size?: number | null
+          file_type?: string | null
+          id?: string
+          lesson_id?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_resources_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lessons: {
         Row: {
           created_at: string
@@ -135,6 +182,7 @@ export type Database = {
           id: string
           program_id: string
           sort_order: number
+          status: string
           title: string
           updated_at: string
         }
@@ -144,6 +192,7 @@ export type Database = {
           id?: string
           program_id: string
           sort_order?: number
+          status?: string
           title: string
           updated_at?: string
         }
@@ -153,6 +202,7 @@ export type Database = {
           id?: string
           program_id?: string
           sort_order?: number
+          status?: string
           title?: string
           updated_at?: string
         }
