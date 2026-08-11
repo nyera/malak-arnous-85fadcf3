@@ -101,12 +101,30 @@ function LessonPage() {
             </div>
           )}
 
-          {data.lesson.resources?.length > 0 && (
+          {(data.files?.length > 0 || data.lesson.resources?.length > 0) && (
             <div className="mb-8">
               <h2 className="display-sm mb-3">المواد المرفقة</h2>
               <ul className="divide-y divide-border rounded-sm border border-border bg-surface">
-                {data.lesson.resources.map((r: Res, i: number) => (
-                  <li key={i}>
+                {(data.files ?? []).map((f: FileRes) => (
+                  <li key={f.id}>
+                    <button
+                      onClick={() => openFile(f.id)}
+                      className="flex w-full items-center justify-between px-5 py-4 text-[15px] hover:bg-background"
+                    >
+                      <span>
+                        📄 {f.title}
+                        {f.file_type ? (
+                          <span className="ms-2 text-xs text-muted-foreground" dir="ltr">
+                            {f.file_name}
+                          </span>
+                        ) : null}
+                      </span>
+                      <span className="text-xs text-ember">تحميل</span>
+                    </button>
+                  </li>
+                ))}
+                {(data.lesson.resources ?? []).map((r: Res, i: number) => (
+                  <li key={`legacy-${i}`}>
                     <a
                       href={r.url}
                       target="_blank"
@@ -120,6 +138,7 @@ function LessonPage() {
               </ul>
             </div>
           )}
+
 
           <button
             onClick={toggle}
