@@ -40,13 +40,22 @@ export const getDashboard = createServerFn({ method: "GET" })
 
     let lessonCounts: Record<string, number> = {};
     if (entitled.length) {
-      const { data: lessons } = await supabase
-        .from("lessons")
-        .select("id, program_id")
-        .eq("is_published", true)
-        .in("program_id", entitled.map((p) => p.id));
-      for (const l of lessons ?? []) lessonCounts[l.program_id] = (lessonCounts[l.program_id] ?? 0) + 1;
+      const programIds = entitled.map((p) => p.id);
+      const [{ data: publishedModules }, { data: lessons }] = await Promise.all([
+        supabase.from("modules").select("id").eq("status", "published").in("program_id", programIds),
+        supabase
+          .from("lessons")
+          .select("id, program_id, module_id")
+          .eq("is_published", true)
+          .in("program_id", programIds),
+      ]);
+      const allowed = new Set((publishedModules ?? []).map((m) => m.id));
+      for (const l of lessons ?? []) {
+        if (!allowed.has(l.module_id)) continue;
+        lessonCounts[l.program_id] = (lessonCounts[l.program_id] ?? 0) + 1;
+      }
     }
+
 
     const doneCounts: Record<string, number> = {};
     for (const p of progress ?? []) doneCounts[p.program_id] = (doneCounts[p.program_id] ?? 0) + 1;
