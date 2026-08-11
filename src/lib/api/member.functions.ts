@@ -94,6 +94,7 @@ export const getProgramView = createServerFn({ method: "GET" })
         .from("modules")
         .select("id, title, description, sort_order")
         .eq("program_id", program.id)
+        .eq("status", "published")
         .order("sort_order", { ascending: true }),
       supabase
         .from("lessons")
@@ -104,16 +105,22 @@ export const getProgramView = createServerFn({ method: "GET" })
       supabase.from("lesson_progress").select("lesson_id").eq("user_id", userId).eq("program_id", program.id),
     ]);
 
+    const moduleList = modules ?? [];
+    const moduleIds = new Set(moduleList.map((m) => m.id));
     const done = new Set((progress ?? []).map((p) => p.lesson_id));
-    const all = (lessons ?? []).map((l) => ({ ...l, completed: done.has(l.id) }));
+    const all = (lessons ?? [])
+      .filter((l) => moduleIds.has(l.module_id))
+      .map((l) => ({ ...l, completed: done.has(l.id) }));
+    const ordered = moduleList.flatMap((m) => all.filter((l) => l.module_id === m.id));
 
     return {
       program,
-      modules: (modules ?? []).map((m) => ({ ...m, lessons: all.filter((l) => l.module_id === m.id) })),
-      totalLessons: all.length,
-      completedLessons: all.filter((l) => l.completed).length,
-      nextLesson: all.find((l) => !l.completed)?.slug ?? all[0]?.slug ?? null,
+      modules: moduleList.map((m) => ({ ...m, lessons: all.filter((l) => l.module_id === m.id) })),
+      totalLessons: ordered.length,
+      completedLessons: ordered.filter((l) => l.completed).length,
+      nextLesson: ordered.find((l) => !l.completed)?.slug ?? ordered[0]?.slug ?? null,
     };
+
   });
 
 export const getLesson = createServerFn({ method: "GET" })
