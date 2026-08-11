@@ -23,11 +23,17 @@ import { Route as ClaimAccessRouteImport } from './routes/claim-access'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as ApiPublicStanPurchaseRouteImport } from './routes/api/public/stan-purchase'
+import { Route as AuthenticatedAdminStudentsRouteImport } from './routes/_authenticated/admin/students'
 import { Route as AuthenticatedDashboardProgramSlugIndexRouteImport } from './routes/_authenticated/dashboard.$programSlug.index'
+import { Route as AuthenticatedAdminProgramsIndexRouteImport } from './routes/_authenticated/admin/programs/index'
+import { Route as AuthenticatedAdminProgramsSlugIndexRouteImport } from './routes/_authenticated/admin/programs/$slug/index'
 import { Route as AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport } from './routes/_authenticated/dashboard.$programSlug.lesson.$lessonSlug'
+import { Route as AuthenticatedAdminProgramsSlugLessonsNewRouteImport } from './routes/_authenticated/admin/programs/$slug/lessons/new'
+import { Route as AuthenticatedAdminProgramsSlugLessonsLessonIdEditRouteImport } from './routes/_authenticated/admin/programs/$slug/lessons/$lessonId/edit'
 
 const TheShiftRoute = TheShiftRouteImport.update({
   id: '/the-shift',
@@ -98,7 +104,7 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
@@ -109,22 +115,57 @@ const AuthenticatedDashboardIndexRoute =
     path: '/dashboard/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
 const ApiPublicStanPurchaseRoute = ApiPublicStanPurchaseRouteImport.update({
   id: '/api/public/stan-purchase',
   path: '/api/public/stan-purchase',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminStudentsRoute =
+  AuthenticatedAdminStudentsRouteImport.update({
+    id: '/students',
+    path: '/students',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedDashboardProgramSlugIndexRoute =
   AuthenticatedDashboardProgramSlugIndexRouteImport.update({
     id: '/dashboard/$programSlug/',
     path: '/dashboard/$programSlug/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminProgramsIndexRoute =
+  AuthenticatedAdminProgramsIndexRouteImport.update({
+    id: '/programs/',
+    path: '/programs/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProgramsSlugIndexRoute =
+  AuthenticatedAdminProgramsSlugIndexRouteImport.update({
+    id: '/programs/$slug/',
+    path: '/programs/$slug/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedDashboardProgramSlugLessonLessonSlugRoute =
   AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport.update({
     id: '/dashboard/$programSlug/lesson/$lessonSlug',
     path: '/dashboard/$programSlug/lesson/$lessonSlug',
     getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminProgramsSlugLessonsNewRoute =
+  AuthenticatedAdminProgramsSlugLessonsNewRouteImport.update({
+    id: '/programs/$slug/lessons/new',
+    path: '/programs/$slug/lessons/new',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute =
+  AuthenticatedAdminProgramsSlugLessonsLessonIdEditRouteImport.update({
+    id: '/programs/$slug/lessons/$lessonId/edit',
+    path: '/programs/$slug/lessons/$lessonId/edit',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -141,11 +182,17 @@ export interface FileRoutesByFullPath {
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
-  '/admin': typeof AuthenticatedAdminRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/admin/programs/': typeof AuthenticatedAdminProgramsIndexRoute
   '/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
   '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
+  '/admin/programs/$slug/': typeof AuthenticatedAdminProgramsSlugIndexRoute
+  '/admin/programs/$slug/lessons/new': typeof AuthenticatedAdminProgramsSlugLessonsNewRoute
+  '/admin/programs/$slug/lessons/$lessonId/edit': typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -161,11 +208,16 @@ export interface FileRoutesByTo {
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
-  '/admin': typeof AuthenticatedAdminRoute
+  '/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/admin/programs': typeof AuthenticatedAdminProgramsIndexRoute
   '/dashboard/$programSlug': typeof AuthenticatedDashboardProgramSlugIndexRoute
   '/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
+  '/admin/programs/$slug': typeof AuthenticatedAdminProgramsSlugIndexRoute
+  '/admin/programs/$slug/lessons/new': typeof AuthenticatedAdminProgramsSlugLessonsNewRoute
+  '/admin/programs/$slug/lessons/$lessonId/edit': typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -183,11 +235,17 @@ export interface FileRoutesById {
   '/survey': typeof SurveyRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
-  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/_authenticated/admin/students': typeof AuthenticatedAdminStudentsRoute
   '/api/public/stan-purchase': typeof ApiPublicStanPurchaseRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/admin/programs/': typeof AuthenticatedAdminProgramsIndexRoute
   '/_authenticated/dashboard/$programSlug/': typeof AuthenticatedDashboardProgramSlugIndexRoute
   '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
+  '/_authenticated/admin/programs/$slug/': typeof AuthenticatedAdminProgramsSlugIndexRoute
+  '/_authenticated/admin/programs/$slug/lessons/new': typeof AuthenticatedAdminProgramsSlugLessonsNewRoute
+  '/_authenticated/admin/programs/$slug/lessons/$lessonId/edit': typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -206,10 +264,16 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/admin'
+    | '/admin/students'
     | '/api/public/stan-purchase'
+    | '/admin/'
     | '/dashboard/'
+    | '/admin/programs/'
     | '/dashboard/$programSlug/'
     | '/dashboard/$programSlug/lesson/$lessonSlug'
+    | '/admin/programs/$slug/'
+    | '/admin/programs/$slug/lessons/new'
+    | '/admin/programs/$slug/lessons/$lessonId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -225,11 +289,16 @@ export interface FileRouteTypes {
     | '/survey'
     | '/testimonials'
     | '/the-shift'
-    | '/admin'
+    | '/admin/students'
     | '/api/public/stan-purchase'
+    | '/admin'
     | '/dashboard'
+    | '/admin/programs'
     | '/dashboard/$programSlug'
     | '/dashboard/$programSlug/lesson/$lessonSlug'
+    | '/admin/programs/$slug'
+    | '/admin/programs/$slug/lessons/new'
+    | '/admin/programs/$slug/lessons/$lessonId/edit'
   id:
     | '__root__'
     | '/'
@@ -247,10 +316,16 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/_authenticated/admin'
+    | '/_authenticated/admin/students'
     | '/api/public/stan-purchase'
+    | '/_authenticated/admin/'
     | '/_authenticated/dashboard/'
+    | '/_authenticated/admin/programs/'
     | '/_authenticated/dashboard/$programSlug/'
     | '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
+    | '/_authenticated/admin/programs/$slug/'
+    | '/_authenticated/admin/programs/$slug/lessons/new'
+    | '/_authenticated/admin/programs/$slug/lessons/$lessonId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -375,7 +450,7 @@ declare module '@tanstack/react-router' {
       id: '/_authenticated/admin'
       path: '/admin'
       fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/': {
@@ -385,12 +460,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/api/public/stan-purchase': {
       id: '/api/public/stan-purchase'
       path: '/api/public/stan-purchase'
       fullPath: '/api/public/stan-purchase'
       preLoaderRoute: typeof ApiPublicStanPurchaseRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin/students': {
+      id: '/_authenticated/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AuthenticatedAdminStudentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/dashboard/$programSlug/': {
       id: '/_authenticated/dashboard/$programSlug/'
@@ -399,6 +488,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardProgramSlugIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/programs/': {
+      id: '/_authenticated/admin/programs/'
+      path: '/programs'
+      fullPath: '/admin/programs/'
+      preLoaderRoute: typeof AuthenticatedAdminProgramsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/programs/$slug/': {
+      id: '/_authenticated/admin/programs/$slug/'
+      path: '/programs/$slug'
+      fullPath: '/admin/programs/$slug/'
+      preLoaderRoute: typeof AuthenticatedAdminProgramsSlugIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug': {
       id: '/_authenticated/dashboard/$programSlug/lesson/$lessonSlug'
       path: '/dashboard/$programSlug/lesson/$lessonSlug'
@@ -406,18 +509,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/programs/$slug/lessons/new': {
+      id: '/_authenticated/admin/programs/$slug/lessons/new'
+      path: '/programs/$slug/lessons/new'
+      fullPath: '/admin/programs/$slug/lessons/new'
+      preLoaderRoute: typeof AuthenticatedAdminProgramsSlugLessonsNewRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/programs/$slug/lessons/$lessonId/edit': {
+      id: '/_authenticated/admin/programs/$slug/lessons/$lessonId/edit'
+      path: '/programs/$slug/lessons/$lessonId/edit'
+      fullPath: '/admin/programs/$slug/lessons/$lessonId/edit'
+      preLoaderRoute: typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminStudentsRoute: typeof AuthenticatedAdminStudentsRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminProgramsIndexRoute: typeof AuthenticatedAdminProgramsIndexRoute
+  AuthenticatedAdminProgramsSlugIndexRoute: typeof AuthenticatedAdminProgramsSlugIndexRoute
+  AuthenticatedAdminProgramsSlugLessonsNewRoute: typeof AuthenticatedAdminProgramsSlugLessonsNewRoute
+  AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute: typeof AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminStudentsRoute: AuthenticatedAdminStudentsRoute,
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+    AuthenticatedAdminProgramsIndexRoute: AuthenticatedAdminProgramsIndexRoute,
+    AuthenticatedAdminProgramsSlugIndexRoute:
+      AuthenticatedAdminProgramsSlugIndexRoute,
+    AuthenticatedAdminProgramsSlugLessonsNewRoute:
+      AuthenticatedAdminProgramsSlugLessonsNewRoute,
+    AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute:
+      AuthenticatedAdminProgramsSlugLessonsLessonIdEditRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
   AuthenticatedDashboardProgramSlugIndexRoute: typeof AuthenticatedDashboardProgramSlugIndexRoute
   AuthenticatedDashboardProgramSlugLessonLessonSlugRoute: typeof AuthenticatedDashboardProgramSlugLessonLessonSlugRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
   AuthenticatedDashboardProgramSlugIndexRoute:
     AuthenticatedDashboardProgramSlugIndexRoute,
@@ -448,13 +592,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -40,13 +40,22 @@ export const getDashboard = createServerFn({ method: "GET" })
 
     let lessonCounts: Record<string, number> = {};
     if (entitled.length) {
-      const { data: lessons } = await supabase
-        .from("lessons")
-        .select("id, program_id")
-        .eq("is_published", true)
-        .in("program_id", entitled.map((p) => p.id));
-      for (const l of lessons ?? []) lessonCounts[l.program_id] = (lessonCounts[l.program_id] ?? 0) + 1;
+      const programIds = entitled.map((p) => p.id);
+      const [{ data: publishedModules }, { data: lessons }] = await Promise.all([
+        supabase.from("modules").select("id").eq("status", "published").in("program_id", programIds),
+        supabase
+          .from("lessons")
+          .select("id, program_id, module_id")
+          .eq("is_published", true)
+          .in("program_id", programIds),
+      ]);
+      const allowed = new Set((publishedModules ?? []).map((m) => m.id));
+      for (const l of lessons ?? []) {
+        if (!allowed.has(l.module_id)) continue;
+        lessonCounts[l.program_id] = (lessonCounts[l.program_id] ?? 0) + 1;
+      }
     }
+
 
     const doneCounts: Record<string, number> = {};
     for (const p of progress ?? []) doneCounts[p.program_id] = (doneCounts[p.program_id] ?? 0) + 1;
@@ -85,6 +94,7 @@ export const getProgramView = createServerFn({ method: "GET" })
         .from("modules")
         .select("id, title, description, sort_order")
         .eq("program_id", program.id)
+        .eq("status", "published")
         .order("sort_order", { ascending: true }),
       supabase
         .from("lessons")
@@ -95,16 +105,22 @@ export const getProgramView = createServerFn({ method: "GET" })
       supabase.from("lesson_progress").select("lesson_id").eq("user_id", userId).eq("program_id", program.id),
     ]);
 
+    const moduleList = modules ?? [];
+    const moduleIds = new Set(moduleList.map((m) => m.id));
     const done = new Set((progress ?? []).map((p) => p.lesson_id));
-    const all = (lessons ?? []).map((l) => ({ ...l, completed: done.has(l.id) }));
+    const all = (lessons ?? [])
+      .filter((l) => moduleIds.has(l.module_id))
+      .map((l) => ({ ...l, completed: done.has(l.id) }));
+    const ordered = moduleList.flatMap((m) => all.filter((l) => l.module_id === m.id));
 
     return {
       program,
-      modules: (modules ?? []).map((m) => ({ ...m, lessons: all.filter((l) => l.module_id === m.id) })),
-      totalLessons: all.length,
-      completedLessons: all.filter((l) => l.completed).length,
-      nextLesson: all.find((l) => !l.completed)?.slug ?? all[0]?.slug ?? null,
+      modules: moduleList.map((m) => ({ ...m, lessons: all.filter((l) => l.module_id === m.id) })),
+      totalLessons: ordered.length,
+      completedLessons: ordered.filter((l) => l.completed).length,
+      nextLesson: ordered.find((l) => !l.completed)?.slug ?? ordered[0]?.slug ?? null,
     };
+
   });
 
 export const getLesson = createServerFn({ method: "GET" })
@@ -115,35 +131,54 @@ export const getLesson = createServerFn({ method: "GET" })
     const program = await requireProgramBySlug(supabase, data.slug);
     await assertAccess(supabase, userId, program.id);
 
-    const { data: lessons } = await supabase
-      .from("lessons")
-      .select(
-        "id, slug, title, description, duration_minutes, video_type, video_url, video_passcode, storage_path, resources, subtitles, sort_order, module_id",
-      )
-      .eq("program_id", program.id)
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true });
+    const [{ data: modules }, { data: lessons }] = await Promise.all([
+      supabase
+        .from("modules")
+        .select("id, title, sort_order")
+        .eq("program_id", program.id)
+        .eq("status", "published")
+        .order("sort_order", { ascending: true }),
+      supabase
+        .from("lessons")
+        .select(
+          "id, slug, title, description, duration_minutes, video_type, video_url, video_passcode, storage_path, resources, subtitles, sort_order, module_id",
+        )
+        .eq("program_id", program.id)
+        .eq("is_published", true)
+        .order("sort_order", { ascending: true }),
+    ]);
 
-    const list = lessons ?? [];
+    const moduleList = modules ?? [];
+    const list = moduleList.flatMap((m) => (lessons ?? []).filter((l) => l.module_id === m.id));
     const index = list.findIndex((l) => l.slug === data.lessonSlug);
     if (index === -1) throw new Error("LESSON_NOT_FOUND");
     const lesson = list[index]!;
 
-    const { data: progress } = await supabase
-      .from("lesson_progress")
-      .select("lesson_id")
-      .eq("user_id", userId)
-      .eq("lesson_id", lesson.id)
-      .maybeSingle();
+    const [{ data: progress }, { data: resources }] = await Promise.all([
+      supabase
+        .from("lesson_progress")
+        .select("lesson_id")
+        .eq("user_id", userId)
+        .eq("lesson_id", lesson.id)
+        .maybeSingle(),
+      supabase
+        .from("lesson_resources")
+        .select("id, title, file_name, file_type, file_size, sort_order")
+        .eq("lesson_id", lesson.id)
+        .order("sort_order", { ascending: true }),
+    ]);
 
     return {
       program: { slug: program.slug, title: program.title },
+      moduleTitle: moduleList.find((m) => m.id === lesson.module_id)?.title ?? null,
       lesson,
+      files: resources ?? [],
       completed: !!progress,
       prev: index > 0 ? { slug: list[index - 1]!.slug, title: list[index - 1]!.title } : null,
       next:
         index < list.length - 1 ? { slug: list[index + 1]!.slug, title: list[index + 1]!.title } : null,
     };
+
   });
 
 export const setLessonProgress = createServerFn({ method: "POST" })
@@ -247,4 +282,34 @@ export const requireAdmin = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
     return { ok: true };
+  });
+
+export const getMyResourceUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(z.object({ slug: z.string().min(1), resourceId: z.string().uuid() }))
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+    const program = await requireProgramBySlug(supabase, data.slug);
+    await assertAccess(supabase, userId, program.id);
+
+    const { data: resource } = await supabase
+      .from("lesson_resources")
+      .select("file_path, lesson_id")
+      .eq("id", data.resourceId)
+      .maybeSingle();
+    if (!resource) throw new Error("NOT_FOUND");
+
+    const { data: lesson } = await supabase
+      .from("lessons")
+      .select("id, program_id, is_published")
+      .eq("id", resource.lesson_id)
+      .maybeSingle();
+    if (!lesson || !lesson.is_published || lesson.program_id !== program.id) throw new Error("NOT_FOUND");
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: signed, error } = await supabaseAdmin.storage
+      .from("course-resources")
+      .createSignedUrl(resource.file_path, 60 * 10);
+    if (error) throw new Error(error.message);
+    return { url: signed.signedUrl };
   });

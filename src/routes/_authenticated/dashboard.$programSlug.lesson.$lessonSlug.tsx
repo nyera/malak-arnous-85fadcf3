@@ -2,7 +2,7 @@ import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, ExternalLink, ArrowLeft, ArrowRight, KeyRound } from "lucide-react";
-import { getLesson, setLessonProgress } from "@/lib/api/member.functions";
+import { getLesson, setLessonProgress, getMyResourceUrl } from "@/lib/api/member.functions";
 import { FadeIn } from "@/components/site/Misc";
 
 export const Route = createFileRoute("/_authenticated/dashboard/$programSlug/lesson/$lessonSlug")({
@@ -29,8 +29,16 @@ export const Route = createFileRoute("/_authenticated/dashboard/$programSlug/les
 });
 
 type Res = { label: string; url: string };
+type FileRes = {
+  id: string;
+  title: string;
+  file_name: string | null;
+  file_type: string | null;
+  file_size: number | null;
+};
 type LessonData = {
   program: { slug: string; title: string };
+  moduleTitle: string | null;
   lesson: {
     id: string;
     title: string;
@@ -41,15 +49,18 @@ type LessonData = {
     resources: Res[];
     subtitles: Res[];
   };
+  files: FileRes[];
   completed: boolean;
   prev: { slug: string; title: string } | null;
   next: { slug: string; title: string } | null;
 };
 
+
 function LessonPage() {
   const data = Route.useLoaderData() as LessonData;
   const router = useRouter();
   const save = useServerFn(setLessonProgress);
+  const resourceUrl = useServerFn(getMyResourceUrl);
   const [completed, setCompleted] = useState(data.completed);
   const [saving, setSaving] = useState(false);
   const { programSlug } = Route.useParams();
@@ -63,6 +74,11 @@ function LessonPage() {
     router.invalidate();
   }
 
+  async function openFile(resourceId: string) {
+    const res = await resourceUrl({ data: { slug: programSlug, resourceId } });
+    if (res?.url) window.open(res.url, "_blank", "noopener,noreferrer");
+  }
+
   return (
     <section className="section-y">
       <div className="container-x max-w-3xl">
@@ -74,7 +90,11 @@ function LessonPage() {
           >
             {data.program.title}
           </Link>
+          {data.moduleTitle ? (
+            <p className="mt-3 text-sm text-muted-foreground">{data.moduleTitle}</p>
+          ) : null}
           <h1 className="display-lg mt-4 mb-3">{data.lesson.title}</h1>
+
           {data.lesson.duration_minutes ? (
             <p className="text-sm text-muted-foreground mb-6">مدة الجلسة: {data.lesson.duration_minutes} دقيقة</p>
           ) : null}
@@ -101,12 +121,30 @@ function LessonPage() {
             </div>
           )}
 
-          {data.lesson.resources?.length > 0 && (
+          {(data.files?.length > 0 || data.lesson.resources?.length > 0) && (
             <div className="mb-8">
               <h2 className="display-sm mb-3">المواد المرفقة</h2>
               <ul className="divide-y divide-border rounded-sm border border-border bg-surface">
-                {data.lesson.resources.map((r: Res, i: number) => (
-                  <li key={i}>
+                {(data.files ?? []).map((f: FileRes) => (
+                  <li key={f.id}>
+                    <button
+                      onClick={() => openFile(f.id)}
+                      className="flex w-full items-center justify-between px-5 py-4 text-[15px] hover:bg-background"
+                    >
+                      <span>
+                        📄 {f.title}
+                        {f.file_type ? (
+                          <span className="ms-2 text-xs text-muted-foreground" dir="ltr">
+                            {f.file_name}
+                          </span>
+                        ) : null}
+                      </span>
+                      <span className="text-xs text-ember">تحميل</span>
+                    </button>
+                  </li>
+                ))}
+                {(data.lesson.resources ?? []).map((r: Res, i: number) => (
+                  <li key={`legacy-${i}`}>
                     <a
                       href={r.url}
                       target="_blank"
@@ -120,6 +158,7 @@ function LessonPage() {
               </ul>
             </div>
           )}
+
 
           <button
             onClick={toggle}
