@@ -131,35 +131,54 @@ export const getLesson = createServerFn({ method: "GET" })
     const program = await requireProgramBySlug(supabase, data.slug);
     await assertAccess(supabase, userId, program.id);
 
-    const { data: lessons } = await supabase
-      .from("lessons")
-      .select(
-        "id, slug, title, description, duration_minutes, video_type, video_url, video_passcode, storage_path, resources, subtitles, sort_order, module_id",
-      )
-      .eq("program_id", program.id)
-      .eq("is_published", true)
-      .order("sort_order", { ascending: true });
+    const [{ data: modules }, { data: lessons }] = await Promise.all([
+      supabase
+        .from("modules")
+        .select("id, title, sort_order")
+        .eq("program_id", program.id)
+        .eq("status", "published")
+        .order("sort_order", { ascending: true }),
+      supabase
+        .from("lessons")
+        .select(
+          "id, slug, title, description, duration_minutes, video_type, video_url, video_passcode, storage_path, resources, subtitles, sort_order, module_id",
+        )
+        .eq("program_id", program.id)
+        .eq("is_published", true)
+        .order("sort_order", { ascending: true }),
+    ]);
 
-    const list = lessons ?? [];
+    const moduleList = modules ?? [];
+    const list = moduleList.flatMap((m) => (lessons ?? []).filter((l) => l.module_id === m.id));
     const index = list.findIndex((l) => l.slug === data.lessonSlug);
     if (index === -1) throw new Error("LESSON_NOT_FOUND");
     const lesson = list[index]!;
 
-    const { data: progress } = await supabase
-      .from("lesson_progress")
-      .select("lesson_id")
-      .eq("user_id", userId)
-      .eq("lesson_id", lesson.id)
-      .maybeSingle();
+    const [{ data: progress }, { data: resources }] = await Promise.all([
+      supabase
+        .from("lesson_progress")
+        .select("lesson_id")
+        .eq("user_id", userId)
+        .eq("lesson_id", lesson.id)
+        .maybeSingle(),
+      supabase
+        .from("lesson_resources")
+        .select("id, title, file_name, file_type, file_size, sort_order")
+        .eq("lesson_id", lesson.id)
+        .order("sort_order", { ascending: true }),
+    ]);
 
     return {
       program: { slug: program.slug, title: program.title },
+      moduleTitle: moduleList.find((m) => m.id === lesson.module_id)?.title ?? null,
       lesson,
+      files: resources ?? [],
       completed: !!progress,
       prev: index > 0 ? { slug: list[index - 1]!.slug, title: list[index - 1]!.title } : null,
       next:
         index < list.length - 1 ? { slug: list[index + 1]!.slug, title: list[index + 1]!.title } : null,
     };
+
   });
 
 export const setLessonProgress = createServerFn({ method: "POST" })
