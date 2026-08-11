@@ -60,6 +60,7 @@ function LessonPage() {
   const data = Route.useLoaderData() as LessonData;
   const router = useRouter();
   const save = useServerFn(setLessonProgress);
+  const resourceUrl = useServerFn(getMyResourceUrl);
   const [completed, setCompleted] = useState(data.completed);
   const [saving, setSaving] = useState(false);
   const { programSlug } = Route.useParams();
@@ -73,6 +74,11 @@ function LessonPage() {
     router.invalidate();
   }
 
+  async function openFile(resourceId: string) {
+    const res = await resourceUrl({ data: { slug: programSlug, resourceId } });
+    if (res?.url) window.open(res.url, "_blank", "noopener,noreferrer");
+  }
+
   return (
     <section className="section-y">
       <div className="container-x max-w-3xl">
@@ -84,7 +90,11 @@ function LessonPage() {
           >
             {data.program.title}
           </Link>
+          {data.moduleTitle ? (
+            <p className="mt-3 text-sm text-muted-foreground">{data.moduleTitle}</p>
+          ) : null}
           <h1 className="display-lg mt-4 mb-3">{data.lesson.title}</h1>
+
           {data.lesson.duration_minutes ? (
             <p className="text-sm text-muted-foreground mb-6">مدة الجلسة: {data.lesson.duration_minutes} دقيقة</p>
           ) : null}
