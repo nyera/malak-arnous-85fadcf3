@@ -482,3 +482,158 @@ export const adminResourceUrl = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { url: signed.signedUrl };
   });
+
+/* ------------------------------------------------------------------ */
+/* Direct (large file) uploads: signed upload URLs                     */
+/* ------------------------------------------------------------------ */
+
+async function lessonStoragePrefix(supabase: any, lessonId: string) {
+  const { data: lesson } = await supabase
+    .from("lessons")
+    .select("id, program_id, module_id, sort_order")
+    .eq("id", lessonId)
+    .maybeSingle();
+  if (!lesson) throw new Error("LESSON_NOT_FOUND");
+  const [{ data: program }, { data: mod }] = await Promise.all([
+    supabase.from("programs").select("slug").eq("id", lesson.program_id).maybeSingle(),
+    supabase.from("modules").select("sort_order").eq("id", lesson.module_id).maybeSingle(),
+  ]);
+  return `${program?.slug ?? "program"}/module-${pad(mod?.sort_order ?? 0)}/lesson-${pad(lesson.sort_order ?? 0)}`;
+}
+
+export const adminCreateUploadUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(
+    z.object({
+      lessonId: z.string().uuid(),
+      fileName: z.string().trim().min(1).max(200),
+      kind: z.enum(["resource", "video"]).default("resource"),
+    }),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.supabase, context.userId);
+    const prefix = await lessonStoragePrefix(context.supabase, data.lessonId);
+    const path = `${prefix}/${data.kind === "video" ? "video-" : ""}${Date.now()}-${safeName(data.fileName)}`;
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: signed, error } = await supabaseAdmin.storage
+      .from(RESOURCE_BUCKET)
+      .createSignedUploadUrl(path);
+    if (error) throw new Error(error.message);
+    return { path, token: signed.token, bucket: RESOURCE_BUCKET };
+  });
+
+export const adminRegisterResource = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(
+    z.object({
+      lessonId: z.string().uuid(),
+      title: z.string().trim().min(1).max(200),
+      path: z.string().trim().min(1).max(500),
+      fileName: z.string().trim().min(1).max(200),
+      fileType: z.string().trim().max(120).optional().nullable(),
+      fileSize: z.number().int().min(0).optional().nullable(),
+      replaceResourceId: z.string().uuid().optional(),
+    }),
+  )
+  .handler(async ({ data, context }) => {
+    const { supabase } = context;
+    await assertAdmin(supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    if (data.replaceResourceId) {
+      const { data: old } = await supabase
+        .from("lesson_resources")
+        .select("file_path")
+        .eq("id", data.replaceResourceId)
+        .maybeSingle();
+      const { error } = await supabase
+        .from("lesson_resources")
+        .update({
+          title: data.title,
+          file_path: data.path,
+          file_name: data.fileName,
+          file_type: data.fileType ?? null,
+          file_size: data.fileSize ?? null,
+        })
+        .eq("id", data.replaceResourceId);
+      if (error) throw new Error(error.message);
+      if (old?.file_path && old.file_path !== data.path) {
+        await supabaseAdmin.storage.from(RESOURCE_BUCKET).remove([old.file_path]);
+      }
+      return { ok: true };
+    }
+
+    const { count } = await supabase
+      .from("lesson_resources")
+      .select("id", { count: "exact", head: true })
+      .eq("lesson_id", data.lessonId);
+
+    const { error } = await supabase.from("lesson_resources").insert({
+      lesson_id: data.lessonId,
+      title: data.title,
+      file_path: data.path,
+      file_name: data.fileName,
+      file_type: data.fileType ?? null,
+      file_size: data.fileSize ?? null,
+      sort_order: (count ?? 0) + 1,
+    });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
+export const adminSetLessonVideoFile = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(z.object({ lessonId: z.string().uuid(), path: z.string().trim().min(1).max(500) }))
+  .handler(async ({ data, context }) => {
+    const { supabase } = context;
+    await assertAdmin(supabase, context.userId);
+    const { data: old } = await supabase
+      .from("lessons")
+      .select("storage_path")
+      .eq("id", data.lessonId)
+      .maybeSingle();
+    const { error } = await supabase
+      .from("lessons")
+      .update({ storage_path: data.path, video_type: "upload" })
+      .eq("id", data.lessonId);
+    if (error) throw new Error(error.message);
+    if (old?.storage_path && old.storage_path !== data.path) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      await supabaseAdmin.storage.from(RESOURCE_BUCKET).remove([old.storage_path]);
+    }
+    return { ok: true };
+  });
+
+export const adminDeleteLessonVideoFile = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(z.object({ lessonId: z.string().uuid() }))
+  .handler(async ({ data, context }) => {
+    const { supabase } = context;
+    await assertAdmin(supabase, context.userId);
+    const { data: row } = await supabase
+      .from("lessons")
+      .select("storage_path")
+      .eq("id", data.lessonId)
+      .maybeSingle();
+    const { error } = await supabase.from("lessons").update({ storage_path: null }).eq("id", data.lessonId);
+    if (error) throw new Error(error.message);
+    if (row?.storage_path) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      await supabaseAdmin.storage.from(RESOURCE_BUCKET).remove([row.storage_path]);
+    }
+    return { ok: true };
+  });
+
+export const adminMediaPreviewUrl = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(z.object({ path: z.string().trim().min(1).max(500) }))
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context.supabase, context.userId);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: signed, error } = await supabaseAdmin.storage
+      .from(RESOURCE_BUCKET)
+      .createSignedUrl(data.path, 60 * 60);
+    if (error) throw new Error(error.message);
+    return { url: signed.signedUrl };
+  });
