@@ -123,20 +123,18 @@ export function LessonForm({
     setUploading(true);
     setMsg(null);
     try {
-      const buffer = await resFile.arrayBuffer();
-      let binary = "";
-      const bytes = new Uint8Array(buffer);
-      const chunk = 0x8000;
-      for (let i = 0; i < bytes.length; i += chunk) {
-        binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
-      }
-      await upload({
+      const { path, token, bucket } = await createUploadUrl({
+        data: { lessonId: lesson.id as string, fileName: resFile.name, kind: "resource" },
+      });
+      await uploadToSignedPath(bucket, path, token, resFile);
+      await registerResource({
         data: {
           lessonId: lesson.id as string,
           title: resTitle.trim() || resFile.name,
+          path,
           fileName: resFile.name,
           fileType: resFile.type || null,
-          base64: btoa(binary),
+          fileSize: resFile.size,
           ...(replaceResourceId ? { replaceResourceId } : {}),
         },
       });
@@ -149,6 +147,28 @@ export function LessonForm({
     }
     setUploading(false);
   }
+
+  async function doVideoUpload() {
+    if (!videoFile || !lesson?.id) return;
+    setVideoUploading(true);
+    setMsg(null);
+    try {
+      const { path, token, bucket } = await createUploadUrl({
+        data: { lessonId: lesson.id as string, fileName: videoFile.name, kind: "video" },
+      });
+      await uploadToSignedPath(bucket, path, token, videoFile);
+      await setVideoFile({ data: { lessonId: lesson.id as string, path } });
+      setVideoPath(path);
+      setVideoFileState(null);
+      setForm((f) => ({ ...f, video_type: "upload" }));
+      onSaved();
+      setMsg("تم رفع الفيديو بنجاح.");
+    } catch (e) {
+      setMsg("تعذّر رفع الفيديو: " + (e instanceof Error ? e.message : "غير معروف"));
+    }
+    setVideoUploading(false);
+  }
+
 
   async function openResource(id: string) {
     const { url } = await signUrl({ data: { id } });
