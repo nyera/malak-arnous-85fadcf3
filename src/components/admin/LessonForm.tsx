@@ -232,10 +232,11 @@ export function LessonForm({
           <select
             className={inputClass}
             value={form.video_type}
-            onChange={(e) => setForm({ ...form, video_type: e.target.value as "zoom" | "hosted" })}
+            onChange={(e) => setForm({ ...form, video_type: e.target.value as "zoom" | "hosted" | "upload" })}
           >
-            <option value="zoom">تسجيل Zoom</option>
-            <option value="hosted">فيديو مستضاف</option>
+            <option value="zoom">تسجيل Zoom (رابط)</option>
+            <option value="upload">ملف فيديو مرفوع (MP4)</option>
+            <option value="hosted">فيديو مستضاف (رابط مباشر)</option>
           </select>
         </AdminField>
       </div>
@@ -269,6 +270,61 @@ export function LessonForm({
             />
           </AdminField>
         </div>
+      ) : form.video_type === "upload" ? (
+        <div className="rounded-lg border border-border bg-surface p-5">
+          <h2 className="mb-1 text-base font-semibold">ملف الفيديو (MP4)</h2>
+          <p className="mb-4 text-xs text-muted-foreground">
+            يُرفع الملف إلى مساحة خاصة، ويُشاهده المشتركات داخل المنصة فقط عبر رابط مؤقّت.
+          </p>
+          {!lesson?.id ? (
+            <p className="text-sm text-muted-foreground">احفظي الجلسة أولاً ثم يمكنك رفع الفيديو.</p>
+          ) : (
+            <>
+              {videoPath ? (
+                <div className="mb-4 flex flex-wrap items-center gap-4 rounded-md border border-border px-4 py-3 text-sm">
+                  <span dir="ltr" className="text-xs text-muted-foreground">
+                    {videoPath.split("/").pop()}
+                  </span>
+                  <button
+                    className="text-ember"
+                    onClick={async () => {
+                      const { url } = await previewUrl({ data: { path: videoPath } });
+                      window.open(url, "_blank", "noopener,noreferrer");
+                    }}
+                  >
+                    معاينة
+                  </button>
+                  <button
+                    className="text-muted-foreground hover:text-foreground"
+                    onClick={async () => {
+                      if (!window.confirm("حذف ملف الفيديو من هذه الجلسة؟")) return;
+                      await deleteVideoFile({ data: { lessonId: lesson.id as string } });
+                      setVideoPath(null);
+                      onSaved();
+                    }}
+                  >
+                    حذف الفيديو
+                  </button>
+                </div>
+              ) : null}
+              <div className="grid gap-x-6 md:grid-cols-2">
+                <AdminField label={videoPath ? "استبدال الفيديو" : "اختاري ملف MP4"}>
+                  <input
+                    type="file"
+                    accept="video/mp4,video/quicktime,video/webm"
+                    className={inputClass}
+                    onChange={(e) => setVideoFileState(e.target.files?.[0] ?? null)}
+                  />
+                </AdminField>
+                <div className="flex items-end pb-4">
+                  <AdminButton onClick={doVideoUpload} disabled={!videoFile || videoUploading}>
+                    {videoUploading ? "جارٍ رفع الفيديو..." : "رفع الفيديو"}
+                  </AdminButton>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       ) : (
         <AdminField label="رابط الفيديو">
           <input
@@ -279,6 +335,7 @@ export function LessonForm({
           />
         </AdminField>
       )}
+
 
       <AdminField label="الحالة">
         <select
