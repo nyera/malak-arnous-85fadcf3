@@ -3,12 +3,17 @@ import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import {
   adminSaveLesson,
-  adminUploadResource,
   adminRenameResource,
   adminDeleteResource,
   adminResourceUrl,
   adminReorder,
+  adminCreateUploadUrl,
+  adminRegisterResource,
+  adminSetLessonVideoFile,
+  adminDeleteLessonVideoFile,
+  adminMediaPreviewUrl,
 } from "@/lib/api/admin.functions";
+import { uploadToSignedPath } from "@/lib/upload";
 import { AdminButton, AdminField, AdminMessage, inputClass, formatBytes } from "@/components/admin/AdminUI";
 
 type Module = { id: string; title: string; sort_order: number };
