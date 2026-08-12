@@ -14,7 +14,7 @@ const lessonInput = z.object({
   title: z.string().trim().min(1).max(200),
   description: z.string().trim().max(4000).optional().nullable(),
   duration_minutes: z.number().int().min(0).max(1000).optional().nullable(),
-  video_type: z.enum(["zoom", "hosted"]).default("zoom"),
+  video_type: z.enum(["zoom", "hosted", "upload"]).default("zoom"),
   video_url: z.string().trim().max(2000).optional().nullable(),
   video_passcode: z.string().trim().max(200).optional().nullable(),
   storage_path: z.string().trim().max(500).optional().nullable(),
