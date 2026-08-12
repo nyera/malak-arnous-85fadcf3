@@ -3,12 +3,17 @@ import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import {
   adminSaveLesson,
-  adminUploadResource,
   adminRenameResource,
   adminDeleteResource,
   adminResourceUrl,
   adminReorder,
+  adminCreateUploadUrl,
+  adminRegisterResource,
+  adminSetLessonVideoFile,
+  adminDeleteLessonVideoFile,
+  adminMediaPreviewUrl,
 } from "@/lib/api/admin.functions";
+import { uploadToSignedPath } from "@/lib/upload";
 import { AdminButton, AdminField, AdminMessage, inputClass, formatBytes } from "@/components/admin/AdminUI";
 
 type Module = { id: string; title: string; sort_order: number };
@@ -49,11 +54,15 @@ export function LessonForm({
 }) {
   const navigate = useNavigate();
   const save = useServerFn(adminSaveLesson);
-  const upload = useServerFn(adminUploadResource);
   const rename = useServerFn(adminRenameResource);
   const removeRes = useServerFn(adminDeleteResource);
   const signUrl = useServerFn(adminResourceUrl);
   const reorder = useServerFn(adminReorder);
+  const createUploadUrl = useServerFn(adminCreateUploadUrl);
+  const registerResource = useServerFn(adminRegisterResource);
+  const setVideoFile = useServerFn(adminSetLessonVideoFile);
+  const deleteVideoFile = useServerFn(adminDeleteLessonVideoFile);
+  const previewUrl = useServerFn(adminMediaPreviewUrl);
 
   const [msg, setMsg] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -64,7 +73,7 @@ export function LessonForm({
     sort_order: String(lesson?.sort_order ?? defaultOrder),
     duration_minutes: String(lesson?.duration_minutes ?? 60),
     description: lesson?.description ?? "",
-    video_type: (lesson?.video_type ?? "zoom") as "zoom" | "hosted",
+    video_type: (lesson?.video_type ?? "zoom") as "zoom" | "hosted" | "upload",
     video_url: lesson?.video_url ?? "",
     video_passcode: lesson?.video_passcode ?? "",
     is_published: Boolean(lesson?.is_published),
@@ -73,6 +82,10 @@ export function LessonForm({
   const [resTitle, setResTitle] = useState("");
   const [resFile, setResFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [videoFile, setVideoFileState] = useState<File | null>(null);
+  const [videoUploading, setVideoUploading] = useState(false);
+  const [videoPath, setVideoPath] = useState<string | null>((lesson?.storage_path as string | null) ?? null);
+
 
   async function submit() {
     setMsg(null);
@@ -110,20 +123,18 @@ export function LessonForm({
     setUploading(true);
     setMsg(null);
     try {
-      const buffer = await resFile.arrayBuffer();
-      let binary = "";
-      const bytes = new Uint8Array(buffer);
-      const chunk = 0x8000;
-      for (let i = 0; i < bytes.length; i += chunk) {
-        binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
-      }
-      await upload({
+      const { path, token, bucket } = await createUploadUrl({
+        data: { lessonId: lesson.id as string, fileName: resFile.name, kind: "resource" },
+      });
+      await uploadToSignedPath(bucket, path, token, resFile);
+      await registerResource({
         data: {
           lessonId: lesson.id as string,
           title: resTitle.trim() || resFile.name,
+          path,
           fileName: resFile.name,
           fileType: resFile.type || null,
-          base64: btoa(binary),
+          fileSize: resFile.size,
           ...(replaceResourceId ? { replaceResourceId } : {}),
         },
       });
@@ -136,6 +147,28 @@ export function LessonForm({
     }
     setUploading(false);
   }
+
+  async function doVideoUpload() {
+    if (!videoFile || !lesson?.id) return;
+    setVideoUploading(true);
+    setMsg(null);
+    try {
+      const { path, token, bucket } = await createUploadUrl({
+        data: { lessonId: lesson.id as string, fileName: videoFile.name, kind: "video" },
+      });
+      await uploadToSignedPath(bucket, path, token, videoFile);
+      await setVideoFile({ data: { lessonId: lesson.id as string, path } });
+      setVideoPath(path);
+      setVideoFileState(null);
+      setForm((f) => ({ ...f, video_type: "upload" }));
+      onSaved();
+      setMsg("تم رفع الفيديو بنجاح.");
+    } catch (e) {
+      setMsg("تعذّر رفع الفيديو: " + (e instanceof Error ? e.message : "غير معروف"));
+    }
+    setVideoUploading(false);
+  }
+
 
   async function openResource(id: string) {
     const { url } = await signUrl({ data: { id } });
@@ -199,10 +232,11 @@ export function LessonForm({
           <select
             className={inputClass}
             value={form.video_type}
-            onChange={(e) => setForm({ ...form, video_type: e.target.value as "zoom" | "hosted" })}
+            onChange={(e) => setForm({ ...form, video_type: e.target.value as "zoom" | "hosted" | "upload" })}
           >
-            <option value="zoom">تسجيل Zoom</option>
-            <option value="hosted">فيديو مستضاف</option>
+            <option value="zoom">تسجيل Zoom (رابط)</option>
+            <option value="upload">ملف فيديو مرفوع (MP4)</option>
+            <option value="hosted">فيديو مستضاف (رابط مباشر)</option>
           </select>
         </AdminField>
       </div>
@@ -236,6 +270,61 @@ export function LessonForm({
             />
           </AdminField>
         </div>
+      ) : form.video_type === "upload" ? (
+        <div className="rounded-lg border border-border bg-surface p-5">
+          <h2 className="mb-1 text-base font-semibold">ملف الفيديو (MP4)</h2>
+          <p className="mb-4 text-xs text-muted-foreground">
+            يُرفع الملف إلى مساحة خاصة، ويُشاهده المشتركات داخل المنصة فقط عبر رابط مؤقّت.
+          </p>
+          {!lesson?.id ? (
+            <p className="text-sm text-muted-foreground">احفظي الجلسة أولاً ثم يمكنك رفع الفيديو.</p>
+          ) : (
+            <>
+              {videoPath ? (
+                <div className="mb-4 flex flex-wrap items-center gap-4 rounded-md border border-border px-4 py-3 text-sm">
+                  <span dir="ltr" className="text-xs text-muted-foreground">
+                    {videoPath.split("/").pop()}
+                  </span>
+                  <button
+                    className="text-ember"
+                    onClick={async () => {
+                      const { url } = await previewUrl({ data: { path: videoPath } });
+                      window.open(url, "_blank", "noopener,noreferrer");
+                    }}
+                  >
+                    معاينة
+                  </button>
+                  <button
+                    className="text-muted-foreground hover:text-foreground"
+                    onClick={async () => {
+                      if (!window.confirm("حذف ملف الفيديو من هذه الجلسة؟")) return;
+                      await deleteVideoFile({ data: { lessonId: lesson.id as string } });
+                      setVideoPath(null);
+                      onSaved();
+                    }}
+                  >
+                    حذف الفيديو
+                  </button>
+                </div>
+              ) : null}
+              <div className="grid gap-x-6 md:grid-cols-2">
+                <AdminField label={videoPath ? "استبدال الفيديو" : "اختاري ملف MP4"}>
+                  <input
+                    type="file"
+                    accept="video/mp4,video/quicktime,video/webm"
+                    className={inputClass}
+                    onChange={(e) => setVideoFileState(e.target.files?.[0] ?? null)}
+                  />
+                </AdminField>
+                <div className="flex items-end pb-4">
+                  <AdminButton onClick={doVideoUpload} disabled={!videoFile || videoUploading}>
+                    {videoUploading ? "جارٍ رفع الفيديو..." : "رفع الفيديو"}
+                  </AdminButton>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       ) : (
         <AdminField label="رابط الفيديو">
           <input
@@ -246,6 +335,7 @@ export function LessonForm({
           />
         </AdminField>
       )}
+
 
       <AdminField label="الحالة">
         <select
@@ -273,9 +363,10 @@ export function LessonForm({
                   placeholder="مثال: كتيّب التمارين"
                 />
               </AdminField>
-              <AdminField label="الملف">
+              <AdminField label="الملف" hint="PDF، صور، صوت، أو فيديو MP4 إضافي">
                 <input
                   type="file"
+                  accept=".pdf,application/pdf,image/*,audio/*,video/mp4,.doc,.docx,.zip"
                   className={inputClass}
                   onChange={(e) => setResFile(e.target.files?.[0] ?? null)}
                 />
