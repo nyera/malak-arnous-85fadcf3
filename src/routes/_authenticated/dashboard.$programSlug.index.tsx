@@ -3,6 +3,8 @@ import { CheckCircle2, Circle, ArrowLeft } from "lucide-react";
 import { getProgramView } from "@/lib/api/member.functions";
 import { FadeIn } from "@/components/site/Misc";
 import { ProgressBar } from "@/components/member/ProgressBar";
+import { TheShiftIntro } from "@/components/member/TheShiftIntro";
+
 
 export const Route = createFileRoute("/_authenticated/dashboard/$programSlug/")({
   head: () => ({
