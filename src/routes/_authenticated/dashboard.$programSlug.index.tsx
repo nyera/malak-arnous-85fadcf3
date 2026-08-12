@@ -3,6 +3,8 @@ import { CheckCircle2, Circle, ArrowLeft } from "lucide-react";
 import { getProgramView } from "@/lib/api/member.functions";
 import { FadeIn } from "@/components/site/Misc";
 import { ProgressBar } from "@/components/member/ProgressBar";
+import { TheShiftIntro } from "@/components/member/TheShiftIntro";
+
 
 export const Route = createFileRoute("/_authenticated/dashboard/$programSlug/")({
   head: () => ({
@@ -47,7 +49,9 @@ function ProgramPage() {
           <Link to="/dashboard" className="eyebrow text-muted-foreground hover:text-ember">لوحتي</Link>
           <h1 className="display-lg mt-4 mb-3">{data.program.title}</h1>
           {data.program.subtitle && <p className="text-muted-foreground text-lg leading-relaxed mb-8">{data.program.subtitle}</p>}
+          {data.program.slug === "the-shift" && <TheShiftIntro />}
           <div className="rounded-sm border border-border bg-surface p-6 mb-12">
+
             <ProgressBar percent={percent} />
             <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">
               <span>أكملتِ {data.completedLessons} من {data.totalLessons} جلسة</span>
