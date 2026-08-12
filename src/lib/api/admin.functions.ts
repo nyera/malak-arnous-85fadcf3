@@ -208,7 +208,7 @@ export const adminSaveModule = createServerFn({ method: "POST" })
       id: z.string().uuid().optional(),
       program_id: z.string().uuid(),
       title: z.string().trim().min(1).max(200),
-      description: z.string().trim().max(2000).optional().nullable(),
+      description: z.string().trim().max(20000).optional().nullable(),
       sort_order: z.number().int().min(0).max(9999).default(0),
       status: z.enum(["draft", "published"]).default("published"),
     }),
