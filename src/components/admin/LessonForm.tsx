@@ -73,7 +73,7 @@ export function LessonForm({
     sort_order: String(lesson?.sort_order ?? defaultOrder),
     duration_minutes: String(lesson?.duration_minutes ?? 60),
     description: lesson?.description ?? "",
-    video_type: (lesson?.video_type ?? "zoom") as "zoom" | "hosted",
+    video_type: (lesson?.video_type ?? "zoom") as "zoom" | "hosted" | "upload",
     video_url: lesson?.video_url ?? "",
     video_passcode: lesson?.video_passcode ?? "",
     is_published: Boolean(lesson?.is_published),
