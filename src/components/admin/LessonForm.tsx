@@ -363,9 +363,10 @@ export function LessonForm({
                   placeholder="مثال: كتيّب التمارين"
                 />
               </AdminField>
-              <AdminField label="الملف">
+              <AdminField label="الملف" hint="PDF، صور، صوت، أو فيديو MP4 إضافي">
                 <input
                   type="file"
+                  accept=".pdf,application/pdf,image/*,audio/*,video/mp4,.doc,.docx,.zip"
                   className={inputClass}
                   onChange={(e) => setResFile(e.target.files?.[0] ?? null)}
                 />
