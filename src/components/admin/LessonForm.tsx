@@ -82,6 +82,10 @@ export function LessonForm({
   const [resTitle, setResTitle] = useState("");
   const [resFile, setResFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [videoFile, setVideoFileState] = useState<File | null>(null);
+  const [videoUploading, setVideoUploading] = useState(false);
+  const [videoPath, setVideoPath] = useState<string | null>((lesson?.storage_path as string | null) ?? null);
+
 
   async function submit() {
     setMsg(null);
