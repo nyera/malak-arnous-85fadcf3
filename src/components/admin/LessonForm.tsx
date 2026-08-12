@@ -54,11 +54,15 @@ export function LessonForm({
 }) {
   const navigate = useNavigate();
   const save = useServerFn(adminSaveLesson);
-  const upload = useServerFn(adminUploadResource);
   const rename = useServerFn(adminRenameResource);
   const removeRes = useServerFn(adminDeleteResource);
   const signUrl = useServerFn(adminResourceUrl);
   const reorder = useServerFn(adminReorder);
+  const createUploadUrl = useServerFn(adminCreateUploadUrl);
+  const registerResource = useServerFn(adminRegisterResource);
+  const setVideoFile = useServerFn(adminSetLessonVideoFile);
+  const deleteVideoFile = useServerFn(adminDeleteLessonVideoFile);
+  const previewUrl = useServerFn(adminMediaPreviewUrl);
 
   const [msg, setMsg] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
