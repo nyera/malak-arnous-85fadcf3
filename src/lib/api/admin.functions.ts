@@ -225,10 +225,37 @@ export const adminSaveLesson = createServerFn({ method: "POST" })
   .inputValidator(lessonInput)
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { data: row, error } = await context.supabase.from("lessons").upsert(data).select("id").maybeSingle();
-    if (error) throw new Error(error.message);
-    return { ok: true, id: row?.id ?? data.id ?? null };
+
+    const { data: existing } = await context.supabase
+      .from("lessons")
+      .select("id, slug")
+      .eq("program_id", data.program_id);
+
+    const taken = new Set(
+      (existing ?? []).filter((l) => l.id !== data.id).map((l) => l.slug),
+    );
+
+    let slug = data.slug.trim() || `lesson-${Date.now()}`;
+    if (taken.has(slug)) {
+      let n = 2;
+      while (taken.has(`${slug}-${n}`)) n += 1;
+      slug = `${slug}-${n}`;
+    }
+
+    const { data: row, error } = await context.supabase
+      .from("lessons")
+      .upsert({ ...data, slug })
+      .select("id")
+      .maybeSingle();
+    if (error) {
+      if (/duplicate key|lessons_program_id_slug_key|23505/i.test(error.message)) {
+        throw new Error("هذا المعرّف مستخدم في جلسة أخرى داخل نفس البرنامج، اختاري معرّفاً آخر.");
+      }
+      throw new Error(error.message);
+    }
+    return { ok: true, id: row?.id ?? data.id ?? null, slug };
   });
+
 
 export const adminDeleteRow = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
