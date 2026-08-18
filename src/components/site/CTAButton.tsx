@@ -59,10 +59,10 @@ import { STAN_URL } from "@/data/content";
 import { useI18n } from "@/i18n/I18nProvider";
 import { ArrowRight } from "lucide-react";
 
-export function JoinNowButton({ size = "md", className }: { size?: Size; className?: string }) {
+export function JoinNowButton({ size = "md", className, href }: { size?: Size; className?: string; href?: string }) {
   const { t } = useI18n();
   return (
-    <CTAButton href={STAN_URL} external size={size} icon={<ArrowRight className="w-4 h-4" />} className={className}>
+    <CTAButton href={href ?? STAN_URL} external size={size} icon={<ArrowRight className="w-4 h-4" />} className={className}>
       {t.cta.joinNow}
     </CTAButton>
   );
