@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useI18n } from "@/i18n/I18nProvider";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { JoinNowButton } from "@/components/site/CTAButton";
