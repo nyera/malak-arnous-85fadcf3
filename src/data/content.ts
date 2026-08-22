@@ -1,7 +1,8 @@
 // Non-translatable data: links, image URLs. Translatable copy lives in src/i18n/translations.ts.
 
 export const STAN_URL = "https://stan.store/malakarnous";
-export const STAN_THE_SHIFT_URL = "https://stan.store/malakarnous/p/the-shiftmain-program";
+// Single source of truth for The Shift discovery-call booking page.
+export const STAN_CALL_URL = "https://stan.store/MalakArnous/p/---the-shift";
 
 export const brand = {
   name: "ملاك عرنوس",

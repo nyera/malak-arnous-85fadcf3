@@ -55,7 +55,7 @@ export const CTAButton = forwardRef<HTMLButtonElement, Props>(
 CTAButton.displayName = "CTAButton";
 
 // Convenience: Stan-linked Join Now button
-import { STAN_URL } from "@/data/content";
+import { STAN_URL, STAN_CALL_URL } from "@/data/content";
 import { useI18n } from "@/i18n/I18nProvider";
 import { ArrowRight } from "lucide-react";
 
@@ -67,3 +67,50 @@ export function JoinNowButton({ size = "md", className, href }: { size?: Size; c
     </CTAButton>
   );
 }
+
+function trackBookCall() {
+  try {
+    const w = window as unknown as {
+      dataLayer?: unknown[];
+      gtag?: (...args: unknown[]) => void;
+    };
+    w.dataLayer?.push({ event: "the_shift_book_call_click" });
+    w.gtag?.("event", "the_shift_book_call_click");
+  } catch {
+    /* analytics is optional */
+  }
+}
+
+/** Books the free discovery call for The Shift. URL lives in src/data/content.ts */
+export function BookCallButton({
+  label,
+  size = "md",
+  variant = "primary",
+  className,
+}: {
+  label: string;
+  size?: Size;
+  variant?: Variant;
+  className?: string;
+}) {
+  return (
+    <a
+      href={STAN_CALL_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-analytics-event="the_shift_book_call_click"
+      onClick={trackBookCall}
+      className={cn(
+        base,
+        sizes[size],
+        variants[variant],
+        "max-w-full w-full sm:w-auto text-center whitespace-normal leading-relaxed",
+        className,
+      )}
+    >
+      <span>{label}</span>
+      <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180" />
+    </a>
+  );
+}
+
