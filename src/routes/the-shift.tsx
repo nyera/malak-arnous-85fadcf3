@@ -187,6 +187,9 @@ function TheShiftPage() {
         <ul className="space-y-3">
           {s.forYouItems.map((it, i) => <li key={i} className="text-lg leading-relaxed">{it}</li>)}
         </ul>
+        <div className="mt-10 flex justify-center sm:justify-start">
+          <BookCallButton label={s.ctaBookCallTheShift} />
+        </div>
       </Block>
 
       <Block title={s.imagineTitle} alt>
@@ -199,6 +202,17 @@ function TheShiftPage() {
         <p className="text-lg leading-loose whitespace-pre-line">{s.finalBody}</p>
       </Block>
 
+      <Block title={s.faqTitle} alt>
+        <Accordion type="single" collapsible className="w-full">
+          {s.faq.map((item, i) => (
+            <AccordionItem key={i} value={`faq-${i}`}>
+              <AccordionTrigger className="text-start text-lg leading-relaxed">{item.q}</AccordionTrigger>
+              <AccordionContent className="text-base text-muted-foreground leading-relaxed">{item.a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </Block>
+
       <section className="section-y relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-surface via-background to-background" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full ember-gradient opacity-15 blur-3xl animate-ember-pulse" />
@@ -206,10 +220,13 @@ function TheShiftPage() {
           <FadeIn>
             <h2 className="display-xl mb-6">{s.bookTitle}</h2>
             <p className="text-xl text-muted-foreground mb-10 leading-relaxed">{s.bookBody}</p>
-            <JoinNowButton size="lg" href={STAN_THE_SHIFT_URL} />
+            <div className="flex justify-center">
+              <BookCallButton label={s.ctaBookCallNow} size="lg" />
+            </div>
           </FadeIn>
         </div>
       </section>
+
 
       <TelegramCTA />
     </>
