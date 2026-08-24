@@ -3,6 +3,8 @@
 export const STAN_URL = "https://stan.store/malakarnous";
 // Single source of truth for The Shift discovery-call booking page.
 export const STAN_CALL_URL = "https://stan.store/MalakArnous/p/---the-shift";
+// Heal and Receive discovery-call booking page (temporary: general Stan store until a dedicated call link exists).
+export const HEAL_CALL_URL = "https://stan.store/malakarnous";
 
 export const brand = {
   name: "ملاك عرنوس",
