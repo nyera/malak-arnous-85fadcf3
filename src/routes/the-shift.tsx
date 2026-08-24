@@ -102,107 +102,93 @@ function TheShiftPage() {
         </div>
       </section>
 
-
-      <Block title={s.ifYouFeelTitle}>
+      <Block title={s.forWhoTitle} alt>
+        <p className="text-lg text-foreground mb-6">{s.forWhoIntro}</p>
         <ul className="space-y-3">
-          {s.ifYouFeelItems.map((it, i) => (
+          {s.forWhoItems.map((it, i) => (
             <li key={i} className="flex items-start gap-3 text-lg leading-relaxed">
               <span className="text-ember mt-1">•</span>
               <span>{it}</span>
             </li>
           ))}
         </ul>
-        <p className="text-lg text-serif-italic text-ember mt-8">{s.youAreNotAlone}</p>
       </Block>
 
-      <Block title={s.notDietTitle} alt>
-        <ul className="space-y-2 mb-6">
-          {s.notDietList.map((it, i) => <li key={i} className="text-lg">{it}</li>)}
-        </ul>
-        <p className="text-lg text-foreground leading-relaxed mb-4">{s.butIs}</p>
-        <ul className="space-y-2 mb-6">
-          {s.butItems.map((it, i) => <li key={i} className="text-lg">{it}</li>)}
-        </ul>
-        <p className="text-lg text-muted-foreground">{s.withoutResistance}</p>
+      <section className="section-y">
+        <div className="container-x max-w-3xl">
+          <FadeIn>
+            <h2 className="display-lg mb-10">{s.insideTitle}</h2>
+          </FadeIn>
+          <div className="space-y-6">
+            {s.insideSections.map((sec, i) => (
+              <FadeIn key={i} delay={Math.min(i * 0.05, 0.25)}>
+                <div className="rounded-3xl border border-border bg-surface/60 p-7 shadow-[0_10px_40px_-30px_oklch(0.24_0.015_30_/_0.5)]">
+                  <div className="flex items-start gap-4">
+                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ember/12 text-ember text-sm font-semibold">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">{sec.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{sec.body}</p>
+                      {"items" in sec && sec.items ? (
+                        <ul className="mt-4 space-y-2">
+                          {sec.items.map((it, j) => (
+                            <li key={j} className="flex items-start gap-3 leading-relaxed">
+                              <span className="text-ember mt-1">•</span>
+                              <span>{it}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+          <FadeIn delay={0.15}>
+            <div className="mt-12 flex justify-center">
+              <BookCallButton label={s.ctaBookCallTheShift} />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      <Block title={s.bodyQTitle} alt>
+        <div className="space-y-3">
+          {s.bodyQBlocks.map((line, i) => (
+            <p key={i} className="text-lg text-foreground/90 leading-relaxed">{line}</p>
+          ))}
+        </div>
       </Block>
 
-      <Block title={s.insideTitle}>
-        <p className="text-lg text-foreground mb-6">{s.insideIntro}</p>
-        <ul className="space-y-3 mb-10">
-          {s.insideItems.map((it, i) => (
-            <li key={i} className="flex items-start gap-3 leading-relaxed">
-              <span className="text-ember mt-1">•</span><span>{it}</span>
+      <Block title={s.notAgainstTitle}>
+        <div className="space-y-3 mb-8">
+          {s.notAgainstBlocks.map((line, i) => (
+            <p key={i} className="text-lg text-foreground/90 leading-relaxed">{line}</p>
+          ))}
+        </div>
+        <p className="text-lg text-foreground mb-4">{s.builtOnLabel}</p>
+        <ul className="space-y-2">
+          {s.builtOnItems.map((it, i) => (
+            <li key={i} className="flex items-start gap-3 text-lg leading-relaxed">
+              <span className="text-ember mt-1">•</span>
+              <span>{it}</span>
             </li>
           ))}
         </ul>
-        <p className="text-lg text-foreground mb-4">{s.alsoWorkOn}</p>
-        <ul className="space-y-2">
-          {s.alsoItems.map((it, i) => <li key={i} className="text-lg">{it}</li>)}
-        </ul>
       </Block>
 
-      <Block title={s.goalTitle} alt>
-        <p className="text-lg leading-loose whitespace-pre-line">{s.goalBody}</p>
-      </Block>
-
-      <Block title={s.afterTitle}>
-        <ul className="space-y-3">
-          {s.afterItems.map((it, i) => <li key={i} className="text-lg leading-relaxed">{it}</li>)}
-        </ul>
-      </Block>
-
-      <Block title={s.howTitle} alt>
-        <p className="text-xl mb-6">{s.howSchedule}</p>
-        <div className="mb-6">
-          <div className="eyebrow text-ember mb-2">{s.howDurationLabel}</div>
-          <p className="text-lg">{s.howDuration}</p>
+      <Block title={s.finalTitle} alt>
+        <div className="space-y-3">
+          {s.finalBlocks.map((line, i) => (
+            <p key={i} className="text-lg text-foreground/90 leading-relaxed">{line}</p>
+          ))}
         </div>
-        <div>
-          <div className="eyebrow text-ember mb-3">{s.howIncludesLabel}</div>
-          <ul className="space-y-2">
-            {s.howIncludes.map((it, i) => <li key={i} className="text-lg">{it}</li>)}
-          </ul>
-        </div>
+        <p className="mt-8 text-xl text-serif-italic text-ember">{s.tagline}</p>
       </Block>
 
-      <Block title={s.supportTitle}>
-        <p className="text-lg mb-6 text-foreground">{s.supportIntro}</p>
-        <ul className="space-y-2">
-          {s.supportItems.map((it, i) => <li key={i} className="text-lg">{it}</li>)}
-        </ul>
-      </Block>
-
-      <Block title={s.resultsTitle} alt>
-        <ul className="space-y-3">
-          {s.resultsItems.map((it, i) => <li key={i} className="text-lg leading-relaxed">{it}</li>)}
-        </ul>
-        <p className="mt-8 text-lg text-foreground">{s.alsoNoticeIntro}</p>
-        <ul className="mt-3 space-y-1">
-          {s.alsoNoticeItems.map((it, i) => <li key={i} className="flex items-start gap-3"><span className="text-ember mt-1">•</span><span>{it}</span></li>)}
-        </ul>
-        <p className="mt-4 text-muted-foreground italic">{s.alsoNoticeOutro}</p>
-      </Block>
-
-      <Block title={s.forYouTitle}>
-        <ul className="space-y-3">
-          {s.forYouItems.map((it, i) => <li key={i} className="text-lg leading-relaxed">{it}</li>)}
-        </ul>
-        <div className="mt-10 flex justify-center sm:justify-start">
-          <BookCallButton label={s.ctaBookCallTheShift} />
-        </div>
-      </Block>
-
-      <Block title={s.imagineTitle} alt>
-        <ul className="space-y-2">
-          {s.imagineItems.map((it, i) => <li key={i} className="text-lg text-serif-italic">{it}</li>)}
-        </ul>
-      </Block>
-
-      <Block title={s.finalTitle}>
-        <p className="text-lg leading-loose whitespace-pre-line">{s.finalBody}</p>
-      </Block>
-
-      <Block title={s.faqTitle} alt>
+      <Block title={s.faqTitle}>
         <Accordion type="single" collapsible className="w-full">
           {s.faq.map((item, i) => (
             <AccordionItem key={i} value={`faq-${i}`}>
