@@ -39,8 +39,15 @@ function ServicesPage() {
                   {s.link ? (
                     <Link to={s.link}><CTAButton variant="outline" icon={<ArrowRight className="w-4 h-4" />}>{t.cta.readMore}</CTAButton></Link>
                   ) : null}
-                  <JoinNowButton size="sm" />
+                  {s.slug === "tapping-script" ? (
+                    <CTAButton href={TAPPING_PAY_URL} external size="sm" icon={<ArrowRight className="w-4 h-4" />}>
+                      {t.tappingScript.ctaOrder}
+                    </CTAButton>
+                  ) : (
+                    <JoinNowButton size="sm" />
+                  )}
                 </div>
+
               </div>
             </FadeIn>
           ))}
