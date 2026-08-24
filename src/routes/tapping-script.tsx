@@ -238,7 +238,10 @@ function TappingScriptPage() {
                   </li>
                 ))}
               </ul>
-              <p className="font-display text-4xl md:text-5xl text-ember mb-8">{s.offerPrice}</p>
+              <p className="font-display mb-8 flex items-baseline justify-center gap-3" dir="ltr">
+                <span className="text-2xl md:text-3xl text-foreground/45 line-through decoration-2">{s.offerOldPrice}</span>
+                <span className="text-4xl md:text-5xl text-ember">{s.offerPrice}</span>
+              </p>
               <div className="flex justify-center">
                 <OrderButton label={s.ctaPrimary} size="lg" />
               </div>
