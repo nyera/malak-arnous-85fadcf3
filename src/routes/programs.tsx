@@ -5,12 +5,14 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { CTAButton, JoinNowButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
 import { FadeIn } from "@/components/site/Misc";
+import { TAPPING_PAY_URL } from "@/data/content";
+
 
 export const Route = createFileRoute("/programs")({
   head: () => ({
     meta: [
       { title: "الخدمات — ملاك عرنوس" },
-      { name: "description", content: "خدمات ملاك عرنوس: The Weight Shift, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
+      { name: "description", content: "خدمات ملاك عرنوس: The Weight Shift, Heal and Receive, خدمة كتابة الـ Tapping Script, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
     ],
     links: [{ rel: "canonical", href: "/programs" }],
   }),
@@ -39,8 +41,15 @@ function ServicesPage() {
                   {s.link ? (
                     <Link to={s.link}><CTAButton variant="outline" icon={<ArrowRight className="w-4 h-4" />}>{t.cta.readMore}</CTAButton></Link>
                   ) : null}
-                  <JoinNowButton size="sm" />
+                  {s.slug === "tapping-script" ? (
+                    <CTAButton href={TAPPING_PAY_URL} external size="sm" icon={<ArrowRight className="w-4 h-4" />}>
+                      {t.tappingScript.ctaOrder}
+                    </CTAButton>
+                  ) : (
+                    <JoinNowButton size="sm" />
+                  )}
                 </div>
+
               </div>
             </FadeIn>
           ))}
