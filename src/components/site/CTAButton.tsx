@@ -87,15 +87,17 @@ export function BookCallButton({
   size = "md",
   variant = "primary",
   className,
+  href,
 }: {
   label: string;
   size?: Size;
   variant?: Variant;
   className?: string;
+  href?: string;
 }) {
   return (
     <a
-      href={STAN_CALL_URL}
+      href={href ?? STAN_CALL_URL}
       target="_blank"
       rel="noopener noreferrer"
       data-analytics-event="the_shift_book_call_click"

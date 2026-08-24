@@ -21,6 +21,7 @@ export function Header() {
     
     { to: "/programs", label: t.nav.services },
     { to: "/the-shift", label: t.nav.theShift },
+    { to: "/heal-and-receive", label: "Heal and Receive" },
     { to: "/testimonials", label: "آراء العملاء" },
     { to: "/survey", label: t.nav.survey },
   ] as const;
