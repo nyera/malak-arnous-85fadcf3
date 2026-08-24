@@ -117,6 +117,15 @@ const ar = {
         link: "/heal-and-receive",
       },
       {
+        slug: "tapping-script",
+        name: "خدمة كتابة الـ Tapping Script ✨",
+        tagline: "Tapping Script مخصص إلك حسب قصتك",
+        description:
+          "خدمة شخصية: بتبعتيلي Voice Note أو رسالة مكتوبة عن الموضوع أو الـ pattern اللي عم يتكرر معك، وبحضّرلك Tapping Script مخصص إلك.",
+        link: "/tapping-script",
+      },
+
+      {
         slug: "tapping-circle",
         name: "Tapping Circle Monthly Membership",
         tagline: "عضوية شهرية لجلسات الـ Tapping الجماعية",
