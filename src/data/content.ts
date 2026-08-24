@@ -6,8 +6,7 @@ export const STAN_CALL_URL = "https://stan.store/MalakArnous/p/---the-shift";
 // Heal and Receive discovery-call booking page (temporary: general Stan store until a dedicated call link exists).
 export const HEAL_CALL_URL = "https://stan.store/malakarnous";
 // Tapping Script service — Stripe Payment Link.
-// TODO: replace "#" with the real Stripe Payment Link URL (payment handled entirely on Stripe, not on this site).
-export const TAPPING_PAY_URL = "#";
+export const TAPPING_PAY_URL = "https://buy.stripe.com/28E00lfxg1IA6zNeYwaAw04";
 
 
 export const brand = {
