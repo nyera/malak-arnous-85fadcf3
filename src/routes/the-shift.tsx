@@ -9,13 +9,13 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 export const Route = createFileRoute("/the-shift")({
   head: () => ({
     meta: [
-      { title: "The Shift — احجزي مكالمة مع ملاك عرنوس" },
+      { title: "The Weight Shift — احجزي مكالمة مع ملاك عرنوس" },
       {
         name: "description",
         content:
-          "The Shift — برنامج تحوّلي لتحرير الأكل العاطفي من الجذور. أول خطوة مكالمة قصيرة مجانية لنشوف سوا إذا البرنامج مناسب إلك.",
+          "The Weight Shift — برنامج تحوّلي لتحرير الأكل العاطفي من الجذور. أول خطوة مكالمة قصيرة مجانية لنشوف سوا إذا البرنامج مناسب إلك.",
       },
-      { property: "og:title", content: "The Shift — احجزي مكالمة مع ملاك عرنوس" },
+      { property: "og:title", content: "The Weight Shift — احجزي مكالمة مع ملاك عرنوس" },
       {
         property: "og:description",
         content: "برنامج تحوّلي لتحرير الأكل العاطفي من الجذور. ابدئي بمكالمة قصيرة مجانية.",
