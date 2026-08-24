@@ -109,6 +109,14 @@ const ar = {
         link: "/the-shift",
       },
       {
+        slug: "heal-and-receive",
+        name: "Heal and Receive",
+        tagline: "برنامج عميق لتحرير جذور منع الاستقبال وفتح مساحة أكبر للوفرة في حياتكِ",
+        description:
+          "برنامج عميق يعمل على جذور منع الاستقبال — وليس فقط على السلوك أو الأفكار الظاهرة، من خلال العمل على الشاكرات السبع.",
+        link: "/heal-and-receive",
+      },
+      {
         slug: "tapping-circle",
         name: "Tapping Circle Monthly Membership",
         tagline: "عضوية شهرية لجلسات الـ Tapping الجماعية",
