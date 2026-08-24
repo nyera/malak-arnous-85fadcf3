@@ -10,7 +10,7 @@ export const Route = createFileRoute("/programs")({
   head: () => ({
     meta: [
       { title: "الخدمات — ملاك عرنوس" },
-      { name: "description", content: "خدمات ملاك عرنوس: The Shift, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
+      { name: "description", content: "خدمات ملاك عرنوس: The Weight Shift, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
     ],
     links: [{ rel: "canonical", href: "/programs" }],
   }),
