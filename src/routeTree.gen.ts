@@ -16,6 +16,7 @@ import { Route as ProgramsRouteImport } from './routes/programs'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as SurveyRouteImport } from './routes/survey'
+import { Route as TappingScriptRouteImport } from './routes/tapping-script'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as TheShiftRouteImport } from './routes/the-shift'
 
@@ -54,6 +55,11 @@ const SurveyRoute = SurveyRouteImport.update({
   path: '/survey',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TappingScriptRoute = TappingScriptRouteImport.update({
+  id: '/tapping-script',
+  path: '/tapping-script',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TestimonialsRoute = TestimonialsRouteImport.update({
   id: '/testimonials',
   path: '/testimonials',
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
+  '/tapping-script': typeof TappingScriptRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
 }
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
+  '/tapping-script': typeof TappingScriptRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
 }
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/story': typeof StoryRoute
   '/survey': typeof SurveyRoute
+  '/tapping-script': typeof TappingScriptRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/survey'
+    | '/tapping-script'
     | '/testimonials'
     | '/the-shift'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/survey'
+    | '/tapping-script'
     | '/testimonials'
     | '/the-shift'
   id:
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/story'
     | '/survey'
+    | '/tapping-script'
     | '/testimonials'
     | '/the-shift'
   fileRoutesById: FileRoutesById
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StoryRoute: typeof StoryRoute
   SurveyRoute: typeof SurveyRoute
+  TappingScriptRoute: typeof TappingScriptRoute
   TestimonialsRoute: typeof TestimonialsRoute
   TheShiftRoute: typeof TheShiftRoute
 }
@@ -198,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SurveyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tapping-script': {
+      id: '/tapping-script'
+      path: '/tapping-script'
+      fullPath: '/tapping-script'
+      preLoaderRoute: typeof TappingScriptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/testimonials': {
       id: '/testimonials'
       path: '/testimonials'
@@ -223,6 +243,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StoryRoute: StoryRoute,
   SurveyRoute: SurveyRoute,
+  TappingScriptRoute: TappingScriptRoute,
   TestimonialsRoute: TestimonialsRoute,
   TheShiftRoute: TheShiftRoute,
 }
