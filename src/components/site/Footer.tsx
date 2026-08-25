@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Send, Youtube, Mail, MapPin } from "lucide-react";
+import { Instagram, Send, Youtube, Mail, MapPin, MessageCircle } from "lucide-react";
 import { brand } from "@/data/content";
 import { useI18n } from "@/i18n/I18nProvider";
 import logoAsset from "@/assets/logo.png.asset.json";
