@@ -45,6 +45,10 @@ export function Footer() {
               <Mail className="w-4 h-4 shrink-0 text-ember" aria-hidden />
               <span className="leading-none">{brand.email}</span>
             </a>
+            <a href={brand.whatsapp} target="_blank" rel="noreferrer" className="footer-link flex items-center gap-2.5 leading-relaxed">
+              <MessageCircle className="w-4 h-4 shrink-0 text-ember" aria-hidden />
+              <span className="leading-none" dir="ltr">{brand.whatsappDisplay}</span>
+            </a>
             <div className="footer-link flex items-center gap-2.5 leading-relaxed">
               <MapPin className="w-4 h-4 shrink-0 text-ember" aria-hidden />
               <span className="leading-none">{t.common.onlineWorldwide}</span>
