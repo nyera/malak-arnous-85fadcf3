@@ -163,12 +163,25 @@
 
 @utility eyebrow {
   font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  /* Arabic must stay joined — no letter-spacing, spacing comes from words */
+  letter-spacing: normal;
+  word-spacing: 0.14em;
+  text-transform: none;
+  color: var(--color-ember);
+}
+
+/* Latin-only labels keep the wide, uppercase editorial look */
+@utility eyebrow-latin {
+  font-family: var(--font-sans);
   font-size: 0.7rem;
   font-weight: 500;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--color-ember);
 }
+
 
 @utility text-serif-italic {
   font-family: var(--font-serif);
