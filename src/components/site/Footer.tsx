@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Send, Mail, MapPin } from "lucide-react";
+import { Instagram, Send, Youtube, Mail, MapPin } from "lucide-react";
 import { brand } from "@/data/content";
 import { useI18n } from "@/i18n/I18nProvider";
 import logoAsset from "@/assets/logo.png.asset.json";
@@ -21,7 +21,7 @@ export function Footer() {
             <div className="flex items-center gap-3 pt-2">
               <a href={brand.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Instagram className="w-4 h-4" /></a>
               <a href={brand.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Send className="w-4 h-4 rtl:-scale-x-100" /></a>
-              <a href={`mailto:${brand.email}`} aria-label="Email" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Mail className="w-4 h-4" /></a>
+              <a href={brand.youtube} target="_blank" rel="noreferrer" aria-label="YouTube" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Youtube className="w-4 h-4" /></a><a href={`mailto:${brand.email}`} aria-label="Email" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember transition-colors"><Mail className="w-4 h-4" /></a>
             </div>
           </div>
 
@@ -31,6 +31,7 @@ export function Footer() {
             <Link to="/testimonials" className="footer-link">آراء العملاء</Link>
             <Link to="/survey" className="footer-link">{t.nav.survey}</Link>
             <a href={brand.telegram} target="_blank" rel="noreferrer" className="footer-link">{t.footer.free}</a>
+            <a href={brand.youtube} target="_blank" rel="noreferrer" className="footer-link">{t.freeContent.youtubeTitle}</a>
           </FooterCol>
 
           <FooterCol title={t.footer.about}>
@@ -51,7 +52,7 @@ export function Footer() {
             <div className="flex items-center gap-3 pt-3">
               <a href={brand.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember hover:-translate-y-0.5 transition-all duration-300"><Instagram className="w-4 h-4" /></a>
               <a href={brand.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember hover:-translate-y-0.5 transition-all duration-300"><Send className="w-4 h-4 rtl:-scale-x-100" /></a>
-              <a href={`mailto:${brand.email}`} aria-label="Email" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember hover:-translate-y-0.5 transition-all duration-300"><Mail className="w-4 h-4" /></a>
+              <a href={brand.youtube} target="_blank" rel="noreferrer" aria-label="YouTube" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember hover:-translate-y-0.5 transition-all duration-300"><Youtube className="w-4 h-4" /></a><a href={`mailto:${brand.email}`} aria-label="Email" className="w-10 h-10 grid place-items-center rounded-sm border border-border hover:border-ember hover:text-ember hover:-translate-y-0.5 transition-all duration-300"><Mail className="w-4 h-4" /></a>
             </div>
           </FooterCol>
         </div>

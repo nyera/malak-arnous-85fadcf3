@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Youtube } from "lucide-react";
 import { useI18n } from "@/i18n/I18nProvider";
 import { SectionHeader } from "@/components/site/SectionHeader";
 import { CTAButton, JoinNowButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
 import { FadeIn } from "@/components/site/Misc";
-import { TAPPING_PAY_URL } from "@/data/content";
+import { TAPPING_PAY_URL, brand } from "@/data/content";
 
 
 export const Route = createFileRoute("/programs")({
@@ -53,6 +53,17 @@ function ServicesPage() {
               </div>
             </FadeIn>
           ))}
+        </div>
+        <div className="container-x mt-10 text-center">
+          <a
+            href={brand.youtube}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-ember transition-colors"
+          >
+            <Youtube className="w-4 h-4 text-ember" />
+            {t.freeContent.servicesLine}
+          </a>
         </div>
       </section>
 
