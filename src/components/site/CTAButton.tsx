@@ -13,13 +13,14 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const base =
-  "group relative inline-flex items-center justify-center gap-2 font-medium uppercase tracking-[0.18em] rounded-full transition-all duration-500 ease-out disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background whitespace-nowrap";
+  "group relative inline-flex items-center justify-center gap-2 font-medium normal-case tracking-normal rounded-full transition-all duration-500 ease-out disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background whitespace-nowrap";
 
 const sizes: Record<Size, string> = {
-  sm: "px-5 py-2.5 text-[10.5px]",
-  md: "px-7 py-3.5 text-[11px]",
-  lg: "px-10 py-5 text-[12px]",
+  sm: "px-5 py-2.5 text-[12px]",
+  md: "px-7 py-3.5 text-[13px]",
+  lg: "px-10 py-5 text-[14.5px]",
 };
+
 
 const variants: Record<Variant, string> = {
   primary:
