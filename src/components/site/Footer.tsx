@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Send, Youtube, Mail, MapPin } from "lucide-react";
+import { Instagram, Send, Youtube, Mail, MapPin, MessageCircle } from "lucide-react";
 import { brand } from "@/data/content";
 import { useI18n } from "@/i18n/I18nProvider";
 import logoAsset from "@/assets/logo.png.asset.json";
@@ -44,6 +44,10 @@ export function Footer() {
             <a href={`mailto:${brand.email}`} className="footer-link flex items-center gap-2.5 leading-relaxed">
               <Mail className="w-4 h-4 shrink-0 text-ember" aria-hidden />
               <span className="leading-none">{brand.email}</span>
+            </a>
+            <a href={brand.whatsapp} target="_blank" rel="noreferrer" className="footer-link flex items-center gap-2.5 leading-relaxed">
+              <MessageCircle className="w-4 h-4 shrink-0 text-ember" aria-hidden />
+              <span className="leading-none" dir="ltr">{brand.whatsappDisplay}</span>
             </a>
             <div className="footer-link flex items-center gap-2.5 leading-relaxed">
               <MapPin className="w-4 h-4 shrink-0 text-ember" aria-hidden />
