@@ -58,7 +58,7 @@ export function Header() {
                 key={item.to}
                 to={item.to}
                 className={cn(
-                  "relative px-3 py-2 text-[11px] uppercase tracking-[0.2em] font-semibold transition-colors",
+                  "relative px-3 py-2 text-[13px] font-semibold tracking-normal transition-colors",
                   active ? "text-ember" : "text-foreground/70 hover:text-foreground",
                 )}
               >
@@ -96,7 +96,7 @@ export function Header() {
           >
             <div className="container-x py-6 flex flex-col gap-1">
               {nav.map((item) => (
-                <Link key={item.to} to={item.to} className="py-3 text-lg font-display uppercase tracking-wide border-b border-border">
+                <Link key={item.to} to={item.to} className="py-3 text-lg font-display tracking-normal border-b border-border">
                   {item.label}
                 </Link>
               ))}

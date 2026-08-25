@@ -16,7 +16,7 @@ function NotFoundComponent() {
         <h1 className="display-xl ember-text">404</h1>
         <h2 className="mt-4 display-md">الصفحة غير موجودة</h2>
         <div className="mt-6">
-          <Link to="/" className="inline-flex items-center justify-center rounded-sm bg-ember px-6 py-3 text-xs font-semibold uppercase tracking-widest text-background">العودة للرئيسية</Link>
+          <Link to="/" className="inline-flex items-center justify-center rounded-sm bg-ember px-6 py-3 text-sm font-semibold tracking-normal text-background">العودة للرئيسية</Link>
         </div>
       </div>
     </div>
@@ -32,8 +32,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
       <div className="max-w-md text-center">
         <h1 className="display-md">حدث خطأ ما.</h1>
         <div className="mt-6 flex justify-center gap-2">
-          <button onClick={() => { router.invalidate(); reset(); }} className="rounded-sm bg-ember px-6 py-3 text-xs font-semibold uppercase tracking-widest text-background">حاولي مرة أخرى</button>
-          <a href="/" className="rounded-sm border border-border px-6 py-3 text-xs font-semibold uppercase tracking-widest">الرئيسية</a>
+          <button onClick={() => { router.invalidate(); reset(); }} className="rounded-sm bg-ember px-6 py-3 text-sm font-semibold tracking-normal text-background">حاولي مرة أخرى</button>
+          <a href="/" className="rounded-sm border border-border px-6 py-3 text-sm font-semibold tracking-normal">الرئيسية</a>
         </div>
       </div>
     </div>

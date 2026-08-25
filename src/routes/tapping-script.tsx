@@ -96,7 +96,7 @@ function TappingScriptPage() {
               <OrderButton label={s.ctaPrimary} size="lg" />
               <a
                 href="#how-it-works"
-                className="text-sm uppercase tracking-[0.18em] text-foreground/70 hover:text-ember transition-colors py-3"
+                className="text-sm tracking-normal text-foreground/70 hover:text-ember transition-colors py-3"
               >
                 {s.ctaSecondary}
               </a>

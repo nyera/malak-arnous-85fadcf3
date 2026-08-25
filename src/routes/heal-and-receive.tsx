@@ -53,7 +53,7 @@ function HealAndReceivePage() {
               <BookCallButton label={s.ctaBookCall} size="lg" href={HEAL_CALL_URL} />
               <a
                 href="#program-details"
-                className="text-sm uppercase tracking-[0.18em] text-foreground/70 hover:text-ember transition-colors py-3"
+                className="text-sm tracking-normal text-foreground/70 hover:text-ember transition-colors py-3"
               >
                 {s.ctaDiscoverDetails}
               </a>

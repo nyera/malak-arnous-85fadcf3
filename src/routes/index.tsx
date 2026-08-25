@@ -116,7 +116,7 @@ function ServicesPreview() {
                 <p className="text-serif-italic text-ember text-base mb-3 leading-snug">{s.tagline}</p>
                 <p className="text-sm text-muted-foreground leading-loose flex-1">{s.description}</p>
                 {s.link && (
-                  <Link to={s.link} className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-ember hover:gap-3 transition-all">
+                  <Link to={s.link} className="mt-5 inline-flex items-center gap-2 text-[13px] tracking-normal font-semibold text-ember hover:gap-3 transition-all">
                     {t.cta.readMore} <ArrowRight className="w-3.5 h-3.5 rtl:-scale-x-100" />
                   </Link>
                 )}

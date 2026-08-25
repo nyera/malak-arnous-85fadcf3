@@ -71,7 +71,7 @@ export function Footer() {
 
         <div className="mt-10 pt-6 border-t border-border flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} {brand.full}. {t.common.rights}</p>
-          <p className="uppercase tracking-widest">{t.common.builtForStrong}</p>
+          <p className="tracking-normal">{t.common.builtForStrong}</p>
         </div>
       </div>
 
