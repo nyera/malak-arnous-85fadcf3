@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Send, Menu, X } from "lucide-react";
+import { Instagram, Send, Youtube, Menu, X } from "lucide-react";
 import { brand } from "@/data/content";
 import { JoinNowButton } from "./CTAButton";
 import { cn } from "@/lib/utils";
@@ -76,6 +76,9 @@ export function Header() {
           <a href={brand.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" className="p-2 text-foreground/70 hover:text-ember transition-colors">
             <Send className="w-4 h-4 rtl:-scale-x-100" />
           </a>
+          <a href={brand.youtube} target="_blank" rel="noreferrer" aria-label="YouTube" className="p-2 text-foreground/70 hover:text-ember transition-colors">
+            <Youtube className="w-4 h-4" />
+          </a>
           <JoinNowButton size="sm" />
         </div>
 
@@ -103,7 +106,8 @@ export function Header() {
               <div className="flex items-center gap-3 pt-5">
 
                 <a href={brand.instagram} target="_blank" rel="noreferrer" className="p-3 rounded-sm border border-border"><Instagram className="w-4 h-4" /></a>
-                <a href={brand.telegram} target="_blank" rel="noreferrer" className="p-3 rounded-sm border border-border"><Send className="w-4 h-4 rtl:-scale-x-100" /></a>
+                <a href={brand.telegram} target="_blank" rel="noreferrer" aria-label="Telegram" className="p-3 rounded-sm border border-border"><Send className="w-4 h-4 rtl:-scale-x-100" /></a>
+                <a href={brand.youtube} target="_blank" rel="noreferrer" aria-label="YouTube" className="p-3 rounded-sm border border-border"><Youtube className="w-4 h-4" /></a>
                 <div className="flex-1"><JoinNowButton size="sm" className="w-full" /></div>
               </div>
             </div>

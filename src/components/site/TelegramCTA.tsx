@@ -86,7 +86,7 @@ function FreeCard({
       <div className="relative flex flex-col flex-1">
         <span className="w-12 h-12 rounded-full bg-ember/10 text-ember grid place-items-center mb-5">{icon}</span>
         <h3 className="display-md mb-2">{title}</h3>
-        <p className="text-sm text-ember mb-4" dir="ltr">
+        <p className="text-sm text-ember mb-4" dir="auto">
           {handle}
         </p>
         <p className="text-muted-foreground leading-relaxed flex-1">{body}</p>
