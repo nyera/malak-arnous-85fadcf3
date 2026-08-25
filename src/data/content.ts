@@ -19,7 +19,8 @@ export const brand = {
   telegram: "https://t.me/+LzSx7ITqfc41N2Qx",
   telegramHandle: "الدائرة الداخلية",
   whatsapp: "",
-  youtube: "",
+  youtube: "https://www.youtube.com/@malakarnous369",
+  youtubeHandle: "@malakarnous369",
   tiktok: "",
 };
 
