@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Send, Youtube, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Instagram, Send, Youtube, Mail, MapPin } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { brand } from "@/data/content";
 import { useI18n } from "@/i18n/I18nProvider";
 import logoAsset from "@/assets/logo.png.asset.json";
@@ -46,7 +47,7 @@ export function Footer() {
               <span className="leading-none">{brand.email}</span>
             </a>
             <a href={brand.whatsapp} target="_blank" rel="noreferrer" className="footer-link flex items-center gap-2.5 leading-relaxed">
-              <MessageCircle className="w-4 h-4 shrink-0 text-ember" aria-hidden />
+              <WhatsAppIcon className="w-4 h-4 shrink-0 text-ember" aria-hidden />
               <span className="leading-none" dir="ltr">{brand.whatsappDisplay}</span>
             </a>
             <div className="footer-link flex items-center gap-2.5 leading-relaxed">
