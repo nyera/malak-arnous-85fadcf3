@@ -5,6 +5,8 @@ export const STAN_URL = "https://stan.store/malakarnous";
 export const STAN_CALL_URL = "https://stan.store/MalakArnous/p/---the-shift";
 // Heal and Receive discovery-call booking page (temporary: general Stan store until a dedicated call link exists).
 export const HEAL_CALL_URL = "https://stan.store/malakarnous";
+// The Weight Shift preview session product — update this when the Stan product link is ready.
+export const STAN_SESSION_URL = "https://stan.store/malakarnous";
 // Tapping Script service — Stripe Payment Link.
 export const TAPPING_PAY_URL = "https://buy.stripe.com/28E00lfxg1IA6zNeYwaAw04";
 
