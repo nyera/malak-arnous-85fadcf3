@@ -109,6 +109,13 @@ const ar = {
         link: "/the-shift",
       },
       {
+        slug: "the-weight-shift-session",
+        name: "جلسة تسريبة من The Weight Shift",
+        tagline: "تجربة حقيقية من داخل البرنامج قبل ما تقرري إذا الرحلة الكاملة مناسبة إلك",
+        description: "جلسة مختارة من برنامج The Weight Shift بتعطيكي تجربة عملية لطريقة العمل داخل البرنامج، من دون ما تلتزمي بالرحلة الكاملة.",
+        link: "/the-weight-shift-session",
+      },
+      {
         slug: "heal-and-receive",
         name: "Heal and Receive",
         tagline: "برنامج عميق لتحرير جذور منع الاستقبال وفتح مساحة أكبر للوفرة في حياتكِ",
