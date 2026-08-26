@@ -19,6 +19,7 @@ import { Route as SurveyRouteImport } from './routes/survey'
 import { Route as TappingScriptRouteImport } from './routes/tapping-script'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as TheShiftRouteImport } from './routes/the-shift'
+import { Route as TheWeightShiftSessionRouteImport } from './routes/the-weight-shift-session'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +71,11 @@ const TheShiftRoute = TheShiftRouteImport.update({
   path: '/the-shift',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TheWeightShiftSessionRoute = TheWeightShiftSessionRouteImport.update({
+  id: '/the-weight-shift-session',
+  path: '/the-weight-shift-session',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/tapping-script': typeof TappingScriptRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/tapping-script': typeof TappingScriptRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/tapping-script': typeof TappingScriptRoute
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
+  '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/tapping-script'
     | '/testimonials'
     | '/the-shift'
+    | '/the-weight-shift-session'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/tapping-script'
     | '/testimonials'
     | '/the-shift'
+    | '/the-weight-shift-session'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/tapping-script'
     | '/testimonials'
     | '/the-shift'
+    | '/the-weight-shift-session'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   TappingScriptRoute: typeof TappingScriptRoute
   TestimonialsRoute: typeof TestimonialsRoute
   TheShiftRoute: typeof TheShiftRoute
+  TheWeightShiftSessionRoute: typeof TheWeightShiftSessionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheShiftRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/the-weight-shift-session': {
+      id: '/the-weight-shift-session'
+      path: '/the-weight-shift-session'
+      fullPath: '/the-weight-shift-session'
+      preLoaderRoute: typeof TheWeightShiftSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -246,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   TappingScriptRoute: TappingScriptRoute,
   TestimonialsRoute: TestimonialsRoute,
   TheShiftRoute: TheShiftRoute,
+  TheWeightShiftSessionRoute: TheWeightShiftSessionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
