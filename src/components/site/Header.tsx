@@ -44,8 +44,8 @@ export function Header() {
     )}>
       <div className="container-x flex items-center justify-between h-20">
         <Link to="/" className="flex items-center gap-2.5 group shrink-0">
-          <div className="w-11 h-11 rounded-full bg-ember/10 grid place-items-center overflow-hidden">
-            <img src={logoAsset.url} alt={brand.name} className="w-9 h-9 object-contain" style={{ filter: "invert(35%) sepia(45%) saturate(900%) hue-rotate(330deg)" }} />
+          <div className="w-11 h-11 grid place-items-center overflow-hidden">
+            <img src={logoAsset.url} alt={brand.name} className="w-10 h-10 object-contain" />
           </div>
           <span className="font-display text-2xl tracking-tight">{brand.name}</span>
         </Link>
