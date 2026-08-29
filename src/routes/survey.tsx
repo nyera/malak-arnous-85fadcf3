@@ -10,8 +10,14 @@ export const Route = createFileRoute("/survey")({
     meta: [
       { title: "استبيان الأكل العاطفي — ملاك عرنوس" },
       { name: "description", content: "استبيان الأكل العاطفي، التدمير الذاتي، والتحول في الحياة." },
+      { property: "og:title", content: "استبيان الأكل العاطفي — ملاك عرنوس" },
+      { property: "og:description", content: "استبيان الأكل العاطفي، التدمير الذاتي، والتحول في الحياة." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/survey" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "/survey" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/survey" }],
   }),
   component: SurveyPage,
 });

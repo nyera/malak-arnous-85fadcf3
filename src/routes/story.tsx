@@ -12,8 +12,14 @@ export const Route = createFileRoute("/story")({
     meta: [
       { title: "قصتي — ملاك عرنوس" },
       { name: "description", content: "قصة ملاك عرنوس مع الأكل العاطفي والوزن والشفاء." },
+      { property: "og:title", content: "قصتي — ملاك عرنوس" },
+      { property: "og:description", content: "قصة ملاك عرنوس مع الأكل العاطفي والوزن والشفاء." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/story" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "/story" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/story" }],
   }),
   component: StoryPage,
 });

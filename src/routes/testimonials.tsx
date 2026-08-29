@@ -11,14 +11,16 @@ export const Route = createFileRoute("/testimonials")({
   head: () => ({
     meta: [
       { title: "آراء العملاء — ملاك عرنوس" },
-      { name: "description", content: "تجارب حقيقية من إنستجرام لنساء ورجال اختبروا التحول من الجذور مع ملاك عرنوس." },
-      { property: "og:title", content: "آراء العملاء — ملاك عرنوس" },
-      { property: "og:description", content: "تجارب حقيقية من إنستجرام مع ملاك عرنوس." },
-      { property: "og:url", content: "https://malak-arnous.lovable.app/testimonials" },
+      { name: "description", content: "تجارب حقيقية من إنستجرام لنساء ورجال اختبروا التحول من الجذور مع ملاك عرنوس." },   
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "آراء العملاء — ملاك عرنوس" },
+      { property: "og:description", content: "تجارب حقيقية من إنستجرام لنساء ورجال اختبروا التحول من الجذور مع ملاك عرنوس." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/testimonials" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "https://malak-arnous.lovable.app/testimonials" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/testimonials" }],
   }),
   component: TestimonialsPage,
 });

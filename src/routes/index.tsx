@@ -16,8 +16,14 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "ملاك عرنوس — متخصصة في الأكل العاطفي وخسارة الوزن من الجذور" },
       { name: "description", content: "تحرري من الأكل العاطفي وخسارة الوزن من الجذور. أنا ملاك عرنوس، Nervous System-Based Emotional Eating and Weight Loss Expert." },
+      { property: "og:title", content: "ملاك عرنوس — متخصصة في الأكل العاطفي وخسارة الوزن من الجذور" },
+      { property: "og:description", content: "تحرري من الأكل العاطفي وخسارة الوزن من الجذور. أنا ملاك عرنوس، Nervous System-Based Emotional Eating and Weight Loss Expert." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/" }],
   }),
   component: HomePage,
 });

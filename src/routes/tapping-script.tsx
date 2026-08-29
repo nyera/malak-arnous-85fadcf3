@@ -15,16 +15,16 @@ export const Route = createFileRoute("/tapping-script")({
         name: "description",
         content:
           "خدمة شخصية: Tapping Script مخصص مبني على قصتك والـ pattern اللي عم يتكرر معك. بعد الدفع تبعتي Voice Note أو رسالة، ويتم تحضير السكريبت خصيصاً إلك.",
-      },
-      { property: "og:title", content: "Tapping Script مخصص إلك — ملاك عرنوس" },
-      {
-        property: "og:description",
-        content: "خدمة شخصية بسعر رمزي: سكريبت Tapping مخصص حسب قصتك والموضوع اللي حابة تشتغلي عليه.",
-      },
+      },  
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "خدمة كتابة الـ Tapping Script — ملاك عرنوس" },
+      { property: "og:description", content: "خدمة شخصية: Tapping Script مخصص مبني على قصتك والـ pattern اللي عم يتكرر معك. بعد الدفع تبعتي Voice Note أو رسالة، ويتم تحضير السكريبت خصيصاً إلك." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/tapping-script" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "/tapping-script" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/tapping-script" }],
   }),
   component: TappingScriptPage,
 });
