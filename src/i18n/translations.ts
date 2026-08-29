@@ -705,6 +705,7 @@ const ar = {
     apply: "احجزي",
     free: "المجتمع المجاني",
     allPrograms: "كل الخدمات",
+    contentNotice: "المحتوى والمواد المقدّمة مخصّصة للاستخدام الشخصي فقط. نشكر تفهّمكِ بعدم نسخها أو مشاركتها على وسائل التواصل الاجتماعي.",
   },
   home: {
     heroEyebrow: "Nervous System-Based Emotional Eating & Weight Loss Expert",
