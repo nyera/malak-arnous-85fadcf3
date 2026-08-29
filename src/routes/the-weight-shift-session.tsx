@@ -183,8 +183,9 @@ function TheWeightShiftSessionPage() {
                   </li>
                 ))}
               </ul>
-              <p className="font-display text-3xl md:text-4xl text-ember mb-8" dir="ltr">
-                {s.offerPrice}
+              <p className="flex items-center justify-center gap-3 mb-8" dir="ltr">
+                <span className="font-display text-3xl md:text-4xl text-ember">{s.offerPrice}</span>
+                <span className="font-display text-xl md:text-2xl text-muted-foreground line-through decoration-ember/70">{s.offerOldPrice}</span>
               </p>
               <div className="flex justify-center">
                 <SessionButton label={s.offerCta} size="lg" />

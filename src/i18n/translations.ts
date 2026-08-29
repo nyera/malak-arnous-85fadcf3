@@ -505,7 +505,8 @@ const ar = {
     ],
     offerTitle: "جلسة تسريبة من The Weight Shift",
     offerSubtitle: "تجربة حقيقية من داخل البرنامج قبل ما تقرري إذا الرحلة الكاملة مناسبة إلك.",
-    offerPrice: "[ADD ACTUAL PRICE HERE]",
+    offerPrice: "$33",
+    offerOldPrice: "$59.99",
     offerItems: [
       "جلسة مختارة من البرنامج",
       "تمرين عملي",
