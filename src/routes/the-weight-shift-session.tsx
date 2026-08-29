@@ -15,16 +15,16 @@ export const Route = createFileRoute("/the-weight-shift-session")({
         name: "description",
         content:
           "جلسة مختارة من برنامج The Weight Shift: تجربة حقيقية من داخل البرنامج لتكتشفي شو واقف خلف علاقتك مع الأكل والوزن قبل ما تقرري الاشتراك بالرحلة الكاملة.",
-      },
-      { property: "og:title", content: "جلسة تسريبة من The Weight Shift — ملاك عرنوس" },
-      {
-        property: "og:description",
-        content: "تجربة حقيقية من داخل The Weight Shift لتكتشفي طريقة العمل على الجذور، مش بس على السلوك الظاهر.",
-      },
+      },  
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "جلسة تسريبة من The Weight Shift — ملاك عرنوس" },
+      { property: "og:description", content: "جلسة مختارة من برنامج The Weight Shift: تجربة حقيقية من داخل البرنامج لتكتشفي شو واقف خلف علاقتك مع الأكل والوزن قبل ما تقرري الاشتراك بالرحلة الكاملة." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/the-weight-shift-session" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "/the-weight-shift-session" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/the-weight-shift-session" }],
   }),
   component: TheWeightShiftSessionPage,
 });

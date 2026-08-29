@@ -13,8 +13,14 @@ export const Route = createFileRoute("/programs")({
     meta: [
       { title: "الخدمات — ملاك عرنوس" },
       { name: "description", content: "خدمات ملاك عرنوس: The Weight Shift, Heal and Receive, خدمة كتابة الـ Tapping Script, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
+      { property: "og:title", content: "الخدمات — ملاك عرنوس" },
+      { property: "og:description", content: "خدمات ملاك عرنوس: The Weight Shift, Heal and Receive, خدمة كتابة الـ Tapping Script, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/programs" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "/programs" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/programs" }],
   }),
   component: ServicesPage,
 });

@@ -14,16 +14,16 @@ export const Route = createFileRoute("/the-shift")({
         name: "description",
         content:
           "The Weight Shift — برنامج تحوّلي لتحرير الأكل العاطفي من الجذور. أول خطوة مكالمة قصيرة مجانية لنشوف سوا إذا البرنامج مناسب إلك.",
-      },
-      { property: "og:title", content: "The Weight Shift — احجزي مكالمة مع ملاك عرنوس" },
-      {
-        property: "og:description",
-        content: "برنامج تحوّلي لتحرير الأكل العاطفي من الجذور. ابدئي بمكالمة قصيرة مجانية.",
-      },
+      },  
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "The Weight Shift — احجزي مكالمة مع ملاك عرنوس" },
+      { property: "og:description", content: "The Weight Shift — برنامج تحوّلي لتحرير الأكل العاطفي من الجذور. أول خطوة مكالمة قصيرة مجانية لنشوف سوا إذا البرنامج مناسب إلك." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/the-shift" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "/the-shift" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/the-shift" }],
   }),
   component: TheShiftPage,
 });

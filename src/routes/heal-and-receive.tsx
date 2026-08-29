@@ -14,16 +14,16 @@ export const Route = createFileRoute("/heal-and-receive")({
         name: "description",
         content:
           "Heal and Receive — برنامج عميق لتحرير جذور منع الاستقبال وفتح مساحة أكبر للوفرة، بالعمل على الشاكرات السبع. ابدئي بمكالمة قصيرة مجانية.",
-      },
-      { property: "og:title", content: "Heal and Receive — برنامج تحرير جذور منع الاستقبال" },
-      {
-        property: "og:description",
-        content: "برنامج عميق يعمل على جذور منع الاستقبال، وليس فقط على السلوك الظاهر. ابدئي بمكالمة قصيرة مجانية.",
-      },
+      },  
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "Heal and Receive — برنامج تحرير جذور منع الاستقبال" },
+      { property: "og:description", content: "Heal and Receive — برنامج عميق لتحرير جذور منع الاستقبال وفتح مساحة أكبر للوفرة، بالعمل على الشاكرات السبع. ابدئي بمكالمة قصيرة مجانية." },
+      { property: "og:url", content: "https://malakarnoushealing369.com/heal-and-receive" },
+      { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
     ],
-    links: [{ rel: "canonical", href: "/heal-and-receive" }],
+    links: [{ rel: "canonical", href: "https://malakarnoushealing369.com/heal-and-receive" }],
   }),
   component: HealAndReceivePage,
 });
