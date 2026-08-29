@@ -75,7 +75,11 @@ export function Footer() {
           </a>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-border flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
+        <div className="mt-10 p-5 rounded-sm border border-ember/20 bg-ember/[0.03] text-center">
+          <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl mx-auto">{t.footer.contentNotice}</p>
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-border flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} {brand.full}. {t.common.rights}</p>
           <p className="tracking-normal">{t.common.builtForStrong}</p>
         </div>
