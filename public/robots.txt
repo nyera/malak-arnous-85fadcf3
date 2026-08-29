@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://malakarnoushealing369.com/sitemap.xml
