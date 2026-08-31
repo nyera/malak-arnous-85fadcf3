@@ -1,50 +1,42 @@
-# Plan: Business Email Inbox for hello@malakarnous369.com
+# Navigation: group programs into a dropdown
 
-## Important distinction
+## Goal
+Reduce the stretched look of the header by replacing the three separate program-related links (Programs / The Shift / Heal and Receive) with a single "البرامج" dropdown. Keep Tapping Script as a standalone top-level link.
 
-Lovable Emails is for **sending** automated emails from the website (contact confirmations, auth emails, etc.). It does **not** provide a real inbox where you can read and reply to client emails.
+## What we will do
 
-To use `hello@malakarnous369.com` as a full business email address (read/reply/send manually), you need a separate **email hosting provider** and the correct DNS records on the domain.
+1. **Refactor `src/components/site/Header.tsx`**
+   - Replace the current top-level links: `/programs`, `/the-shift`, `/heal-and-receive` with one dropdown labeled **"البرامج"**.
+   - Dropdown items (exactly the two programs):
+     - The Weight Shift → `/the-shift`
+     - Heal and Receive → `/heal-and-receive`
+   - Keep the parent label itself clickable to `/programs` so the services overview page remains reachable.
+   - On desktop: hover reveals the dropdown; clicking the label text navigates to `/programs`.
+   - On mobile: use the accordion style the user asked for — a chevron expands the dropdown, the label text navigates to `/programs`.
+   - Update active-state logic so `/programs`, `/the-shift`, and `/heal-and-receive` all highlight the **البرامج** parent.
+   - Keep Tapping Script, Testimonials, and Survey as standalone top-level links.
 
-Because the domain was bought through Lovable, DNS records can be managed directly from the Lovable dashboard.
+2. **Styling & UX**
+   - Use existing design tokens: `bg-surface`, `border-border`, `text-ember`, rounded corners, and the existing shadow utilities.
+   - Add a small chevron icon that rotates when the dropdown is open.
+   - Use Framer Motion for the dropdown open/close animation (consistent with the existing mobile menu).
+   - Ensure full RTL alignment and keyboard accessibility (hover intent delay to avoid accidental opens, focus-visible ring, ESC to close).
 
-## Recommended email hosting options
+3. **Translations**
+   - Add `nav.programs: "البرامج"` in `src/i18n/translations.ts` Arabic object (it already exists as "الخدمservices", we will update it to "البرامج" for the dropdown label).
+   - Keep English translations in sync (low priority since site is Arabic-only).
 
-| Provider | Best for | Approximate cost |
-|----------|----------|------------------|
-| Google Workspace | Full business email + Drive + Meet | ~$6–12 USD/user/month |
-| Zoho Mail | Cheapest business email option | ~$1–4 USD/user/month (free tier available) |
-| Microsoft 365 | Email + Office apps + Teams | ~$6–12 USD/user/month |
+4. **Routes preserved**
+   - `/programs` remains accessible as the services overview page.
+   - `/the-shift`, `/heal-and-receive`, `/tapping-script` routes are unchanged.
 
-For a single professional inbox, **Zoho Mail** is the most cost-effective; **Google Workspace** is the most feature-complete and trusted by clients.
+## What we will NOT change
+- No color changes.
+- No layout changes beyond the header nav.
+- No route deletion or creation.
+- No content edits on the program pages.
 
-## Steps to activate the inbox
-
-1. **Choose an email hosting provider** and sign up for a business email plan.
-2. **Verify domain ownership** with the provider. They will give you DNS records to add (usually MX, SPF, DKIM, and sometimes a TXT verification record).
-3. **Open Lovable DNS management** for `malakarnous369.com`:
-   - Project Settings → Domains → find the purchased domain → ⋯ → Configure → Manage DNS records.
-4. **Add the DNS records** exactly as provided by the email provider.
-   - MX records route incoming email to the provider.
-   - SPF/DKIM/DMARC records improve deliverability and prevent spoofing.
-5. **Wait for DNS propagation** (up to a few hours, sometimes 24–48 hours).
-6. **Create the mailbox** `hello@malakarnous369.com` inside the provider's admin panel.
-7. **Test sending and receiving** from the new inbox.
-
-## What we can build on the website afterward
-
-Once the inbox is active, we can optionally:
-
-- Replace public `mailto:` links with a contact form that sends emails to `hello@malakarnous369.com`.
-- Set the website's public "from" address to `hello@malakarnous369.com` for automated emails (if Lovable Emails is also configured).
-- Add a contact page with the business email clearly displayed.
-
-## What this plan does not include
-
-- Setting up Lovable Emails for automated sending (that is a separate, optional feature).
-- Paying for or subscribing to the email hosting provider on your behalf.
-- Manual DNS changes without the exact records from your chosen provider.
-
-## Next action required from you
-
-Pick an email hosting provider (Google Workspace, Zoho Mail, or Microsoft 365), create the account, and share the DNS records they ask you to add. Then I can guide you through adding them in Lovable DNS or do it for you if you provide the exact values.
+## Verification
+- Screenshot the header on desktop and mobile to confirm the dropdown is compact and RTL-aligned.
+- Click each dropdown link to confirm navigation works.
+- Confirm `/programs` is still reachable by clicking the parent label.
