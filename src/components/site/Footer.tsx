@@ -76,7 +76,12 @@ export function Footer() {
         </div>
 
         <div className="mt-10 p-5 rounded-sm border border-ember/20 bg-ember/[0.03] text-center">
-          <p className="text-xs text-muted-foreground leading-relaxed max-w-2xl mx-auto">{t.footer.contentNotice}</p>
+          <h4 className="text-sm font-semibold text-foreground mb-3">{t.footer.contentNoticeTitle}</h4>
+          <div className="space-y-3 text-xs text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+            {t.footer.contentNoticeBody.split("\n\n").map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
         </div>
 
         <div className="mt-6 pt-6 border-t border-border flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
