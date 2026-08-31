@@ -12,7 +12,7 @@ const ar = {
     theShift: "The Weight Shift",
     survey: "الاستبيان",
     contact: "تواصلي",
-    programs: "الخدمات",
+    programs: "البرامج",
     results: "قصص النجاح",
   },
   cta: {
