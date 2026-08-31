@@ -45,9 +45,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { console.log("pathname effect", pathname); setOpen(false); setProgramsOpen(false); }, [pathname]);
-
-  console.log("render Header", { open, programsOpen, pathname });
+  useEffect(() => { setOpen(false); setProgramsOpen(false); }, [pathname]);
 
   return (
     <header className={cn(
@@ -137,11 +135,11 @@ export function Header() {
         <div className="flex lg:hidden items-center gap-1">
           <button
             type="button"
-            onClick={() => { console.log("click", open); setTimeout(() => { console.log("setTimeout set"); setOpen(true); }, 0); }}
-            className="p-2 text-foreground relative z-50"
+            onClick={() => setOpen((v) => !v)}
+            className="p-2 text-foreground"
             aria-label="Toggle menu"
           >
-            {open ? "X" : "Menu"}
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
