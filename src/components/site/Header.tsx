@@ -137,11 +137,11 @@ export function Header() {
         <div className="flex lg:hidden items-center gap-1">
           <button
             type="button"
-            onClick={() => { console.log("hamburger clicked", open); setOpen((v) => !v); }}
+            onClick={() => { console.log("click", open); setTimeout(() => { console.log("setTimeout set"); setOpen(true); }, 0); }}
             className="p-2 text-foreground relative z-50"
             aria-label="Toggle menu"
           >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {open ? "X" : "Menu"}
           </button>
         </div>
       </div>
