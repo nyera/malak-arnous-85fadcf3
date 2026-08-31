@@ -47,6 +47,8 @@ export function Header() {
 
   useEffect(() => { console.log("pathname effect", pathname); setOpen(false); setProgramsOpen(false); }, [pathname]);
 
+  console.log("render Header", { open, programsOpen, pathname });
+
   return (
     <header className={cn(
       "fixed inset-x-0 top-0 z-50 transition-all duration-500",
