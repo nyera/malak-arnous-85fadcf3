@@ -55,6 +55,7 @@ export function AssessmentForm() {
       });
     });
     const body = lines.join("\n");
+    setSummary(body);
     const subject = "استبيان جديد من الموقع";
     const mailto = `mailto:${brand.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
