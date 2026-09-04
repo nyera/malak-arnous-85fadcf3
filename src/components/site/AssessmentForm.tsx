@@ -68,13 +68,32 @@ export function AssessmentForm() {
           <Check className="w-8 h-8 text-background" />
         </div>
         <h3 className="display-md mb-3">{t.survey.successTitle}</h3>
-        <p className="text-muted-foreground max-w-md mx-auto mb-8 leading-relaxed">{t.survey.successBody}</p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground max-w-md mx-auto mb-6 leading-relaxed">{t.survey.successBody}</p>
+        <a href={`mailto:${brand.email}`} className="text-sm text-ember underline underline-offset-4">
           {brand.email}
-        </p>
+        </a>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(summary);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2500);
+              } catch {
+                setCopied(false);
+              }
+            }}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-sm border border-border text-sm hover:border-ember transition-colors"
+          >
+            {copied ? <Check className="w-4 h-4 text-ember" /> : <Copy className="w-4 h-4" />}
+            {copied ? "تم نسخ الإجابات" : "نسخ الإجابات"}
+          </button>
+        </div>
       </motion.div>
     );
   }
+
 
   return (
     <form onSubmit={onSubmit} className="space-y-10">
