@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Loader2 } from "lucide-react";
+import { Check, Copy, Loader2 } from "lucide-react";
 import { CTAButton } from "./CTAButton";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -12,6 +12,8 @@ export function AssessmentForm() {
   const [values, setValues] = useState<Record<string, string | string[]>>({});
   const [state, setState] = useState<"idle" | "loading" | "success">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [summary, setSummary] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const setVal = (id: string, v: string | string[]) => setValues((s) => ({ ...s, [id]: v }));
   const toggleCheckbox = (id: string, opt: string) => {
