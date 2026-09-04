@@ -14,7 +14,7 @@ export const TAPPING_PAY_URL = "https://buy.stripe.com/28E00lfxg1IA6zNeYwaAw04";
 export const brand = {
   name: "ملاك عرنوس",
   full: "ملاك عرنوس",
-  email: "hello@malakarnous369.com",
+  email: "hello@malakarnoushealing369.com",
   phone: "",
   instagram: "https://instagram.com/malakarnous369",
   instagramHandle: "@malakarnous369",
