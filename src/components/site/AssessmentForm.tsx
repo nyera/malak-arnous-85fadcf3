@@ -10,7 +10,7 @@ export function AssessmentForm() {
   const { t } = useI18n();
   const sections = t.survey.sections;
   const [values, setValues] = useState<Record<string, string | string[]>>({});
-  const [state, setState] = useState<"idle" | "loading" | "success">("idle");
+  const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [summary, setSummary] = useState("");
   const [copied, setCopied] = useState(false);
