@@ -20,6 +20,7 @@ import { Route as TappingScriptRouteImport } from './routes/tapping-script'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as TheShiftRouteImport } from './routes/the-shift'
 import { Route as TheWeightShiftSessionRouteImport } from './routes/the-weight-shift-session'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,12 @@ const TheWeightShiftSessionRoute = TheWeightShiftSessionRouteImport.update({
   path: '/the-weight-shift-session',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +110,7 @@ export interface FileRoutesByTo {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +125,7 @@ export interface FileRoutesById {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/lovable/email/transactional/preview'
   id:
     | '__root__'
     | '/'
@@ -157,6 +169,7 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +184,7 @@ export interface RootRouteChildren {
   TestimonialsRoute: typeof TestimonialsRoute
   TheShiftRoute: typeof TheShiftRoute
   TheWeightShiftSessionRoute: typeof TheWeightShiftSessionRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -252,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheWeightShiftSessionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -267,6 +288,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestimonialsRoute: TestimonialsRoute,
   TheShiftRoute: TheShiftRoute,
   TheWeightShiftSessionRoute: TheWeightShiftSessionRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
