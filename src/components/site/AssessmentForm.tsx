@@ -56,13 +56,64 @@ export function AssessmentForm() {
     });
     const body = lines.join("\n");
     setSummary(body);
-    const subject = "استبيان جديد من الموقع";
-    const mailto = `mailto:${brand.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    // Open default mail client
-    window.location.href = mailto;
-    setTimeout(() => setState("success"), 600);
+    try {
+      const res = await fetch("/api/public/survey", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(values["fullName"] || "").trim(),
+          email: String(values["email"] || "").trim(),
+          country: String(values["country"] || "").trim(),
+          age: String(values["age"] || "").trim(),
+          answers: body,
+        }),
+      });
+      if (!res.ok) throw new Error("send failed");
+      setState("success");
+    } catch {
+      setState("error");
+    }
   };
+
+  if (state === "error") {
+    return (
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
+        <h3 className="display-md mb-3">تعذّر إرسال الاستبيان</h3>
+        <p className="text-muted-foreground max-w-md mx-auto mb-6 leading-relaxed">
+          حدث خطأ أثناء الإرسال. يمكنكِ نسخ إجاباتك وإرسالها مباشرة إلى:
+        </p>
+        <a href={`mailto:${brand.email}`} className="text-sm text-ember underline underline-offset-4">
+          {brand.email}
+        </a>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(summary);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2500);
+              } catch {
+                setCopied(false);
+              }
+            }}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-sm border border-border text-sm hover:border-ember transition-colors"
+          >
+            {copied ? <Check className="w-4 h-4 text-ember" /> : <Copy className="w-4 h-4" />}
+            {copied ? "تم نسخ الإجابات" : "نسخ الإجابات"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setState("idle")}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-sm border border-border text-sm hover:border-ember transition-colors"
+          >
+            المحاولة مرة أخرى
+          </button>
+        </div>
+      </motion.div>
+    );
+  }
 
   if (state === "success") {
     return (
