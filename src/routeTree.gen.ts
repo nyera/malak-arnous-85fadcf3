@@ -20,6 +20,7 @@ import { Route as TappingScriptRouteImport } from './routes/tapping-script'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as TheShiftRouteImport } from './routes/the-shift'
 import { Route as TheWeightShiftSessionRouteImport } from './routes/the-weight-shift-session'
+import { Route as ApiPublicSurveyRouteImport } from './routes/api/public/survey'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
@@ -77,6 +78,11 @@ const TheWeightShiftSessionRoute = TheWeightShiftSessionRouteImport.update({
   path: '/the-weight-shift-session',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSurveyRoute = ApiPublicSurveyRouteImport.update({
+  id: '/api/public/survey',
+  path: '/api/public/survey',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/api/public/survey': typeof ApiPublicSurveyRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/api/public/survey': typeof ApiPublicSurveyRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/api/public/survey': typeof ApiPublicSurveyRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/api/public/survey'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/api/public/survey'
     | '/lovable/email/transactional/preview'
   id:
     | '__root__'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/api/public/survey'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
@@ -184,6 +196,7 @@ export interface RootRouteChildren {
   TestimonialsRoute: typeof TestimonialsRoute
   TheShiftRoute: typeof TheShiftRoute
   TheWeightShiftSessionRoute: typeof TheWeightShiftSessionRoute
+  ApiPublicSurveyRoute: typeof ApiPublicSurveyRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
@@ -266,6 +279,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheWeightShiftSessionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/survey': {
+      id: '/api/public/survey'
+      path: '/api/public/survey'
+      fullPath: '/api/public/survey'
+      preLoaderRoute: typeof ApiPublicSurveyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
@@ -288,6 +308,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestimonialsRoute: TestimonialsRoute,
   TheShiftRoute: TheShiftRoute,
   TheWeightShiftSessionRoute: TheWeightShiftSessionRoute,
+  ApiPublicSurveyRoute: ApiPublicSurveyRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport
