@@ -1,7 +1,5 @@
 export type Lang = "en" | "ar";
 
-export const STAN_URL = "https://stan.store/malakarnous";
-
 const ar = {
   lang: "ar" as const,
   nav: {

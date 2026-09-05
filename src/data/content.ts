@@ -1,10 +1,11 @@
 // Non-translatable data: links, image URLs. Translatable copy lives in src/i18n/translations.ts.
 
 export const STAN_URL = "https://stan.store/malakarnous";
-// Single source of truth for The Shift discovery-call booking page.
-export const STAN_CALL_URL = "https://stan.store/MalakArnous/p/---the-shift";
-// Heal and Receive discovery-call booking page (temporary: general Stan store until a dedicated call link exists).
-export const HEAL_CALL_URL = "https://stan.store/malakarnous";
+// Single source of truth for the shared free discovery-call booking page.
+export const DISCOVERY_CALL_URL = "https://stan.store/MalakArnous/p/discovery-call-free-fpkbh17n";
+// Legacy aliases: both programs now lead to the same discovery call first.
+export const STAN_CALL_URL = DISCOVERY_CALL_URL;
+export const HEAL_CALL_URL = DISCOVERY_CALL_URL;
 // The Weight Shift preview session product — one leaked session.
 export const STAN_SESSION_URL = "https://stan.store/MalakArnous/p/the-weight-shift-session-33-dollars";
 // Tapping Script service — Stripe Payment Link.
