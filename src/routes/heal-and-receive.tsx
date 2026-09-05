@@ -4,7 +4,7 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { BookCallButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
 import { FadeIn } from "@/components/site/Misc";
-import { HEAL_CALL_URL } from "@/data/content";
+import { DISCOVERY_CALL_URL } from "@/data/content";
 
 export const Route = createFileRoute("/heal-and-receive")({
   head: () => ({
@@ -50,7 +50,7 @@ function HealAndReceivePage() {
               ))}
             </div>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <BookCallButton label={s.ctaBookCall} size="lg" href={HEAL_CALL_URL} />
+              <BookCallButton label={s.ctaBookCall} size="lg" href={DISCOVERY_CALL_URL} />
               <a
                 href="#program-details"
                 className="text-sm tracking-normal text-foreground/70 hover:text-ember transition-colors py-3"
@@ -146,7 +146,7 @@ function HealAndReceivePage() {
           ))}
         </div>
         <div className="mt-10 flex justify-center">
-          <BookCallButton label={s.ctaBookCall} href={HEAL_CALL_URL} />
+          <BookCallButton label={s.ctaBookCall} href={DISCOVERY_CALL_URL} />
         </div>
       </Block>
 
@@ -201,7 +201,7 @@ function HealAndReceivePage() {
             <h2 className="display-xl mb-6">{s.bookTitle}</h2>
             <p className="text-xl text-muted-foreground mb-10 leading-relaxed">{s.bookBody}</p>
             <div className="flex justify-center">
-              <BookCallButton label={s.ctaBookCall} size="lg" href={HEAL_CALL_URL} />
+              <BookCallButton label={s.ctaBookCall} size="lg" href={DISCOVERY_CALL_URL} />
             </div>
           </FadeIn>
         </div>
