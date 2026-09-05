@@ -5,6 +5,7 @@ import { BookCallButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
 import { FadeIn } from "@/components/site/Misc";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { DISCOVERY_CALL_URL } from "@/data/content";
 
 export const Route = createFileRoute("/the-shift")({
   head: () => ({
