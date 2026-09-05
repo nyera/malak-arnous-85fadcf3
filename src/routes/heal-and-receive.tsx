@@ -4,7 +4,7 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { BookCallButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
 import { FadeIn } from "@/components/site/Misc";
-import { HEAL_CALL_URL } from "@/data/content";
+import { DISCOVERY_CALL_URL } from "@/data/content";
 
 export const Route = createFileRoute("/heal-and-receive")({
   head: () => ({
