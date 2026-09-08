@@ -37,6 +37,14 @@ function SessionButton({ label, size = "md" }: { label: string; size?: "sm" | "m
   );
 }
 
+function CtaBar({ label }: { label: string }) {
+  return (
+    <div className="mt-8 flex justify-center">
+      <SessionButton label={label} />
+    </div>
+  );
+}
+
 function Block({ title, children, alt, id }: { title: string; children: React.ReactNode; alt?: boolean; id?: string }) {
   return (
     <section id={id} className={"section-y scroll-mt-24 " + (alt ? "bg-surface border-y border-border" : "")}>
