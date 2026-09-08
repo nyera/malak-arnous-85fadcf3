@@ -115,6 +115,12 @@ function TheWeightShiftSessionPage() {
         <Bullets items={s.experienceItems} />
       </Block>
 
+      {/* RESULTS / OUTCOMES */}
+      <Block title={s.resultsTitle} alt>
+        <Bullets items={s.resultsItems} />
+        <p className="mt-8 text-lg text-foreground/90 leading-relaxed">{s.resultsClosing}</p>
+      </Block>
+
       {/* IMPORTANT PREPARATION */}
       <section className="section-y bg-surface border-y border-border">
         <div className="container-x max-w-3xl">
