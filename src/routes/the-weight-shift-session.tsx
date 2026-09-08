@@ -15,7 +15,7 @@ export const Route = createFileRoute("/the-weight-shift-session")({
         name: "description",
         content:
           "جلسة مختارة من برنامج The Weight Shift: تجربة حقيقية من داخل البرنامج لتكتشفي شو واقف خلف علاقتك مع الأكل والوزن قبل ما تقرري الاشتراك بالرحلة الكاملة.",
-      },  
+      },
       { property: "og:type", content: "website" },
       { property: "og:title", content: "جلسة تسريبة من The Weight Shift — ملاك عرنوس" },
       { property: "og:description", content: "جلسة مختارة من برنامج The Weight Shift: تجربة حقيقية من داخل البرنامج لتكتشفي شو واقف خلف علاقتك مع الأكل والوزن قبل ما تقرري الاشتراك بالرحلة الكاملة." },
@@ -116,17 +116,20 @@ function TheWeightShiftSessionPage() {
       {/* INTRODUCTION */}
       <Block title={s.introTitle} alt id="session-details">
         <Blocks items={s.introBlocks} />
+        <CtaBar label={s.introCta} />
       </Block>
 
       {/* WHAT YOU WILL EXPERIENCE */}
       <Block title={s.experienceTitle}>
         <Bullets items={s.experienceItems} />
+        <CtaBar label={s.experienceCta} />
       </Block>
 
       {/* RESULTS / OUTCOMES */}
       <Block title={s.resultsTitle} alt>
         <Bullets items={s.resultsItems} />
         <p className="mt-8 text-lg text-foreground/90 leading-relaxed">{s.resultsClosing}</p>
+        <CtaBar label={s.resultsCta} />
       </Block>
 
       {/* IMPORTANT PREPARATION */}
@@ -145,11 +148,13 @@ function TheWeightShiftSessionPage() {
       {/* WHO IS THIS SESSION FOR? */}
       <Block title={s.forWhoTitle} alt>
         <Bullets items={s.forWhoItems} />
+        <CtaBar label={s.forWhoCta} />
       </Block>
 
       {/* WHAT MAKES THIS DIFFERENT? */}
       <Block title={s.differentTitle}>
         <Blocks items={s.differentBlocks} />
+        <CtaBar label={s.differentCta} />
       </Block>
 
       {/* ABOUT THE FULL PROGRAM */}
@@ -179,6 +184,7 @@ function TheWeightShiftSessionPage() {
               </FadeIn>
             ))}
           </div>
+          <CtaBar label={s.howCta} />
         </div>
       </section>
 
