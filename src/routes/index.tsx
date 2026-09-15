@@ -115,20 +115,22 @@ function ServicesPreview() {
       <div className="container-x">
         <SectionHeader eyebrow={t.home.servicesEyebrow} title={t.home.servicesTitle} highlight="" description={t.home.servicesDescription} align="center" />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {t.services.items.map((s, i) => (
-            <FadeIn key={s.slug} delay={i * 0.08}>
-              <div className="p-7 rounded-sm border border-border bg-surface hover-lift h-full flex flex-col">
-                <h3 className="font-display text-2xl mb-2">{s.name}</h3>
-                <p className="text-serif-italic text-ember text-base mb-3 leading-snug">{s.tagline}</p>
-                <p className="text-sm text-muted-foreground leading-loose flex-1">{s.description}</p>
-                {s.link && (
-                  <Link to={s.link} className="mt-5 inline-flex items-center gap-2 text-[13px] tracking-normal font-semibold text-ember hover:gap-3 transition-all">
-                    {t.cta.readMore} <ArrowRight className="w-3.5 h-3.5 rtl:-scale-x-100" />
-                  </Link>
-                )}
-              </div>
-            </FadeIn>
-          ))}
+          {t.services.items
+            .filter((s) => s.slug === "one-on-one-healing")
+            .map((s, i) => (
+              <FadeIn key={s.slug} delay={i * 0.08}>
+                <div className="p-7 rounded-sm border border-border bg-surface hover-lift h-full flex flex-col">
+                  <h3 className="font-display text-2xl mb-2">{s.name}</h3>
+                  <p className="text-serif-italic text-ember text-base mb-3 leading-snug">{s.tagline}</p>
+                  <p className="text-sm text-muted-foreground leading-loose flex-1">{s.description}</p>
+                  {s.link && (
+                    <Link to={s.link} className="mt-5 inline-flex items-center gap-2 text-[13px] tracking-normal font-semibold text-ember hover:gap-3 transition-all">
+                      {t.cta.readMore} <ArrowRight className="w-3.5 h-3.5 rtl:-scale-x-100" />
+                    </Link>
+                  )}
+                </div>
+              </FadeIn>
+            ))}
         </div>
         <div className="mt-12 text-center">
           <Link to="/programs"><CTAButton variant="ghost" icon={<ArrowRight className="w-4 h-4" />}>{t.cta.compareAll}</CTAButton></Link>
