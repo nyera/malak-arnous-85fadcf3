@@ -107,13 +107,6 @@ const ar = {
         link: "/the-shift",
       },
       {
-        slug: "the-weight-shift-session",
-        name: "جلسة تسريبة من The Weight Shift",
-        tagline: "تجربة حقيقية من داخل البرنامج قبل ما تقرري إذا الرحلة الكاملة مناسبة إلك",
-        description: "جلسة مختارة من برنامج The Weight Shift بتعطيكي تجربة عملية لطريقة العمل داخل البرنامج، من دون ما تلتزمي بالرحلة الكاملة.",
-        link: "/the-weight-shift-session",
-      },
-      {
         slug: "heal-and-receive",
         name: "Heal and Receive",
         tagline: "برنامج عميق لتحرير جذور منع الاستقبال وفتح مساحة أكبر للوفرة في حياتكِ",
@@ -122,37 +115,10 @@ const ar = {
         link: "/heal-and-receive",
       },
       {
-        slug: "tapping-script",
-        name: "خدمة كتابة الـ Tapping Script ✨",
-        tagline: "Tapping Script مخصص إلك حسب قصتك",
-        description:
-          "خدمة شخصية: بتبعتيلي Voice Note أو رسالة مكتوبة عن الموضوع أو الـ pattern اللي عم يتكرر معك، وبحضّرلك Tapping Script مخصص إلك.",
-        link: "/tapping-script",
-      },
-
-      {
-        slug: "tapping-circle",
-        name: "Tapping Circle Monthly Membership",
-        tagline: "عضوية شهرية لجلسات الـ Tapping الجماعية",
-        description: "مجتمع شهري لممارسة EFT بشكل جماعي، تحرير المشاعر، والدعم المستمر.",
-      },
-      {
         slug: "one-on-one-healing",
         name: "One-on-One Healing Session",
         tagline: "جلسة شفاء فردية",
         description: "جلسة فردية عميقة لتحرير المشاعر والصدمات المخزّنة في الجهاز العصبي.",
-      },
-      {
-        slug: "one-on-one-consultation",
-        name: "One-on-One Consultation",
-        tagline: "جلسة استشارة فردية",
-        description: "جلسة استشارة شخصية لفهم وضعك الحالي ووضع خطة العمل المناسبة لكِ.",
-      },
-      {
-        slug: "break-free",
-        name: "Break Free Mini Course",
-        tagline: "Shift Your Eating Behavior In A Week",
-        description: "كورس مكثّف خلال أسبوع لتغيير سلوكك الغذائي والتحرر من العادات القديمة.",
       },
     ],
   },
