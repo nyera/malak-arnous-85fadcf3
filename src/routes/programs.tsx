@@ -13,9 +13,9 @@ export const Route = createFileRoute("/programs")({
   head: () => ({
     meta: [
       { title: "الخدمات — ملاك عرنوس" },
-      { name: "description", content: "خدمات ملاك عرنوس: The Weight Shift, Heal and Receive, خدمة كتابة الـ Tapping Script, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
+      { name: "description", content: "خدمات ملاك عرنوس: برنامج The Weight Shift، برنامج Heal and Receive، وجلسة One-on-One Healing Session." },
       { property: "og:title", content: "الخدمات — ملاك عرنوس" },
-      { property: "og:description", content: "خدمات ملاك عرنوس: The Weight Shift, Heal and Receive, خدمة كتابة الـ Tapping Script, Tapping Circle, جلسات فردية، استشارات، وكورس Break Free." },
+      { property: "og:description", content: "خدمات ملاك عرنوس: برنامج The Weight Shift، برنامج Heal and Receive، وجلسة One-on-One Healing Session." },
       { property: "og:url", content: "https://malakarnoushealing369.com/programs" },
       { property: "og:image", content: "https://malakarnoushealing369.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -37,7 +37,7 @@ function ServicesPage() {
       </section>
 
       <section className="pb-24">
-        <div className="container-x grid md:grid-cols-2 gap-6 items-stretch">
+        <div className="container-x grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {t.services.items.map((s, i) => (
             <FadeIn key={s.slug} delay={i * 0.08}>
               <div className="p-8 lg:p-10 rounded-sm border border-border bg-surface hover-lift h-full flex flex-col">
@@ -48,13 +48,7 @@ function ServicesPage() {
                   {s.link ? (
                     <Link to={s.link}><CTAButton variant="outline" icon={<ArrowRight className="w-4 h-4" />}>{t.cta.readMore}</CTAButton></Link>
                   ) : null}
-                  {s.slug === "tapping-script" ? (
-                    <CTAButton href={TAPPING_PAY_URL} external size="sm" icon={<ArrowRight className="w-4 h-4" />}>
-                      {t.tappingScript.ctaOrder}
-                    </CTAButton>
-                  ) : (
-                    <JoinNowButton size="sm" />
-                  )}
+                  <JoinNowButton size="sm" />
                 </div>
 
               </div>
