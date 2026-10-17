@@ -5,7 +5,8 @@ import { SectionHeader } from "@/components/site/SectionHeader";
 import { CTAButton, JoinNowButton } from "@/components/site/CTAButton";
 import { TelegramCTA } from "@/components/site/TelegramCTA";
 import { FadeIn } from "@/components/site/Misc";
-import { TAPPING_PAY_URL, brand } from "@/data/content";
+import { brand } from "@/data/content";
+
 
 
 export const Route = createFileRoute("/programs")({
