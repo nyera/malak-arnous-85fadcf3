@@ -120,18 +120,6 @@ const ar = {
         tagline: "جلسة شفاء فردية",
         description: "جلسة فردية عميقة لتحرير المشاعر والصدمات المخزّنة في الجهاز العصبي.",
       },
-      {
-        slug: "one-on-one-consultation",
-        name: "One-on-One Consultation",
-        tagline: "جلسة استشارة فردية",
-        description: "جلسة استشارة شخصية لفهم وضعك الحالي ووضع خطة العمل المناسبة لكِ.",
-      },
-      {
-        slug: "break-free",
-        name: "Break Free Mini Course",
-        tagline: "Shift Your Eating Behavior In A Week",
-        description: "كورس مكثّف خلال أسبوع لتغيير سلوكك الغذائي والتحرر من العادات القديمة.",
-      },
     ],
   },
   theShift: {
