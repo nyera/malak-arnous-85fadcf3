@@ -251,3 +251,21 @@
 @utility animate-ember-pulse {
   animation: ember-pulse 6s ease-in-out infinite;
 }
+
+/* Webinar page palette */
+:root {
+  --wb-cream: oklch(0.975 0.014 80);
+  --wb-blush: oklch(0.93 0.035 15);
+  --wb-rose: oklch(0.68 0.07 10);
+  --wb-gold: oklch(0.72 0.08 80);
+  --wb-plum: oklch(0.3 0.07 350);
+  --wb-plum-foreground: oklch(0.975 0.014 80);
+}
+@theme inline {
+  --color-wb-cream: var(--wb-cream);
+  --color-wb-blush: var(--wb-blush);
+  --color-wb-rose: var(--wb-rose);
+  --color-wb-gold: var(--wb-gold);
+  --color-wb-plum: var(--wb-plum);
+  --color-wb-plum-foreground: var(--wb-plum-foreground);
+}

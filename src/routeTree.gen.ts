@@ -20,6 +20,8 @@ import { Route as TappingScriptRouteImport } from './routes/tapping-script'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as TheShiftRouteImport } from './routes/the-shift'
 import { Route as TheWeightShiftSessionRouteImport } from './routes/the-weight-shift-session'
+import { Route as WebinarRouteImport } from './routes/webinar'
+import { Route as WebinarThankYouRouteImport } from './routes/webinar_.thank-you'
 import { Route as ApiPublicSurveyRouteImport } from './routes/api/public/survey'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
@@ -78,6 +80,16 @@ const TheWeightShiftSessionRoute = TheWeightShiftSessionRouteImport.update({
   path: '/the-weight-shift-session',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WebinarRoute = WebinarRouteImport.update({
+  id: '/webinar',
+  path: '/webinar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WebinarThankYouRoute = WebinarThankYouRouteImport.update({
+  id: '/webinar_/thank-you',
+  path: '/webinar/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicSurveyRoute = ApiPublicSurveyRouteImport.update({
   id: '/api/public/survey',
   path: '/api/public/survey',
@@ -102,6 +114,8 @@ export interface FileRoutesByFullPath {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/webinar': typeof WebinarRoute
+  '/webinar/thank-you': typeof WebinarThankYouRoute
   '/api/public/survey': typeof ApiPublicSurveyRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -117,6 +131,8 @@ export interface FileRoutesByTo {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/webinar': typeof WebinarRoute
+  '/webinar/thank-you': typeof WebinarThankYouRoute
   '/api/public/survey': typeof ApiPublicSurveyRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -133,6 +149,8 @@ export interface FileRoutesById {
   '/testimonials': typeof TestimonialsRoute
   '/the-shift': typeof TheShiftRoute
   '/the-weight-shift-session': typeof TheWeightShiftSessionRoute
+  '/webinar': typeof WebinarRoute
+  '/webinar_/thank-you': typeof WebinarThankYouRoute
   '/api/public/survey': typeof ApiPublicSurveyRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -150,6 +168,8 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/webinar'
+    | '/webinar/thank-you'
     | '/api/public/survey'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
@@ -165,6 +185,8 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/webinar'
+    | '/webinar/thank-you'
     | '/api/public/survey'
     | '/lovable/email/transactional/preview'
   id:
@@ -180,6 +202,8 @@ export interface FileRouteTypes {
     | '/testimonials'
     | '/the-shift'
     | '/the-weight-shift-session'
+    | '/webinar'
+    | '/webinar_/thank-you'
     | '/api/public/survey'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
@@ -196,6 +220,8 @@ export interface RootRouteChildren {
   TestimonialsRoute: typeof TestimonialsRoute
   TheShiftRoute: typeof TheShiftRoute
   TheWeightShiftSessionRoute: typeof TheWeightShiftSessionRoute
+  WebinarRoute: typeof WebinarRoute
+  WebinarThankYouRoute: typeof WebinarThankYouRoute
   ApiPublicSurveyRoute: typeof ApiPublicSurveyRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
@@ -279,6 +305,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheWeightShiftSessionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/webinar': {
+      id: '/webinar'
+      path: '/webinar'
+      fullPath: '/webinar'
+      preLoaderRoute: typeof WebinarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/webinar_/thank-you': {
+      id: '/webinar_/thank-you'
+      path: '/webinar/thank-you'
+      fullPath: '/webinar/thank-you'
+      preLoaderRoute: typeof WebinarThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/survey': {
       id: '/api/public/survey'
       path: '/api/public/survey'
@@ -308,6 +348,8 @@ const rootRouteChildren: RootRouteChildren = {
   TestimonialsRoute: TestimonialsRoute,
   TheShiftRoute: TheShiftRoute,
   TheWeightShiftSessionRoute: TheWeightShiftSessionRoute,
+  WebinarRoute: WebinarRoute,
+  WebinarThankYouRoute: WebinarThankYouRoute,
   ApiPublicSurveyRoute: ApiPublicSurveyRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }

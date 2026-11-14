@@ -62,3 +62,8 @@ export const instagramPosts = [
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=600&fit=crop",
   "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=600&fit=crop",
 ];
+
+// Zoho Webinar registration (Zoho sends confirmation + personal join link)
+export const ZOHO_WEBINAR_URL = "https://live.zoho.com/dngk-qol-hsz";
+// Fill these when confirmed; empty = "announced soon" message is shown.
+export const WEBINAR = { date: "", time: "", timezone: "" };
