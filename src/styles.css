@@ -255,8 +255,8 @@
 /* Webinar page palette */
 :root {
   --wb-cream: oklch(0.975 0.014 80);
-  --wb-blush: oklch(0.93 0.035 15);
-  --wb-rose: oklch(0.68 0.07 10);
+  --wb-blush: color-mix(in oklab, #DA8D79 30%, white);
+  --wb-rose: #DA8D79;
   --wb-gold: oklch(0.72 0.08 80);
   --wb-plum: oklch(0.3 0.07 350);
   --wb-plum-foreground: oklch(0.975 0.014 80);
