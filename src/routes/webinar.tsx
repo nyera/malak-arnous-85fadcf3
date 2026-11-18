@@ -84,7 +84,7 @@ function ZohoForm() {
       <input id="wb-last" name="REGISTRATIONCF1" required maxLength={100} placeholder="اسم العائلة *" className={field} />
       <label className="sr-only" htmlFor="wb-email">البريد الإلكتروني</label>
       <input id="wb-email" name="EMAIL" type="email" required maxLength={251} placeholder="البريد الإلكتروني *" dir="rtl" className={field} />
-      <button type="submit" className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-wb-gold px-6 py-3.5 text-[15px] font-semibold text-wb-plum shadow-lg shadow-wb-gold/25 transition hover:-translate-y-0.5 hover:shadow-xl">
+      <button type="submit" className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-wb-yellow px-6 py-3.5 text-[15px] font-bold text-wb-plum shadow-lg shadow-wb-yellow/40 transition hover:-translate-y-0.5 hover:brightness-105 hover:shadow-xl">
         <Sparkles className="w-4 h-4" aria-hidden />
         {PRIMARY}
       </button>

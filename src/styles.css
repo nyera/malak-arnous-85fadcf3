@@ -258,6 +258,7 @@
   --wb-blush: color-mix(in oklab, #DA8D79 30%, white);
   --wb-rose: #DA8D79;
   --wb-gold: oklch(0.72 0.08 80);
+  --wb-yellow: #F5C518;
   --wb-plum: oklch(0.3 0.07 350);
   --wb-plum-dark: oklch(0.24 0.055 350);
   --wb-plum-deep: oklch(0.18 0.04 350);
@@ -268,6 +269,7 @@
   --color-wb-blush: var(--wb-blush);
   --color-wb-rose: var(--wb-rose);
   --color-wb-gold: var(--wb-gold);
+  --color-wb-yellow: var(--wb-yellow);
   --color-wb-plum: var(--wb-plum);
   --color-wb-plum-dark: var(--wb-plum-dark);
   --color-wb-plum-deep: var(--wb-plum-deep);
