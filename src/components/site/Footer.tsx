@@ -8,7 +8,7 @@ import logoAsset from "@/assets/logo.png.asset.json";
 export function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="border-t border-border bg-surface mt-20">
+    <footer className="border-t border-border bg-surface">
       <div className="container-x py-20">
         <div className="grid lg:grid-cols-[2fr_1fr_1fr_1fr] gap-12">
           <div className="space-y-5 max-w-sm">

@@ -115,10 +115,10 @@ function DateBox({ live, dark }: { live?: boolean; dark?: boolean }) {
   );
 }
 
-function Section({ children, tone = "cream", id }: { children: React.ReactNode; tone?: "cream" | "ivory" | "blush"; id?: string }) {
+function Section({ children, tone = "cream", id, last }: { children: React.ReactNode; tone?: "cream" | "ivory" | "blush"; id?: string; last?: boolean }) {
   const bg = tone === "blush" ? "bg-wb-blush/50" : tone === "ivory" ? "bg-background" : "bg-wb-cream";
   return (
-    <section id={id} className={bg + " py-16 md:py-24"}>
+    <section id={id} className={bg + (last ? " pt-16 pb-10 md:pt-24 md:pb-14" : " py-16 md:py-24")}>
       <div className="container-x max-w-3xl">
         <FadeIn>{children}</FadeIn>
       </div>
@@ -171,7 +171,7 @@ const forYou = [
 
 function WebinarPage() {
   return (
-    <div dir="rtl" className="bg-wb-cream text-foreground pb-24 md:pb-0">
+    <div dir="rtl" className="bg-wb-cream text-foreground pb-20 md:pb-0">
       {/* HERO — light cream; centered headline, then portrait + registration form */}
       <section className="relative overflow-hidden bg-wb-cream">
         <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-wb-blush/60 blur-3xl" aria-hidden />
@@ -325,7 +325,7 @@ function WebinarPage() {
       </Section>
 
       {/* WHY NOW */}
-      <Section tone="ivory">
+      <Section tone="cream" last>
         <Divider />
         <H2>لماذا يجب أن تحضري الآن؟</H2>
         <p className="text-[16px] leading-loose text-foreground/85">الاستمرار في نفس النمط القديم يعني استمرار التكلفة التي تدفعينها يومياً: بقاء الأكل كشغل شاغل يستهلك تفكيرك بين الوجبات، فقدان الثقة بوعودك لنفسك مع كل "بداية جديدة" تُكسر، والبقاء في دوامة خسارة الوزن واستعادته. حضوركِ لهذا التدريب سيمنحكِ الفهم العصبي والأداة العملية لتغيير هذه المعادلة من الداخل، وبناء علاقة أهدأ مع الطعام لا تعتمد على مقاومتك المستمرة.</p>
