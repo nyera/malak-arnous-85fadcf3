@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Check, CalendarDays, Clock, Globe, Gift, Sparkles, Heart, Zap, Sprout } from "lucide-react";
 import { FadeIn } from "@/components/site/Misc";
-import { ZOHO_WEBINAR_URL, ZOHO_WEBINAR_EMBED_URL, WEBINAR } from "@/data/content";
+import { WEBINAR } from "@/data/content";
 import portraitAsset from "@/assets/malak-portrait.png.asset.json";
 
 const TITLE = "ويبينار مجاني: كيف تغيّرين علاقتك بالأكل من الداخل — ملاك عرنوس";
@@ -32,9 +33,7 @@ const LEARN_CTA = "سجلي مجاناً الآن واكتشفي الطريقة"
 function RegisterButton({ label = PRIMARY, className = "" }: { label?: string; className?: string }) {
   return (
     <a
-      href={ZOHO_WEBINAR_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      href="#register"
       className={
         "inline-flex items-center justify-center gap-2 rounded-full bg-wb-rose text-wb-plum-foreground px-7 py-3.5 text-[15px] font-semibold shadow-lg shadow-wb-rose/25 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wb-gold focus-visible:ring-offset-2 " +
         className
@@ -59,6 +58,37 @@ function ScrollButton({ label, className = "" }: { label: string; className?: st
       <Sparkles className="w-4 h-4" aria-hidden />
       {label}
     </a>
+  );
+}
+
+/* Native Zoho Webinar registration form (posts directly to Zoho) */
+function ZohoForm() {
+  const [tz, setTz] = useState("Asia/Riyadh");
+  useEffect(() => {
+    try { const z = Intl.DateTimeFormat().resolvedOptions().timeZone; if (z) setTz(z); } catch {}
+  }, []);
+  const field = "w-full rounded-xl border border-input bg-wb-cream/50 px-4 py-3 text-[15px] text-foreground placeholder:text-muted-foreground focus:border-wb-rose focus:outline-none focus:ring-2 focus:ring-wb-rose/30";
+  return (
+    <form action="https://webinar.zoho.com/meeting/WebForm" method="POST" acceptCharset="UTF-8" target="_blank" className="space-y-3">
+      <input type="hidden" name="xnQsjsdp" value="a2cc7c834290bab6565ffd4f91d1310c1a3328767c646cd22d9eb38ab34b32ec" />
+      <input type="hidden" name="zc_gad" value="" />
+      <input type="hidden" name="xmIwtLD" value="9805e272e1b2c9f5156cc427ac7459596d773bb8cb8818330eec6510a1e22d05c00f716f9d4ae6d49877ccfd148f06b9" />
+      <input type="hidden" name="actionType" value="UmVnaXN0cmF0aW9ucw==" />
+      <input type="hidden" name="returnURL" value="https://webinar.zoho.com/postregister" />
+      <input type="hidden" name="sysId" value="5774894000000012098" />
+      <input type="hidden" name="isEmbedForm" value="true" />
+      <input type="hidden" name="timezone" value={tz} />
+      <label className="sr-only" htmlFor="wb-first">الاسم الأول</label>
+      <input id="wb-first" name="NAME" required maxLength={40} placeholder="الاسم الأول *" className={field} />
+      <label className="sr-only" htmlFor="wb-last">اسم العائلة</label>
+      <input id="wb-last" name="REGISTRATIONCF1" required maxLength={100} placeholder="اسم العائلة *" className={field} />
+      <label className="sr-only" htmlFor="wb-email">البريد الإلكتروني</label>
+      <input id="wb-email" name="EMAIL" type="email" required maxLength={251} placeholder="البريد الإلكتروني *" dir="rtl" className={field} />
+      <button type="submit" className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-wb-gold px-6 py-3.5 text-[15px] font-semibold text-wb-plum shadow-lg shadow-wb-gold/25 transition hover:-translate-y-0.5 hover:shadow-xl">
+        <Sparkles className="w-4 h-4" aria-hidden />
+        {PRIMARY}
+      </button>
+    </form>
   );
 }
 
@@ -147,78 +177,72 @@ const forYou = [
 function WebinarPage() {
   return (
     <div dir="rtl" className="bg-wb-cream text-foreground pb-24 md:pb-0">
-      {/* HERO — dark premium plum, two-column: messaging (right) + registration card (left) */}
-      <section className="relative overflow-hidden bg-wb-plum-deep text-wb-plum-foreground">
-        {/* soft blush/gold glow elements */}
-        <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-wb-rose/20 blur-3xl" aria-hidden />
+      {/* HERO — light cream; centered headline, then portrait + registration form */}
+      <section className="relative overflow-hidden bg-wb-cream">
+        <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-wb-blush/60 blur-3xl" aria-hidden />
         <div className="pointer-events-none absolute top-1/3 -right-24 h-80 w-80 rounded-full bg-wb-gold/15 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-wb-plum/60 blur-3xl" aria-hidden />
 
-        <div className="container-x relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2">
-          {/* Messaging (right side in RTL) */}
+        <div className="container-x relative py-12 md:py-16">
           <FadeIn>
-            <div className="text-center lg:text-right">
-              <p className="inline-block rounded-full border border-wb-gold/40 bg-wb-plum-foreground/5 px-4 py-1.5 text-[13px] leading-relaxed text-wb-plum-foreground/90 mb-6">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="inline-block rounded-full border border-wb-gold/40 bg-background/70 px-4 py-1.5 text-[13px] leading-relaxed text-wb-plum mb-5">
                 ويبينار تدريبي مجاني للسيدات اللواتي تعبن من وعود «سأبدأ دايت من جديد يوم الإثنين»
               </p>
-              <h1 className="display-xl mb-6 leading-[1.35] text-wb-plum-foreground">
+              <h1 className="display-xl mb-5 leading-[1.35] text-wb-plum">
                 كيف تغيّرين علاقتك بالأكل وتخسرين الوزن من الداخل إلى الخارج... بدون دايت جديد أو حرمان.
               </h1>
-              <div className="space-y-4 text-wb-plum-foreground/80 text-[16px] leading-loose">
+              <div className="space-y-3 text-foreground/80 text-[16px] leading-loose">
                 <p>تعرفين تماماً ما المفروض أن تأكليه، لكنكِ ترجعين للأكل العاطفي مع كل ضغط، تعب، أو يوم صعب؟</p>
                 <p>هذا اللقاء المباشر مصمم ليساعدكِ تفهمي العلاقة بين مشاعرك، استجابتك الداخلية، وعلاقتك بالأكل بطريقة مختلفة عن الدايت والمنع والحرمان.</p>
               </div>
-              <div className="mt-8"><DateBox dark /></div>
             </div>
           </FadeIn>
 
-          {/* Registration card (left side in RTL) — soft gold border/glow */}
-          <FadeIn>
-            <div
-              id="register"
-              className="relative mx-auto w-full max-w-md scroll-mt-24 rounded-[2rem] border border-wb-gold/50 bg-wb-plum-dark/80 p-8 text-center shadow-[0_0_60px_-15px] shadow-wb-gold/30 backdrop-blur"
-            >
-              <img
-                src={portraitAsset.url}
-                alt="ملاك عرنوس"
-                className="mx-auto -mt-20 mb-5 h-24 w-24 rounded-full border-2 border-wb-gold/60 object-cover shadow-lg"
-              />
-              <h2 className="text-xl font-semibold text-wb-plum-foreground mb-2">{PRIMARY}</h2>
-              <p className="text-[14px] leading-loose text-wb-plum-foreground/70 mb-6">
-                التسجيل مجاني — سيصلك رابط الدخول وتفاصيل الويبينار على بريدك الإلكتروني.
-              </p>
-              {/* Official Zoho registration embed */}
-              <div className="overflow-hidden rounded-2xl border border-wb-gold/30 bg-wb-plum-foreground/5">
-                <iframe
-                  src={ZOHO_WEBINAR_EMBED_URL}
-                  title="التسجيل في الويبينار"
-                  className="block h-[240px] w-full"
-                  frameBorder={0}
-                />
+          <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-[1.6fr_1fr]">
+            <FadeIn>
+              <figure className="h-full">
+                <div className="relative h-full min-h-[320px] overflow-hidden rounded-3xl border border-wb-gold/30 bg-wb-blush/40 shadow-lg shadow-wb-rose/10">
+                  <img src={portraitAsset.url} alt="ملاك عرنوس" className="absolute inset-0 h-full w-full object-cover object-top" />
+                </div>
+                <figcaption className="mt-2 text-center text-[13px] text-muted-foreground">مع ملاك عرنوس</figcaption>
+              </figure>
+            </FadeIn>
+            <FadeIn>
+              <div id="register" className="scroll-mt-24 overflow-hidden rounded-3xl border border-wb-gold/40 bg-background shadow-xl shadow-wb-rose/15">
+                <div className="flex items-center justify-center gap-2 bg-wb-rose px-4 py-3 text-[14px] font-semibold text-wb-plum-foreground">
+                  <CalendarDays className="h-4 w-4" aria-hidden />
+                  مقاعد محدودة — التسجيل مجاني
+                </div>
+                <div className="p-6">
+                  <div className="mb-5 space-y-1.5 text-center text-[14px] text-wb-plum">
+                    <p className="flex items-center justify-center gap-2"><CalendarDays className="w-4 h-4 text-wb-gold" aria-hidden />{WEBINAR.date}</p>
+                    <p className="flex items-center justify-center gap-2"><Clock className="w-4 h-4 text-wb-gold" aria-hidden />{WEBINAR.time} — {WEBINAR.timezone}</p>
+                  </div>
+                  <ZohoForm />
+                  <p className="mt-4 text-center text-[12px] leading-relaxed text-muted-foreground">
+                    سيصلك رابط الدخول وتفاصيل الويبينار على بريدك الإلكتروني.
+                  </p>
+                </div>
               </div>
-              <p className="mt-4 flex items-center justify-center gap-2 text-[12px] text-wb-plum-foreground/60" dir="ltr">
-                <Globe className="w-3.5 h-3.5 text-wb-gold" aria-hidden />
-                Online Live Webinar
-              </p>
-            </div>
-          </FadeIn>
+            </FadeIn>
+          </div>
         </div>
       </section>
 
-      {/* QUICK VALUE CARDS — 3 premium dark cards right under the hero */}
-      <section className="relative bg-wb-plum-deep pb-16 md:pb-24 pt-2">
+      {/* QUICK VALUE CARDS */}
+      <section className="relative bg-wb-cream pb-16 md:pb-24 pt-2">
         <div className="container-x max-w-5xl">
           <FadeIn>
             <div className="grid gap-6 md:grid-cols-3">
               {quickValues.map((q) => (
                 <article
                   key={q.title}
-                  className="rounded-3xl border border-wb-gold/25 bg-wb-plum-dark/70 p-7 text-center shadow-lg shadow-black/20 backdrop-blur transition hover:-translate-y-1 hover:border-wb-gold/50"
+                  className="rounded-3xl border border-wb-gold/30 bg-background p-7 text-center shadow-sm transition hover:-translate-y-1 hover:border-wb-gold/60"
                 >
-                  <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-wb-gold/40 bg-wb-plum-foreground/5">
-                    <q.icon className="h-5 w-5 text-wb-gold" aria-hidden />
+                  <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-wb-blush/60">
+                    <q.icon className="h-5 w-5 text-wb-rose" aria-hidden />
                   </span>
-                  <h3 className="text-[17px] font-semibold leading-relaxed text-wb-plum-foreground">{q.title}</h3>
+                  <h3 className="text-[17px] font-semibold leading-relaxed text-wb-plum">{q.title}</h3>
                 </article>
               ))}
             </div>
@@ -258,18 +282,18 @@ function WebinarPage() {
       </section>
 
       {/* WHAT YOU WILL LEARN — dark plum */}
-      <section className="relative overflow-hidden bg-wb-plum-deep py-16 md:py-24 text-wb-plum-foreground">
+      <section className="relative overflow-hidden bg-wb-blush/40 py-16 md:py-24">
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-wb-rose/15 blur-3xl" aria-hidden />
         <div className="container-x relative max-w-5xl">
           <FadeIn>
-            <Divider dark />
-            <H2 dark>في هذا التدريب، ستكتشفين:</H2>
+            <Divider />
+            <H2>في هذا التدريب، ستكتشفين:</H2>
             <div className="grid gap-6 md:grid-cols-3">
               {secrets.map((s, i) => (
-                <article key={s.title} className="rounded-3xl border border-wb-gold/25 bg-wb-plum-dark/70 p-7 shadow-lg shadow-black/20 backdrop-blur">
-                  <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-wb-rose/20 text-wb-gold font-semibold border border-wb-gold/30">{i + 1}</span>
-                  <h3 className="text-lg font-semibold text-wb-plum-foreground mb-3 leading-relaxed">{s.title}</h3>
-                  <p className="text-[15px] leading-loose text-wb-plum-foreground/70">{s.body}</p>
+                <article key={s.title} className="rounded-3xl border border-wb-gold/30 bg-background p-7 shadow-sm">
+                  <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-wb-rose text-wb-plum-foreground font-semibold">{i + 1}</span>
+                  <h3 className="text-lg font-semibold text-wb-plum mb-3 leading-relaxed">{s.title}</h3>
+                  <p className="text-[15px] leading-loose text-foreground/75">{s.body}</p>
                 </article>
               ))}
             </div>
@@ -376,16 +400,16 @@ function WebinarPage() {
       </section>
 
       {/* FINAL — dark plum */}
-      <section className="relative overflow-hidden bg-wb-plum-deep py-16 md:py-24 text-wb-plum-foreground">
+      <section className="relative overflow-hidden bg-wb-blush/40 py-16 md:py-24">
         <div className="pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-wb-gold/15 blur-3xl" aria-hidden />
         <div className="container-x relative max-w-3xl text-center">
           <FadeIn>
-            <h2 className="display-lg mb-8 text-wb-plum-foreground">جاهزة تبدأي تفهمي علاقتك بالأكل بطريقة مختلفة؟</h2>
-            <DateBox live dark />
+            <h2 className="display-lg mb-8 text-wb-plum">جاهزة تبدأي تفهمي علاقتك بالأكل بطريقة مختلفة؟</h2>
+            <DateBox live />
             <div className="mt-8">
               <RegisterButton className="px-8 py-4 text-base" />
             </div>
-            <p className="mt-4 text-[13px] opacity-80">التسجيل مجاني — بعد التسجيل رح يوصلك إيميل التأكيد ورابط الدخول الخاص فيكِ.</p>
+            <p className="mt-4 text-[13px] text-muted-foreground">التسجيل مجاني — بعد التسجيل رح يوصلك إيميل التأكيد ورابط الدخول الخاص فيكِ.</p>
           </FadeIn>
         </div>
       </section>
