@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Check, CalendarDays, Clock, Globe, Gift, Sparkles } from "lucide-react";
+import { Check, CalendarDays, Clock, Globe, Gift, Sparkles, Heart, Zap, Sprout } from "lucide-react";
 import { FadeIn } from "@/components/site/Misc";
 import { ZOHO_WEBINAR_URL, WEBINAR } from "@/data/content";
 import portraitAsset from "@/assets/malak-portrait.png.asset.json";
@@ -28,6 +28,7 @@ export const Route = createFileRoute("/webinar")({
 const PRIMARY = "احجزي مقعدك المجاني الآن";
 const LEARN_CTA = "سجلي مجاناً الآن واكتشفي الطريقة";
 
+/* Button that opens the Zoho registration page (used inside the registration card + final section) */
 function RegisterButton({ label = PRIMARY, className = "" }: { label?: string; className?: string }) {
   return (
     <a
@@ -35,7 +36,7 @@ function RegisterButton({ label = PRIMARY, className = "" }: { label?: string; c
       target="_blank"
       rel="noopener noreferrer"
       className={
-        "inline-flex items-center justify-center gap-2 rounded-full bg-wb-plum text-wb-plum-foreground px-7 py-3.5 text-[15px] font-semibold shadow-lg shadow-wb-plum/20 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wb-gold focus-visible:ring-offset-2 " +
+        "inline-flex items-center justify-center gap-2 rounded-full bg-wb-rose text-wb-plum-foreground px-7 py-3.5 text-[15px] font-semibold shadow-lg shadow-wb-rose/25 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wb-gold focus-visible:ring-offset-2 " +
         className
       }
     >
@@ -45,18 +46,29 @@ function RegisterButton({ label = PRIMARY, className = "" }: { label?: string; c
   );
 }
 
-function Cta({ label }: { label?: string }) {
+/* Button that scrolls to the registration card in the hero */
+function ScrollButton({ label, className = "" }: { label: string; className?: string }) {
   return (
-    <div className="mt-10 flex justify-center">
-      <RegisterButton label={label} />
-    </div>
+    <a
+      href="#register"
+      className={
+        "inline-flex items-center justify-center gap-2 rounded-full bg-wb-rose text-wb-plum-foreground px-7 py-3.5 text-[15px] font-semibold shadow-lg shadow-wb-rose/25 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wb-gold focus-visible:ring-offset-2 " +
+        className
+      }
+    >
+      <Sparkles className="w-4 h-4" aria-hidden />
+      {label}
+    </a>
   );
 }
 
-function DateBox({ live }: { live?: boolean }) {
+function DateBox({ live, dark }: { live?: boolean; dark?: boolean }) {
   const has = WEBINAR.date || WEBINAR.time;
+  const tone = dark
+    ? "border-wb-gold/40 bg-wb-plum-foreground/5 text-wb-plum-foreground"
+    : "border-wb-gold/40 bg-background/70 text-wb-plum";
   return (
-    <div className="inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-2xl border border-wb-gold/40 bg-background/70 px-6 py-4 text-wb-plum">
+    <div className={"inline-flex flex-wrap items-center justify-center gap-x-6 gap-y-2 rounded-2xl border px-6 py-4 " + tone}>
       {has ? (
         <>
           <span className="flex items-center gap-2"><CalendarDays className="w-4 h-4 text-wb-gold" aria-hidden />{WEBINAR.date}</span>
@@ -84,30 +96,36 @@ function Section({ children, tone = "cream", id }: { children: React.ReactNode; 
   );
 }
 
-function H2({ children }: { children: React.ReactNode }) {
-  return <h2 className="display-lg text-wb-plum text-center mb-8">{children}</h2>;
+function H2({ children, dark }: { children: React.ReactNode; dark?: boolean }) {
+  return <h2 className={"display-lg text-center mb-8 " + (dark ? "text-wb-plum-foreground" : "text-wb-plum")}>{children}</h2>;
 }
 
-const Divider = () => (
+const Divider = ({ dark }: { dark?: boolean }) => (
   <div className="flex items-center justify-center gap-3 mb-6" aria-hidden>
-    <span className="h-px w-10 bg-wb-gold/60" />
+    <span className={"h-px w-10 " + (dark ? "bg-wb-gold/70" : "bg-wb-gold/60")} />
     <span className="h-1.5 w-1.5 rotate-45 bg-wb-gold" />
-    <span className="h-px w-10 bg-wb-gold/60" />
+    <span className={"h-px w-10 " + (dark ? "bg-wb-gold/70" : "bg-wb-gold/60")} />
   </div>
 );
+
+const quickValues = [
+  { icon: Heart, title: "افهمي الرابط بين مشاعرك والأكل" },
+  { icon: Zap, title: "اكتشفي لماذا الإرادة وحدها لا تكفي" },
+  { icon: Sprout, title: "ابدئي التغيير من الجذور وليس من المنع" },
+];
 
 const secrets = [
   {
     title: "السر الأول: تهدئة جهازك العصبي قبل صحنك",
-    body: "لماذا خطوتك القادمة لا يجب أن تبدأ بمعركة يومية لمنع أكلة جديدة، بل بفهم الرابط بين تجاربك، مشاعرك، واللجوء للأكل، والتعرف على استخدام الـ EFT (التايبينغ).",
+    body: "لماذا خطوتك القادمة لخسارة الوزن لا يجب أن تبدأ بمعركة يومية لمنع أكلة جديدة، بل بفك الرابط بين ماضيكِ، مشاعرك، واللجوء للأكل باستخدام الـ EFT (التايبينغ).",
   },
   {
     title: "السر الثاني: خرافة قوة الإرادة",
-    body: "لماذا لا تحتاجين إلى أن تصبحي «أقوى إرادة» حتى تبدأي بالتغيير، وكيف يمكن العمل على الاستجابة الداخلية بدل الدخول كل مرة في معركة جديدة مع الرغبة بالأكل.",
+    body: "لماذا لا تحتاجين إلى أن تصبحي «أقوى إرادة» لكي تتغيري، وكيف نهدئ الجهاز العصبي حتى تختفي الرغبة الملحّة والصرخة الداخلية من الأساس.",
   },
   {
     title: "السر الثالث: التغيير وسط الفوضى",
-    body: "كيف تبدأين بالتعامل مع نمط الأكل العاطفي وسط يومك المليء بالضغط والفوضى، بدون انتظار أن تصبح حياتك وروتينك \"مثاليين\".",
+    body: "كيف تسيطرين على نمط الأكل العاطفي في قلب يومك المليء بالضغط والفوضى، دون أن تضطري لانتظار أن تصبح ظروف حياتك وروتينك \"مثالية\".",
   },
 ];
 
@@ -129,67 +147,147 @@ const forYou = [
 function WebinarPage() {
   return (
     <div dir="rtl" className="bg-wb-cream text-foreground pb-24 md:pb-0">
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-wb-blush/60 via-wb-cream to-wb-cream pt-14 pb-16 md:pt-24 md:pb-24">
-        <div className="container-x max-w-3xl text-center">
+      {/* HERO — dark premium plum, two-column: messaging (right) + registration card (left) */}
+      <section className="relative overflow-hidden bg-wb-plum-deep text-wb-plum-foreground">
+        {/* soft blush/gold glow elements */}
+        <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-wb-rose/20 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute top-1/3 -right-24 h-80 w-80 rounded-full bg-wb-gold/15 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-wb-plum/60 blur-3xl" aria-hidden />
+
+        <div className="container-x relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2">
+          {/* Messaging (right side in RTL) */}
           <FadeIn>
-            <p className="inline-block rounded-full border border-wb-rose/40 bg-background/60 px-4 py-1.5 text-[13px] leading-relaxed text-wb-plum mb-6">
-              ويبينار تدريبي مجاني للسيدات اللواتي تعبن من وعود «سأبدأ دايت من جديد يوم الإثنين»
-            </p>
-            <h1 className="display-xl text-wb-plum mb-6 leading-[1.35]">
-              كيف تغيّرين علاقتك بالأكل وتخسرين الوزن من الداخل إلى الخارج... بدون دايت جديد أو حرمان.
-            </h1>
-            <div className="space-y-4 text-muted-foreground text-[16px] leading-loose max-w-2xl mx-auto">
-              <p>تعرفين تماماً ما المفروض أن تأكليه، لكنكِ ترجعين للأكل العاطفي مع كل ضغط، تعب، أو يوم صعب؟</p>
-              <p>هذا اللقاء المباشر مصمم ليساعدكِ تفهمي العلاقة بين مشاعرك، استجابتك الداخلية، وعلاقتك بالأكل بطريقة مختلفة عن الدايت والمنع والحرمان.</p>
+            <div className="text-center lg:text-right">
+              <p className="inline-block rounded-full border border-wb-gold/40 bg-wb-plum-foreground/5 px-4 py-1.5 text-[13px] leading-relaxed text-wb-plum-foreground/90 mb-6">
+                ويبينار تدريبي مجاني للسيدات اللواتي تعبن من وعود «سأبدأ دايت من جديد يوم الإثنين»
+              </p>
+              <h1 className="display-xl mb-6 leading-[1.35] text-wb-plum-foreground">
+                كيف تغيّرين علاقتك بالأكل وتخسرين الوزن من الداخل إلى الخارج... بدون دايت جديد أو حرمان.
+              </h1>
+              <div className="space-y-4 text-wb-plum-foreground/80 text-[16px] leading-loose">
+                <p>تعرفين تماماً ما المفروض أن تأكليه، لكنكِ ترجعين للأكل العاطفي مع كل ضغط، تعب، أو يوم صعب؟</p>
+                <p>هذا اللقاء المباشر مصمم ليساعدكِ تفهمي العلاقة بين مشاعرك، استجابتك الداخلية، وعلاقتك بالأكل بطريقة مختلفة عن الدايت والمنع والحرمان.</p>
+              </div>
+              <div className="mt-8"><DateBox dark /></div>
             </div>
-            <div className="mt-8"><DateBox /></div>
-            <div className="mt-8"><RegisterButton className="text-base px-8 py-4" /></div>
-            <p className="mt-4 text-[13px] text-muted-foreground">
-              التسجيل مجاني — بعد التسجيل سيصلك إيميل التأكيد ورابط الدخول الخاص فيكِ.
-            </p>
+          </FadeIn>
+
+          {/* Registration card (left side in RTL) — soft gold border/glow */}
+          <FadeIn>
+            <div
+              id="register"
+              className="relative mx-auto w-full max-w-md scroll-mt-24 rounded-[2rem] border border-wb-gold/50 bg-wb-plum-dark/80 p-8 text-center shadow-[0_0_60px_-15px] shadow-wb-gold/30 backdrop-blur"
+            >
+              <img
+                src={portraitAsset.url}
+                alt="ملاك عرنوس"
+                className="mx-auto -mt-20 mb-5 h-24 w-24 rounded-full border-2 border-wb-gold/60 object-cover shadow-lg"
+              />
+              <h2 className="text-xl font-semibold text-wb-plum-foreground mb-2">{PRIMARY}</h2>
+              <p className="text-[14px] leading-loose text-wb-plum-foreground/70 mb-6">
+                التسجيل مجاني — سيصلك رابط الدخول وتفاصيل الويبينار على بريدك الإلكتروني.
+              </p>
+              {/* [ZOHO WEBINAR IFRAME HERE] — replaced with the official Zoho embed once provided */}
+              <RegisterButton className="w-full text-base px-8 py-4" />
+              <p className="mt-4 flex items-center justify-center gap-2 text-[12px] text-wb-plum-foreground/60" dir="ltr">
+                <Globe className="w-3.5 h-3.5 text-wb-gold" aria-hidden />
+                Online Live Webinar
+              </p>
+            </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* PROBLEM */}
-      <Section tone="ivory">
-        <Divider />
-        <H2>وجودكِ هنا ليس صدفة…</H2>
-        <div className="space-y-5 text-[16px] leading-loose text-foreground/85">
-          <p>ربما جرّبتِ الحميات، وعدّ السعرات، والصيام المتقطع، ومنعتِ نفسكِ من تناول الطعام.</p>
-          <p>كنتِ صادقة عندما وعدتِ نفسك بالالتزام، لكن بمجرد أن يمر عليكِ يوم مزعج، أو تتغير خططك، أو تشعري بالضغط... تجدين نفسك تعودين إلى الأكل بحثاً عن الراحة.</p>
-          <p>ثم تبدأ دوامة التأنيب، وتكتشفين أنكِ أكلتِ أكثر مما كنتِ تريدين.</p>
-          <p className="text-wb-plum font-semibold text-lg">المشكلة لم تكن في الطعام أبدًا، ولا في ضعف إرادتك.</p>
-          <p>الهدف من هذا اللقاء هو مساعدتكِ على فهم العلاقة بين المشاعر، التجارب السابقة، استجابة الجهاز العصبي، واللجوء للأكل كمساحة للراحة.</p>
-        </div>
-        <p className="mt-10 border-r-2 border-wb-gold pr-5 text-lg text-wb-plum leading-loose">
-          في هذا اللقاء المجاني المباشر، سأشاركك النهج المختلف الذي يساعدكِ تبدأي تفهمي هذه الدوامة من الداخل.
-        </p>
-      </Section>
-
-      {/* LEARN */}
-      <section className="bg-wb-cream py-16 md:py-24">
+      {/* QUICK VALUE CARDS — 3 premium dark cards right under the hero */}
+      <section className="relative bg-wb-plum-deep pb-16 md:pb-24 pt-2">
         <div className="container-x max-w-5xl">
           <FadeIn>
-            <Divider />
-            <H2>في هذا التدريب، ستكتشفين:</H2>
             <div className="grid gap-6 md:grid-cols-3">
-              {secrets.map((s, i) => (
-                <article key={s.title} className="rounded-3xl border border-wb-gold/30 bg-background p-7 shadow-sm">
-                  <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-wb-blush text-wb-plum font-semibold">{i + 1}</span>
-                  <h3 className="text-lg font-semibold text-wb-plum mb-3 leading-relaxed">{s.title}</h3>
-                  <p className="text-[15px] leading-loose text-muted-foreground">{s.body}</p>
+              {quickValues.map((q) => (
+                <article
+                  key={q.title}
+                  className="rounded-3xl border border-wb-gold/25 bg-wb-plum-dark/70 p-7 text-center shadow-lg shadow-black/20 backdrop-blur transition hover:-translate-y-1 hover:border-wb-gold/50"
+                >
+                  <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-wb-gold/40 bg-wb-plum-foreground/5">
+                    <q.icon className="h-5 w-5 text-wb-gold" aria-hidden />
+                  </span>
+                  <h3 className="text-[17px] font-semibold leading-relaxed text-wb-plum-foreground">{q.title}</h3>
                 </article>
               ))}
             </div>
-            <Cta label={LEARN_CTA} />
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* PROBLEM — light cream, split layout */}
+      <section className="bg-wb-cream py-16 md:py-24">
+        <div className="container-x max-w-5xl">
+          <FadeIn>
+            <div className="grid items-center gap-12 md:grid-cols-2">
+              <div>
+                <Divider />
+                <h2 className="display-lg text-wb-plum mb-8 text-center md:text-right">وجودكِ هنا ليس صدفة…</h2>
+                <div className="space-y-5 text-[16px] leading-loose text-foreground/85">
+                  <p>ربما جرّبتِ الحميات، وعدّ السعرات، والصيام المتقطع، ومنعتِ نفسكِ من تناول الطعام. كنتِ صادقة عندما وعدتِ نفسك بالالتزام، لكن بمجرد أن يمر عليكِ يوم مزعج، أو تتغير خططك، أو تشعري بالضغط... تجدين نفسك تعودين إلى الأكل بحثاً عن الراحة.</p>
+                  <p>ثم تبدأ دوامة التأنيب، وتكتشفين أنكِ أكلتِ أكثر مما كنتِ تريدين.</p>
+                  <p className="text-wb-plum font-semibold text-lg">المشكلة لم تكن في الطعام أبدًا، ولا في ضعف إرادتك. المشكلة في المشاعر والصدمات المخزّنة في جهازك العصبي التي تدفعك للأكل كطوق نجاة.</p>
+                </div>
+                <p className="mt-8 border-r-2 border-wb-gold pr-5 text-lg text-wb-plum leading-loose">
+                  في هذا اللقاء المجاني المباشر، سأشاركك النهج المختلف الذي سيحررك من هذه الدوامة.
+                </p>
+              </div>
+              {/* subtle abstract wellness visual */}
+              <div className="relative mx-auto aspect-square w-full max-w-sm" aria-hidden>
+                <div className="absolute inset-0 rounded-full bg-wb-blush/50 blur-2xl" />
+                <div className="absolute inset-8 rounded-full border border-wb-gold/40" />
+                <div className="absolute inset-16 rounded-full bg-gradient-to-br from-wb-rose/30 to-wb-gold/20 blur-sm" />
+                <div className="absolute inset-24 rounded-full bg-wb-plum/10 backdrop-blur-sm" />
+                <div className="absolute top-6 right-10 h-16 w-16 rounded-full bg-wb-gold/30 blur-md" />
+                <div className="absolute bottom-8 left-8 h-20 w-20 rounded-full bg-wb-rose/30 blur-md" />
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* WHAT YOU WILL LEARN — dark plum */}
+      <section className="relative overflow-hidden bg-wb-plum-deep py-16 md:py-24 text-wb-plum-foreground">
+        <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-wb-rose/15 blur-3xl" aria-hidden />
+        <div className="container-x relative max-w-5xl">
+          <FadeIn>
+            <Divider dark />
+            <H2 dark>في هذا التدريب، ستكتشفين:</H2>
+            <div className="grid gap-6 md:grid-cols-3">
+              {secrets.map((s, i) => (
+                <article key={s.title} className="rounded-3xl border border-wb-gold/25 bg-wb-plum-dark/70 p-7 shadow-lg shadow-black/20 backdrop-blur">
+                  <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-wb-rose/20 text-wb-gold font-semibold border border-wb-gold/30">{i + 1}</span>
+                  <h3 className="text-lg font-semibold text-wb-plum-foreground mb-3 leading-relaxed">{s.title}</h3>
+                  <p className="text-[15px] leading-loose text-wb-plum-foreground/70">{s.body}</p>
+                </article>
+              ))}
+            </div>
+            <div className="mt-10 flex justify-center">
+              <ScrollButton label={LEARN_CTA} />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ماذا لو — light transition banner */}
+      <section className="bg-background py-16 md:py-20">
+        <div className="container-x max-w-3xl text-center">
+          <FadeIn>
+            <Divider />
+            <h2 className="display-xl text-wb-plum leading-[1.4]">ماذا لو لم يكن الحل في دايت جديد؟</h2>
+            <div className="mt-8 flex justify-center">
+              <ScrollButton label={PRIMARY} />
+            </div>
           </FadeIn>
         </div>
       </section>
 
       {/* ABOUT */}
-      <section className="bg-background py-16 md:py-24">
+      <section className="bg-wb-cream py-16 md:py-24">
         <div className="container-x max-w-5xl">
           <FadeIn>
             <div className="grid items-center gap-10 md:grid-cols-[2fr_3fr]">
@@ -203,7 +301,7 @@ function WebinarPage() {
                   <p>أنا ملاك عرنوس، متخصصة في مساعدة النساء على فهم وتغيير علاقتهن مع الأكل العاطفي والعمل على الأسباب الأعمق خلف هذا النمط، وليس فقط التركيز على السلوك الظاهر.</p>
                   <p>أساعدكِ على فهم المشاعر والأنماط التي تدفعكِ للجوء إلى الأكل، والعمل عليها بطريقة أكثر وعياً، لتبني علاقة أهدأ وأكثر حرية مع الطعام.</p>
                 </div>
-                <div className="mt-8"><RegisterButton label={LEARN_CTA} /></div>
+                <div className="mt-8"><ScrollButton label={LEARN_CTA} /></div>
               </div>
             </div>
           </FadeIn>
@@ -252,7 +350,9 @@ function WebinarPage() {
           ))}
         </ul>
         <p className="text-[16px] leading-loose text-wb-plum">هذا التدريب سيعطيكِ منظوراً مختلفاً وأداة عملية تساعدكِ على البدء بفهم العلاقة بين مشاعرك واستجابتك للأكل من الداخل، بدل الاعتماد المستمر على المنع والمقاومة.</p>
-        <Cta label="احجزي مقعدك المجاني الآن واقطعي دائرة التأنيب" />
+        <div className="mt-10 flex justify-center">
+          <ScrollButton label="احجزي مقعدك المجاني الآن واقطعي دائرة التأنيب" />
+        </div>
       </Section>
 
       {/* BONUS */}
@@ -268,22 +368,15 @@ function WebinarPage() {
         </div>
       </section>
 
-      {/* FINAL */}
-      <section id="register" className="bg-wb-plum py-16 md:py-24 text-wb-plum-foreground">
-        <div className="container-x max-w-3xl text-center">
+      {/* FINAL — dark plum */}
+      <section className="relative overflow-hidden bg-wb-plum-deep py-16 md:py-24 text-wb-plum-foreground">
+        <div className="pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-wb-gold/15 blur-3xl" aria-hidden />
+        <div className="container-x relative max-w-3xl text-center">
           <FadeIn>
             <h2 className="display-lg mb-8 text-wb-plum-foreground">جاهزة تبدأي تفهمي علاقتك بالأكل بطريقة مختلفة؟</h2>
-            <DateBox live />
+            <DateBox live dark />
             <div className="mt-8">
-              <a
-                href={ZOHO_WEBINAR_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-wb-cream text-wb-plum px-8 py-4 font-semibold shadow-lg transition hover:-translate-y-0.5"
-              >
-                <Sparkles className="w-4 h-4" aria-hidden />
-                {PRIMARY}
-              </a>
+              <RegisterButton className="px-8 py-4 text-base" />
             </div>
             <p className="mt-4 text-[13px] opacity-80">التسجيل مجاني — بعد التسجيل رح يوصلك إيميل التأكيد ورابط الدخول الخاص فيكِ.</p>
           </FadeIn>
@@ -292,7 +385,7 @@ function WebinarPage() {
 
       {/* STICKY MOBILE CTA */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-wb-gold/30 bg-wb-cream/95 p-3 pl-20 backdrop-blur md:hidden">
-        <RegisterButton className="w-full" />
+        <ScrollButton label={PRIMARY} className="w-full" />
       </div>
     </div>
   );
