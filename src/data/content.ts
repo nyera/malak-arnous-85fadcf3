@@ -65,5 +65,7 @@ export const instagramPosts = [
 
 // Zoho Webinar registration (Zoho sends confirmation + personal join link)
 export const ZOHO_WEBINAR_URL = "https://live.zoho.com/dngk-qol-hsz";
+// Official Zoho registration embed (shown inside the hero registration card).
+export const ZOHO_WEBINAR_EMBED_URL = "https://webinar.zoho.com/meeting/register/embed?sessionId=1060224851";
 // Fill these when confirmed; empty = "announced soon" message is shown.
-export const WEBINAR = { date: "", time: "", timezone: "" };
+export const WEBINAR = { date: "الأربعاء 18 نوفمبر 2026", time: "4:00 – 5:30 مساءً", timezone: "بتوقيت السعودية (AST)" };

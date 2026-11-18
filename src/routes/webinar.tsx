@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check, CalendarDays, Clock, Globe, Gift, Sparkles, Heart, Zap, Sprout } from "lucide-react";
 import { FadeIn } from "@/components/site/Misc";
-import { ZOHO_WEBINAR_URL, WEBINAR } from "@/data/content";
+import { ZOHO_WEBINAR_URL, ZOHO_WEBINAR_EMBED_URL, WEBINAR } from "@/data/content";
 import portraitAsset from "@/assets/malak-portrait.png.asset.json";
 
 const TITLE = "ويبينار مجاني: كيف تغيّرين علاقتك بالأكل من الداخل — ملاك عرنوس";
@@ -187,8 +187,15 @@ function WebinarPage() {
               <p className="text-[14px] leading-loose text-wb-plum-foreground/70 mb-6">
                 التسجيل مجاني — سيصلك رابط الدخول وتفاصيل الويبينار على بريدك الإلكتروني.
               </p>
-              {/* [ZOHO WEBINAR IFRAME HERE] — replaced with the official Zoho embed once provided */}
-              <RegisterButton className="w-full text-base px-8 py-4" />
+              {/* Official Zoho registration embed */}
+              <div className="overflow-hidden rounded-2xl border border-wb-gold/30 bg-wb-plum-foreground/5">
+                <iframe
+                  src={ZOHO_WEBINAR_EMBED_URL}
+                  title="التسجيل في الويبينار"
+                  className="block h-[240px] w-full"
+                  frameBorder={0}
+                />
+              </div>
               <p className="mt-4 flex items-center justify-center gap-2 text-[12px] text-wb-plum-foreground/60" dir="ltr">
                 <Globe className="w-3.5 h-3.5 text-wb-gold" aria-hidden />
                 Online Live Webinar
