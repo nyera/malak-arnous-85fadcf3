@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Check, CalendarDays, Clock, Globe, Gift, Sparkles, Heart, Zap, Sprout } from "lucide-react";
+import { Check, CalendarDays, Clock, Globe, Sparkles } from "lucide-react";
 import { FadeIn } from "@/components/site/Misc";
 import { WEBINAR } from "@/data/content";
 import portraitAsset from "@/assets/malak-portrait.png.asset.json";
@@ -138,11 +138,6 @@ const Divider = ({ dark }: { dark?: boolean }) => (
   </div>
 );
 
-const quickValues = [
-  { icon: Heart, title: "افهمي الرابط بين مشاعرك والأكل" },
-  { icon: Zap, title: "اكتشفي لماذا الإرادة وحدها لا تكفي" },
-  { icon: Sprout, title: "ابدئي التغيير من الجذور وليس من المنع" },
-];
 
 const secrets = [
   {
@@ -198,11 +193,11 @@ function WebinarPage() {
             </div>
           </FadeIn>
 
-          <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-[1.6fr_1fr]">
+          <div className="mt-10 grid items-start gap-6 lg:grid-cols-[1fr_1fr]">
             <FadeIn>
-              <figure className="h-full">
-                <div className="relative h-full min-h-[320px] overflow-hidden rounded-3xl border border-wb-gold/30 bg-wb-blush/40 shadow-lg shadow-wb-rose/10">
-                  <img src={portraitAsset.url} alt="ملاك عرنوس" className="absolute inset-0 h-full w-full object-cover object-top" />
+              <figure className="mx-auto w-full max-w-md">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-wb-gold/30 bg-wb-blush/40 shadow-lg shadow-wb-rose/10">
+                  <img src={portraitAsset.url} alt="ملاك عرنوس" className="absolute inset-0 h-full w-full object-cover object-[center_20%]" />
                 </div>
                 <figcaption className="mt-2 text-center text-[13px] text-muted-foreground">مع ملاك عرنوس</figcaption>
               </figure>
@@ -226,27 +221,6 @@ function WebinarPage() {
               </div>
             </FadeIn>
           </div>
-        </div>
-      </section>
-
-      {/* QUICK VALUE CARDS */}
-      <section className="relative bg-wb-cream pb-16 md:pb-24 pt-2">
-        <div className="container-x max-w-5xl">
-          <FadeIn>
-            <div className="grid gap-6 md:grid-cols-3">
-              {quickValues.map((q) => (
-                <article
-                  key={q.title}
-                  className="rounded-3xl border border-wb-gold/30 bg-background p-7 text-center shadow-sm transition hover:-translate-y-1 hover:border-wb-gold/60"
-                >
-                  <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-wb-blush/60">
-                    <q.icon className="h-5 w-5 text-wb-rose" aria-hidden />
-                  </span>
-                  <h3 className="text-[17px] font-semibold leading-relaxed text-wb-plum">{q.title}</h3>
-                </article>
-              ))}
-            </div>
-          </FadeIn>
         </div>
       </section>
 
@@ -304,19 +278,6 @@ function WebinarPage() {
         </div>
       </section>
 
-      {/* ماذا لو — light transition banner */}
-      <section className="bg-background py-16 md:py-20">
-        <div className="container-x max-w-3xl text-center">
-          <FadeIn>
-            <Divider />
-            <h2 className="display-xl text-wb-plum leading-[1.4]">ماذا لو لم يكن الحل في دايت جديد؟</h2>
-            <div className="mt-8 flex justify-center">
-              <ScrollButton label={PRIMARY} />
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
       {/* ABOUT */}
       <section className="bg-wb-cream py-16 md:py-24">
         <div className="container-x max-w-5xl">
@@ -367,52 +328,11 @@ function WebinarPage() {
       <Section tone="ivory">
         <Divider />
         <H2>لماذا يجب أن تحضري الآن؟</H2>
-        <p className="text-[16px] leading-loose text-foreground/85 mb-6">الاستمرار في نفس النمط القديم يعني استمرار التكلفة التي تدفعينها يومياً:</p>
-        <ul className="space-y-3 mb-8">
-          {[
-            "بقاء الأكل شاغلاً لمساحة كبيرة من تفكيرك بين الوجبات،",
-            "فقدان الثقة بوعودك لنفسك مع كل \"بداية جديدة\"،",
-            "والبقاء في دائرة خسارة الوزن واستعادته.",
-          ].map((t) => (
-            <li key={t} className="flex items-start gap-3 rounded-xl bg-wb-blush/40 px-5 py-4 text-[15px] leading-loose">
-              <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-wb-rose" aria-hidden />
-              {t}
-            </li>
-          ))}
-        </ul>
-        <p className="text-[16px] leading-loose text-wb-plum">هذا التدريب سيعطيكِ منظوراً مختلفاً وأداة عملية تساعدكِ على البدء بفهم العلاقة بين مشاعرك واستجابتك للأكل من الداخل، بدل الاعتماد المستمر على المنع والمقاومة.</p>
+        <p className="text-[16px] leading-loose text-foreground/85">الاستمرار في نفس النمط القديم يعني استمرار التكلفة التي تدفعينها يومياً: بقاء الأكل كشغل شاغل يستهلك تفكيرك بين الوجبات، فقدان الثقة بوعودك لنفسك مع كل "بداية جديدة" تُكسر، والبقاء في دوامة خسارة الوزن واستعادته. حضوركِ لهذا التدريب سيمنحكِ الفهم العصبي والأداة العملية لتغيير هذه المعادلة من الداخل، وبناء علاقة أهدأ مع الطعام لا تعتمد على مقاومتك المستمرة.</p>
         <div className="mt-10 flex justify-center">
           <ScrollButton label="احجزي مقعدك المجاني الآن واقطعي دائرة التأنيب" />
         </div>
       </Section>
-
-      {/* BONUS */}
-      <section className="bg-wb-cream py-14">
-        <div className="container-x max-w-2xl">
-          <FadeIn>
-            <div className="rounded-3xl border border-wb-gold/50 bg-gradient-to-br from-background to-wb-blush/50 p-8 text-center">
-              <Gift className="mx-auto mb-4 h-8 w-8 text-wb-gold" aria-hidden />
-              <h2 className="text-xl md:text-2xl font-semibold text-wb-plum mb-3">وفي مفاجأة للحاضرات للنهاية ✨</h2>
-              <p className="text-[15px] leading-loose text-foreground/80">خلال البث المباشر، رح يكون في هدية خاصة بانتظار اللي رح يبقوا معنا حتى نهاية اللقاء.</p>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* FINAL — dark plum */}
-      <section className="relative overflow-hidden bg-wb-blush/40 py-16 md:py-24">
-        <div className="pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-wb-gold/15 blur-3xl" aria-hidden />
-        <div className="container-x relative max-w-3xl text-center">
-          <FadeIn>
-            <h2 className="display-lg mb-8 text-wb-plum">جاهزة تبدأي تفهمي علاقتك بالأكل بطريقة مختلفة؟</h2>
-            <DateBox live />
-            <div className="mt-8">
-              <RegisterButton className="px-8 py-4 text-base" />
-            </div>
-            <p className="mt-4 text-[13px] text-muted-foreground">التسجيل مجاني — بعد التسجيل رح يوصلك إيميل التأكيد ورابط الدخول الخاص فيكِ.</p>
-          </FadeIn>
-        </div>
-      </section>
 
       {/* STICKY MOBILE CTA */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-wb-gold/30 bg-wb-cream/95 p-3 pl-20 backdrop-blur md:hidden">
