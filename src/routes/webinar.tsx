@@ -194,14 +194,14 @@ function WebinarPage() {
           </FadeIn>
 
           <div className="mt-10 grid items-start gap-6 lg:grid-cols-[1fr_1fr]">
-            <FadeIn>
+            <div className="order-2 lg:order-none"><FadeIn>
               <figure className="mx-auto w-full max-w-md">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-wb-gold/30 bg-wb-blush/40 shadow-lg shadow-wb-rose/10">
                   <img src={portraitAsset.url} alt="ملاك عرنوس" className="absolute inset-0 h-full w-full object-cover object-[center_20%]" />
                 </div>
                 <figcaption className="mt-2 text-center text-[13px] text-muted-foreground">مع ملاك عرنوس</figcaption>
               </figure>
-            </FadeIn>
+            </FadeIn></div>
             <FadeIn>
               <div id="register" className="scroll-mt-24 overflow-hidden rounded-3xl border border-wb-gold/40 bg-background shadow-xl shadow-wb-rose/15">
                 <div className="flex items-center justify-center gap-2 bg-wb-rose px-4 py-3 text-[14px] font-semibold text-wb-plum-foreground">
@@ -228,10 +228,10 @@ function WebinarPage() {
       <section className="bg-wb-cream py-16 md:py-24">
         <div className="container-x max-w-5xl">
           <FadeIn>
-            <div className="grid items-center gap-12 md:grid-cols-2">
+            <div className="grid items-center gap-12 lg:grid-cols-2">
               <div>
                 <Divider />
-                <h2 className="display-lg text-wb-plum mb-8 text-center md:text-right">وجودكِ هنا ليس صدفة…</h2>
+                <h2 className="display-lg text-wb-plum mb-8 text-center lg:text-right">وجودكِ هنا ليس صدفة…</h2>
                 <div className="space-y-5 text-[16px] leading-loose text-foreground/85">
                   <p>ربما جرّبتِ الحميات، وعدّ السعرات، والصيام المتقطع، ومنعتِ نفسكِ من تناول الطعام. كنتِ صادقة عندما وعدتِ نفسك بالالتزام، لكن بمجرد أن يمر عليكِ يوم مزعج، أو تتغير خططك، أو تشعري بالضغط... تجدين نفسك تعودين إلى الأكل بحثاً عن الراحة.</p>
                   <p>ثم تبدأ دوامة التأنيب، وتكتشفين أنكِ أكلتِ أكثر مما كنتِ تريدين.</p>
@@ -262,7 +262,7 @@ function WebinarPage() {
           <FadeIn>
             <Divider />
             <H2>في هذا التدريب، ستكتشفين:</H2>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {secrets.map((s, i) => (
                 <article key={s.title} className="rounded-3xl border border-wb-gold/30 bg-background p-7 shadow-sm">
                   <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-wb-rose text-wb-plum-foreground font-semibold">{i + 1}</span>

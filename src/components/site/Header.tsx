@@ -60,7 +60,7 @@ export function Header() {
           <span className="font-display text-2xl tracking-tight">{brand.name}</span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden xl:flex items-center gap-1">
           {nav.map((item) => {
             if ("children" in item) {
               return (
@@ -119,7 +119,7 @@ export function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden xl:flex items-center gap-2">
           <a href={brand.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="p-2 text-foreground/70 hover:text-ember transition-colors">
             <Instagram className="w-4 h-4" />
           </a>
@@ -132,7 +132,7 @@ export function Header() {
           <JoinNowButton size="sm" />
         </div>
 
-        <div className="flex lg:hidden items-center gap-1">
+        <div className="flex xl:hidden items-center gap-1">
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -150,7 +150,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-t border-border overflow-hidden"
+            className="xl:hidden bg-background border-t border-border overflow-hidden"
           >
             <div className="container-x py-6 flex flex-col gap-1">
               {nav.map((item) => {
