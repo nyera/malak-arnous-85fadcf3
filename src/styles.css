@@ -263,6 +263,11 @@
   --wb-plum-dark: oklch(0.24 0.055 350);
   --wb-plum-deep: oklch(0.18 0.04 350);
   --wb-plum-foreground: oklch(0.975 0.014 80);
+
+  /* WhatsApp brand green — used for the support widget so it is instantly recognizable */
+  --whatsapp: #25D366;
+  --whatsapp-dark: #1EBE5A;
+  --whatsapp-foreground: #FFFFFF;
 }
 @theme inline {
   --color-wb-cream: var(--wb-cream);
@@ -274,4 +279,7 @@
   --color-wb-plum-dark: var(--wb-plum-dark);
   --color-wb-plum-deep: var(--wb-plum-deep);
   --color-wb-plum-foreground: var(--wb-plum-foreground);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-dark: var(--whatsapp-dark);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
 }

@@ -7,11 +7,11 @@ export function WhatsAppFloat() {
       href={brand.whatsapp}
       target="_blank"
       rel="noreferrer"
-      aria-label={`واتساب الدعم ${brand.whatsappDisplay}`}
-      className="fixed bottom-5 end-5 z-50 flex items-center gap-2 rounded-full bg-ember px-4 py-3 text-background shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+      aria-label="تواصلي معنا على واتساب"
+      className="fixed bottom-5 end-5 z-50 flex items-center gap-2 rounded-full bg-whatsapp px-4 py-3 text-whatsapp-foreground shadow-lg ring-1 ring-whatsapp-dark/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-whatsapp-dark"
     >
       <WhatsAppIcon className="w-5 h-5" />
-      <span className="hidden sm:inline text-xs font-semibold" dir="ltr">{brand.whatsappDisplay}</span>
+      <span className="text-xs font-semibold">تواصلي معنا</span>
     </a>
   );
 }

@@ -12,6 +12,11 @@ export const STAN_SESSION_URL = "https://stan.store/MalakArnous/p/the-weight-shi
 export const TAPPING_PAY_URL = "https://buy.stripe.com/28E00lfxg1IA6zNeYwaAw04";
 
 
+// WhatsApp support line: every button opens the chat with a ready Arabic message.
+const WHATSAPP_NUMBER = "966562244887";
+const WHATSAPP_MESSAGE = "مرحباً، كيف حالك؟ أود الاستفسار عن برامجك وجلساتك.";
+const WHATSAPP_CHAT = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
 export const brand = {
   name: "ملاك عرنوس",
   full: "ملاك عرنوس",
@@ -21,7 +26,8 @@ export const brand = {
   instagramHandle: "@malakarnous369",
   telegram: "https://t.me/+LzSx7ITqfc41N2Qx",
   telegramHandle: "الدائرة الداخلية",
-  whatsapp: "https://wa.me/966562244887",
+  whatsapp: WHATSAPP_CHAT,
+  whatsappNumber: WHATSAPP_NUMBER,
   whatsappDisplay: "+966 56 224 4887",
   youtube: "https://www.youtube.com/@malakarnous369",
   youtubeHandle: "@malakarnous369",
