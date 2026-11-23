@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { z } from "zod";
 import { Check, CalendarDays, Clock, Globe, Sparkles } from "lucide-react";
 import { FadeIn } from "@/components/site/Misc";
 import { WEBINAR } from "@/data/content";
@@ -64,18 +65,36 @@ function ScrollButton({ label, className = "" }: { label: string; className?: st
 /* Native Zoho Webinar registration form (posts directly to Zoho) */
 function ZohoForm() {
   const [tz, setTz] = useState("Asia/Riyadh");
+  const [error, setError] = useState("");
   useEffect(() => {
     try { const z = Intl.DateTimeFormat().resolvedOptions().timeZone; if (z) setTz(z); } catch {}
   }, []);
   const field = "w-full rounded-xl border border-input bg-wb-cream/50 px-4 py-3 text-[15px] text-foreground placeholder:text-muted-foreground focus:border-wb-rose focus:outline-none focus:ring-2 focus:ring-wb-rose/30";
   return (
-    <form action="https://webinar.zoho.com/meeting/WebForm" method="POST" acceptCharset="UTF-8" target="_blank" className="space-y-3">
-      <input type="hidden" name="xnQsjsdp" value="a2cc7c834290bab6565ffd4f91d1310c1a3328767c646cd22d9eb38ab34b32ec" />
+    <form action="https://webinar.zoho.com/meeting/WebForm" name="WebForm5774894000000017011" method="POST" acceptCharset="UTF-8" target="_blank" className="space-y-3" onSubmit={(event) => {
+      const form = event.currentTarget;
+      const result = z.object({
+        NAME: z.string().trim().min(1).max(40),
+        REGISTRATIONCF1: z.string().trim().min(1).max(100),
+        EMAIL: z.string().trim().email().max(251),
+      }).safeParse(Object.fromEntries(new FormData(form)));
+      if (!result.success) {
+        event.preventDefault();
+        setError("يرجى إدخال الاسم الأول واسم العائلة وبريد إلكتروني صحيح.");
+        return;
+      }
+      setError("");
+      for (const [name, value] of Object.entries(result.data)) {
+        const input = form.elements.namedItem(name);
+        if (input instanceof HTMLInputElement) input.value = value;
+      }
+    }}>
+      <input type="hidden" name="xnQsjsdp" value="a18cbe9e86c5266173c325ad5f8c6f009ae8610bc07998bc58d3667a10a163bc" />
       <input type="hidden" name="zc_gad" value="" />
-      <input type="hidden" name="xmIwtLD" value="9805e272e1b2c9f5156cc427ac7459596d773bb8cb8818330eec6510a1e22d05c00f716f9d4ae6d49877ccfd148f06b9" />
+      <input type="hidden" name="xmIwtLD" value="ec5760e3e35147b3274d6ac4d37a0eb7dcdd1a4917340fc3e7ad35fbb93e2f3864107b7ba0bcdd4a8fe9532d7c5ff4ce" />
       <input type="hidden" name="actionType" value="UmVnaXN0cmF0aW9ucw==" />
       <input type="hidden" name="returnURL" value="https://webinar.zoho.com/postregister" />
-      <input type="hidden" name="sysId" value="5774894000000012098" />
+      <input type="hidden" name="sysId" value="5774894000000017006" />
       <input type="hidden" name="isEmbedForm" value="true" />
       <input type="hidden" name="timezone" value={tz} />
       <label className="sr-only" htmlFor="wb-first">الاسم الأول</label>
@@ -84,6 +103,7 @@ function ZohoForm() {
       <input id="wb-last" name="REGISTRATIONCF1" required maxLength={100} placeholder="اسم العائلة *" className={field} />
       <label className="sr-only" htmlFor="wb-email">البريد الإلكتروني</label>
       <input id="wb-email" name="EMAIL" type="email" required maxLength={251} placeholder="البريد الإلكتروني *" dir="rtl" className={field} />
+      {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
       <button type="submit" className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-wb-yellow px-6 py-3.5 text-[15px] font-bold text-wb-plum shadow-lg shadow-wb-yellow/40 transition hover:-translate-y-0.5 hover:brightness-105 hover:shadow-xl">
         <Sparkles className="w-4 h-4" aria-hidden />
         {PRIMARY}
@@ -209,10 +229,10 @@ function WebinarPage() {
                   مقاعد محدودة — التسجيل مجاني
                 </div>
                 <div className="p-6">
-                  <div className="mb-5 space-y-1.5 text-center text-[14px] text-wb-plum">
+                  {(WEBINAR.date || WEBINAR.time) && <div className="mb-5 space-y-1.5 text-center text-[14px] text-wb-plum">
                     <p className="flex items-center justify-center gap-2"><CalendarDays className="w-4 h-4 text-wb-gold" aria-hidden />{WEBINAR.date}</p>
                     <p className="flex items-center justify-center gap-2"><Clock className="w-4 h-4 text-wb-gold" aria-hidden />{WEBINAR.time} — {WEBINAR.timezone}</p>
-                  </div>
+                  </div>}
                   <ZohoForm />
                   <p className="mt-4 text-center text-[12px] leading-relaxed text-muted-foreground">
                     سيصلك رابط الدخول وتفاصيل الويبينار على بريدك الإلكتروني.
