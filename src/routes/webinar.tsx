@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Check, CalendarDays, Clock, Globe, Sparkles } from "lucide-react";
 import { FadeIn } from "@/components/site/Misc";
-import { WEBINAR } from "@/data/content";
+import { WEBINAR, ZOHO_WEBINAR_URL } from "@/data/content";
 import portraitAsset from "@/assets/malak-portrait.png.asset.json";
 
 const TITLE = "ويبينار مجاني: كيف تغيّرين علاقتك بالأكل من الداخل — ملاك عرنوس";
@@ -234,6 +234,7 @@ function WebinarPage() {
                     <p className="flex items-center justify-center gap-2"><Clock className="w-4 h-4 text-wb-gold" aria-hidden />{WEBINAR.time} — {WEBINAR.timezone}</p>
                   </div>}
                   <ZohoForm />
+                  <a href={ZOHO_WEBINAR_URL} target="_blank" rel="noopener noreferrer" className="mt-4 block text-center text-sm text-wb-plum underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-wb-gold">رابط التسجيل</a>
                   <p className="mt-4 text-center text-[12px] leading-relaxed text-muted-foreground">
                     سيصلك رابط الدخول وتفاصيل الويبينار على بريدك الإلكتروني.
                   </p>

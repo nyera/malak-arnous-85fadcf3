@@ -74,4 +74,4 @@ export const ZOHO_WEBINAR_URL = "https://live.zoho.com/slzj-fbp-udz";
 // Official Zoho registration embed (shown inside the hero registration card).
 export const ZOHO_WEBINAR_EMBED_URL = "https://webinar.zoho.com/meeting/register/embed?sessionId=1060224851";
 // Fill these when confirmed; empty = "announced soon" message is shown.
-export const WEBINAR = { startsAt: "2026-11-29T19:00:00Z", date: "الأحد 29 نوفمبر 2026", time: "10:00 مساءً", timezone: "بتوقيت السعودية (2:00 مساءً بتوقيت EST)" };
+export const WEBINAR = { date: "", time: "", timezone: "" };
